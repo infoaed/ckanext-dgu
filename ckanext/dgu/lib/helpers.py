@@ -1442,17 +1442,17 @@ def search_facets_selected(facet_keys):
 def search_facet_text(key,value):
     if key=='core_dataset':
         if value=='true':
-            return 'Show NII datasets'
-        return 'Hide NII datasets'
+            return 'Näita NII andmehulki'
+        return 'Näita NII andmehulki'
     if key=='unpublished':
         if value=='true':
-            return 'Unpublished datasets'
-        return 'Published datasets'
+            return 'Avalikustamata andmehulki'
+        return 'Avalikustatud andmehulki'
     if key=='license_id-is-ogl':
         if value=='true':
             return 'Open Government Licence'
         elif value=='unpublished':
-            return 'Unpublished dataset'
+            return 'Avalikustamata andmehulk'
         return 'Non-Open Government Licence'
     if key=='openness_score':
         try:

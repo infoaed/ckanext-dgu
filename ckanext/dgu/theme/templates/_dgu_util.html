@@ -50,7 +50,7 @@
   <!-- pure one-liner to avoid whitespace glitches -->
   <py:def function="if_(testValue,stringIfTrue,stringIfFalse='')"><py:if test="testValue">${stringIfTrue}</py:if><py:if test="not testValue">${stringIfFalse}</py:if></py:def>
 
-  <div py:def="search_form(mini=False, placeholder='Search for data...', set_fields=None, extra_options=None)" class="search-area">
+  <div py:def="search_form(mini=False, placeholder='Otsi andmehulki...', set_fields=None, extra_options=None)" class="search-area">
     <div class="clearfix dgu-equal-height" data-selector=".auto-height">
       <div class="${if_(mini,'mini','left')}">
         <div class="left-inner auto-height">
@@ -87,10 +87,10 @@
         <div class="chevron"></div>
         <py:if test="not c.query_error" py:with="count = c.page.item_count if c.page not in (None, '') else c.package_count or 0">
           <div class="result-count">${count}</div>
-          <div class="result-count-footer">Dataset${if_(count!=1,'s')}</div>
+          <div class="result-count-footer">Andmehulk${if_(count!=1,'s')}</div>
         </py:if>
         <py:if test="c.query_error">
-          <div class="result-count-footer">Search Error</div>
+          <div class="result-count-footer">Otsinguviga</div>
         </py:if>
         </div>
       </div>
@@ -116,7 +116,7 @@
           <div class="dataset dataset-summary theme-${primary_theme or 'none'} ${if_(mini,'mini')} ${if_(unpublished,'unpublished')}">
            <a class="dataset-header" href="${h.url_for(controller='package', action='read', id=package.get('name'))}">
              <div class="theme-name">${primary_theme or '(Uncategorised)'}</div>
-             <div class="underlined">${title} <span class="text-unpublished" py:if="unpublished">(unpublished)</span></div>
+             <div class="underlined">${title} <span class="text-unpublished" py:if="unpublished">(avalikustamata)</span></div>
            </a>
            <div class="dataset-body">
              <div class="left">
@@ -129,7 +129,7 @@
              </div>
              <div class="right">
                 <py:if test="h.is_core_dataset(package)">
-                  <div title="This dataset is part of the National Information Infrastructure" class="js-tooltip format-box" style='background-color: #8BC658;'>NII</div>
+                  <div title="See andmehulk kuulub National Information Infrastructure (NII) alla" class="js-tooltip format-box" style='background-color: #8BC658;'>NII</div>
                 </py:if>
 
                <py:for each="format in h.formats_for_package(package)">
@@ -146,12 +146,12 @@
                      <span
                           class="preview-add js-dataset-${package.id}-add"
                           style="${if_(in_basket,'display: none;')}">
-                            <button data-id="${package.id}" class="btn btn-default btn-xs btn-info btn-preview btn-basket"><i class="icon-shopping-cart"></i>&nbsp; Add to Preview List</button>
+                            <button data-id="${package.id}" class="btn btn-default btn-xs btn-info btn-preview btn-basket"><i class="icon-shopping-cart"></i>&nbsp; Lisa eelvaate loetellu</button>
                      </span>
                      <span
                           class="preview-remove js-dataset-${package.id}-remove"
                           style="${if_(not in_basket,'display: none;')}">
-                          <button data-id="${package.id}" class="btn btn-danger btn-xs btn-preview btn-basket"><i class="icon-shopping-cart"></i>&nbsp; Remove from List</button>
+                          <button data-id="${package.id}" class="btn btn-danger btn-xs btn-preview btn-basket"><i class="icon-shopping-cart"></i>&nbsp; Eemalda loetelust</button>
                      </span>
                    </py:with>
                  </div>
@@ -159,7 +159,7 @@
              </div>
              <div class="clearfix clearfix-ie7"> &nbsp;</div>
              <a class="view-data-link" href="${h.url_for(controller='package', action='read', id=package.get('name'))}">
-               View Data
+               Vaata andmeid
              </a>
            </div>
            </div>
@@ -171,7 +171,7 @@
 
   <py:def function="feedback_summary(package,render_title=True,large=False)">
     <div class="feedback-summary ${if_(large,'large')}" py:with="comment_dict=h.unpublished_comments_lookup(package)">
-      <div py:if="render_title" class="pull-left feedback-summary-title">Feedback:</div>
+      <div py:if="render_title" class="pull-left feedback-summary-title">Tagasiside:</div>
       <a class="js-tooltip" data-toggle="tooltip" data-placement="bottom" title="Economic growth" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController',action='view',id=package.name)}"><i class="icon-gbp"></i>  ${comment_dict['economic']}</a>
       <a class="js-tooltip" data-toggle="tooltip" data-placement="bottom" title="Social growth" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController',action='view',id=package.name)}"><i class="icon-group"></i>  ${comment_dict['social']}</a>
       <a class="js-tooltip" data-toggle="tooltip" data-placement="bottom" title="Effective public services" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController',action='view',id=package.name)}"><i class="icon-road"></i>  ${comment_dict['effective']}</a>
@@ -212,10 +212,10 @@
         <py:if test="more_button is not None and len(unselected)>5">
           <a id="${more_button}" class="facet-expand-collapse" href="#">
             <div class="expander">
-              <i class="icon-double-angle-down"></i>&nbsp; more &nbsp;<i class="icon-double-angle-down"></i>
+              <i class="icon-double-angle-down"></i>&nbsp; rohkem &nbsp;<i class="icon-double-angle-down"></i>
             </div>
             <div class="collapser">
-              <i class="icon-double-angle-up"></i>&nbsp; less &nbsp;<i class="icon-double-angle-up"></i>
+              <i class="icon-double-angle-up"></i>&nbsp; vähem &nbsp;<i class="icon-double-angle-up"></i>
             </div>
           </a>
         </py:if>
@@ -231,101 +231,39 @@
           <i class="icon-remove-circle icon-4x"></i>
         </a>
       </div>
-      ${facet_box(
-          'Show only...',
-          h.search_facets_unselected(['unpublished']),
-          h.search_facets_selected(['unpublished']),
-          'No further filters to apply.'
-          )}
+      <py:if test="request.params.get('parent_publishers','')">
+        ${facet_box(
+            'Teabevaldaja',
+            h.search_facets_unselected(['parent_publishers']),
+            h.search_facets_selected(['parent_publishers']),
+            'Rohkem teabevaldaja filtreid pole.',
+            more_button='more-publishers-button'
+        )}
+      </py:if>
       <div class="facet-divider"></div>
-      ${facet_box(
-          'NII datasets',
-          h.search_facets_unselected(['core_dataset']),
-          h.search_facets_selected(['core_dataset']),
-          'No further filters to apply.'
-          )}
-      <div class="facet-divider"></div>
-      ${facet_box(
-          'Licence',
-          h.search_facets_unselected(['license_id-is-ogl']),
-          h.search_facets_selected(['license_id-is-ogl']),
-          'No further licence filters to apply.'
-      )}
-      <div class="facet-divider"></div>
-      <!--
-      <label class="checkbox pull-right search-theme-checkbox">
-        <input type="checkbox" id="search-theme-mode" py:attrs="h.search_theme_mode_attrs()"></input>
-        Only primary theme
-      </label>
-      <div class="facets-theme-primary ${if_(not h.search_theme_mode_secondary(),'enabled','disabled')}">
-        -->
       <div class="facets-theme-primary">
       ${facet_box(
-          'Theme',
+          'Teema',
           h.search_facets_unselected(['theme-primary']),
           h.search_facets_selected(['theme-primary']),
-          'No further theme filters to apply.',
+          'Rohkem teema filtreid pole.',
           more_button='more-prithemes-button'
       )}
       </div>
-      <!--
-      <div class="facets-theme-all ${if_(h.search_theme_mode_secondary(),'enabled','disabled')}">
-      ${facet_box(
-          'Themes',
-          h.search_facets_unselected(['all_themes']),
-          h.search_facets_selected(['all_themes']),
-          'No further theme filters to apply.',
-          more_button='more-themes-button'
-      )}
-      </div>
-      -->
       <div class="facet-divider"></div>
       ${facet_box(
-          'Resource Format',
+          'Formaat',
           h.search_facets_unselected(['res_format']),
           h.search_facets_selected(['res_format']),
-          'No further format filters to apply.',
+          'Rohkem formaadi filtreid pole.',
           more_button='more-formats-button'
       )}
       <div class="facet-divider"></div>
-      <py:if test="request.params.get('parent_publishers','')">
-        ${facet_box(
-            'Publisher',
-            h.search_facets_unselected(['parent_publishers']),
-            h.search_facets_selected(['parent_publishers']),
-            'No further publisher filters to apply.',
-            more_button='more-publishers-button'
-        )}
-      </py:if>
-      <py:if test="not request.params.get('parent_publishers','')">
-        ${facet_box(
-            'Publisher',
-            h.search_facets_unselected(['publisher']),
-            h.search_facets_selected(['publisher']),
-            'No further publisher filters to apply.',
-            more_button='more-publishers-button'
-        )}
-      </py:if>
-      <div class="facet-divider"></div>
       ${facet_box(
-          'Openness Score (beta)',
-          h.search_facets_unselected(['openness_score'],'name'),
-          h.search_facets_selected(['openness_score']),
-          'No further openness filters to apply.',
-      )}
-      <div class="facet-divider"></div>
-      ${facet_box(
-          'Broken links',
-          h.search_facets_unselected(['broken_links']),
-          h.search_facets_selected(['broken_links']),
-          'No further broken link filters to apply.'
-      )}
-      <div class="facet-divider"></div>
-      ${facet_box(
-          'UK Location Dataset Type',
-          h.search_facets_unselected(['UKLP','resource-type','spatial-data-service-type']),
-          h.search_facets_selected(['UKLP','resource-type','spatial-data-service-type']),
-          'No further type filters to apply.'
+          'Litsents',
+          h.search_facets_unselected(['license_id-is-ogl']),
+          h.search_facets_selected(['license_id-is-ogl']),
+          'Rohkem faile pole.'
       )}
     </div><!-- /facet-filters -->
   </div>
@@ -333,23 +271,23 @@
   <!--! Contact details -->
   <py:def function="contact_details(name, email, phone, web_url, web_name)">
         <py:choose test="">
-          <li py:when="email and '@' in email">Email:
+          <li py:when="email and '@' in email">E-mail:
             <a href="mailto:${email}">${email}</a>
           </li>
-          <li py:when="email and 'http' in email">Web contact form:
+          <li py:when="email and 'http' in email">Kontaktivorm:
             <a href="${email}">${email}</a>
           </li>
-          <li py:when="email">Email:
+          <li py:when="email">E-mail:
             ${email}
           </li>
         </py:choose>
-        <li py:if="phone">Phone:
+        <li py:if="phone">Telefon:
           ${phone}
         </li>
         <li py:if="web_url">Web:
           <a href="${web_url}">${h.truncate(web_name or web_url, 32)}</a>
         </li>
-        <p py:if="not (email or phone or web_url)"><em>No details supplied</em></p>
+        <p py:if="not (email or phone or web_url)"><em>Detailinfo puudub</em></p>
   </py:def>
 
   <py:def function="format_box(format_name)">

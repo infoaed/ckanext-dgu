@@ -18,3 +18,7 @@ selenium/*
 package/DEBIAN/control
 *.swp
 node_modules/*
+/.project
+/.settings
+/WebContent
+/.pydevproject

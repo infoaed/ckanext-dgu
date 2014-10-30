@@ -3,25 +3,25 @@
   xmlns:xi="http://www.w3.org/2001/XInclude"
   py:strip="">
 
-  <py:def function="page_title">Publishers</py:def>
+  <py:def function="page_title">Teabevaldajad</py:def>
 
   <py:match path="breadcrumbs">
-    <li><a href="/publisher">Publishers</a></li>
+    <li><a href="/publisher">Teabevaldajad</a></li>
   </py:match>
 
   <py:match path="content" py:with="hierarchy=h.publisher_hierarchy()">
-    <h1>Publishers</h1>
-    <p>Datasets are 'published' on data.gov.uk by a range of organisations, mainly from the public sector. On this page you can browse and search for them by name or place in a notional hierarchy.</p>
+    <h1>Teabevaldajad</h1>
+    <p>Andmehulgad avalikustatakse antud portaalis mitmesuguste andmevaldajate poolt, eeskätt avalikust sektorist aga ka mujalt. Siin lehel on võimalik andmevaldajaid lehitseda ja otsida nime ning hierarhia järgi.</p>
     <div py:if="c.userobj" class="panel panel-info">
-      <div class="panel-heading"><strong>Adding New Publishers</strong></div>
-      <div class="panel-body">If you are from a public sector body not listed yet, please <a href="/contact">get in touch with Cabinet Office data.gov.uk team</a> to request the addition of your publisher</div>
+      <div class="panel-heading"><strong>Uute teabevaldajate lisamine</strong></div>
+      <div class="panel-body">Kui Teie sektori asutust ei ole siin veel kirjas, siis palume selle lisamiseks <a href="mailto:opendatasupport@mkm.ee?subject=Soov%20registreerida%20teabevaldaja%20avaandmete%20portaalis">kontakteeruda portaali valdajaga</a>.</div>
     </div>
     <div class="search-area" style="margin-top: 20px; margin-bottom: 30px;">
       <div class="clearfix dgu-equal-height" data-selector=".auto-height">
         <div class="left">
           <div class="left-inner auto-height form-search">
             <div class="input-group">
-              <input id="js-search" class="form-control" type="text" name="q" value="${c.q}" results="0" placeholder="Start typing a name..." />
+              <input id="js-search" class="form-control" type="text" name="q" value="${c.q}" results="0" placeholder="Alusta nime kirjutamist..." />
               <span class="input-group-btn">
                 <button type="submit" class="btn btn-default">
                   <i class="icon-search"></i>
@@ -62,8 +62,8 @@
         <div class="right">
           <div class="right-inner auto-height">
           <div class="chevron"></div>
-            <div class="result-count">All</div>
-            <div class="result-count-footer">Publishers</div>
+            <div class="result-count">Kõik</div>
+            <div class="result-count-footer">Teabevaldajad</div>
           </div>
         </div>
       </div>
