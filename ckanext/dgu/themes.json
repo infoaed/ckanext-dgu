@@ -6,7 +6,7 @@
     {"title": "Kultuur",
      "stored_as": "Kultuur",
      "description": "Kultuur.",
-     "topics": ["kultuur"],
+     "topics": ["kultuur"]
     },
     {"title": "Majandus ja tööstus",
      "stored_as": "Majandus",
