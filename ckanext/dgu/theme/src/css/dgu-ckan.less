@@ -31,7 +31,7 @@ ul.sublist {
 }
 .h1-subheading {
   color: #999;
-  font-weight: 300; 
+  font-weight: 300;
   font-size: 15px;
   margin-top: -7px;
   a {
@@ -289,7 +289,7 @@ table.tablesorter {
         -webkit-transition: left 0.25s ease;
         -moz-transition: left 0.25s ease;
         -o-transition: left 0.25s ease;
-        -ms-transition: left 0.25s ease;  
+        -ms-transition: left 0.25s ease;
         &.in {
           left: 0;
         }
@@ -299,8 +299,8 @@ table.tablesorter {
       text-align: right;
       padding-right: 20px;
       margin-bottom: 20px;
-      color: #aaa; 
-      &:hover { color: #fff; text-decoration: none; } 
+      color: #aaa;
+      &:hover { color: #fff; text-decoration: none; }
     }
 }
 
@@ -311,11 +311,11 @@ table.tablesorter {
       font-size: 12px;
       display: block;
       color: #999;
-      &:hover { 
+      &:hover {
         color: #000;
         text-decoration: none;
       }
-      // Class 'expanded' changes children 
+      // Class 'expanded' changes children
       .expander { display: block; }
       .collapser { display: none; }
       &.expanded .expander { display: none; }
@@ -327,12 +327,12 @@ table.tablesorter {
       padding-right: 10px;
       font-size: 13px;
       border-top: 1px dotted #ccc;
-      a { 
-        color: #333; 
+      a {
+        color: #333;
         display: block;
       }
-      &:first-child { 
-        border-top: none; 
+      &:first-child {
+        border-top: none;
       }
       &.facet-option-selected {
         background-color: #DFE8D4;
@@ -361,8 +361,8 @@ table.tablesorter {
       .facet-option {
         border-top: none;
         margin-right: 10px;
-        a { 
-          color: #aaa; 
+        a {
+          color: #aaa;
           &:hover { color: #fff; }
         }
         &.facet-option-selected {
@@ -415,8 +415,8 @@ table.tablesorter {
   li {
     color: #999;
     i { opacity: 0.3; }
-    &.active { 
-      color: #000; 
+    &.active {
+      color: #000;
       i { opacity: 1.0; }
     }
   }
@@ -440,7 +440,7 @@ table.tablesorter {
     -webkit-transition: font 0.15s ease;
     -moz-transition: font 0.15s ease;
     -o-transition: font 0.15s ease;
-    -ms-transition: font 0.15s ease;  
+    -ms-transition: font 0.15s ease;
     i { color: #666; }
     &:hover {
       text-decoration: none;
@@ -473,17 +473,20 @@ table.tablesorter {
 // @color_spending: #F95AB6; //<-- From Sam
 // @color_transport: #FAA657; //<-- From Sam
 // @color_towns: ; //<-- From Sam
-@color_crime: #9a1433;
-@color_defence: #9e6a2c;
-@color_economy: #dc6440;
-@color_education: #ef325a;
-@color_mapping: #c53696;
-@color_government: #f4be16;
-@color_health: #922254;
-@color_society: #ceb385;
-@color_spending: #bb8885;
-@color_transport: #cea395;
-@color_towns: #ef424a;
+@color_pollumajandus: #9a1433;
+@color_kultuur: #9e6a2c;
+@color_majandus: #dc6440;
+@color_toohoive: #ef325a;
+@color_haridus: #c53696;
+@color_keskkond: #f4be16;
+@color_rahandus: #922254;
+@color_geograafia: #ceb385;
+@color_tervis: #bb8885;
+@color_riigiteenused: #cea395;
+@color_valitsemine: #ef424a;
+@color_rahvastik: #FFE5FF;
+@color_transport: #A8FFA8;
+@color_sotsiaal: #FFEE99;
 
 /* These themes SHOULD NOT EXIST */
 @color_administration: @color_government;
@@ -553,22 +556,20 @@ table.tablesorter {
     }
   }
   &.theme-none           { .theme-name { display: none; color: #bbb; font-weight: normal; font-style: italic; }                                                        }
-  &.theme-Crime          { .theme-name { color: @color_crime;          } .dataset-header { border-color: @color_crime;          }  }
-  &.theme-Defence        { .theme-name { color: @color_defence;        } .dataset-header { border-color: @color_defence;        }  }
-  &.theme-Economy        { .theme-name { color: @color_economy;        } .dataset-header { border-color: @color_economy;        }  }
-  &.theme-Education      { .theme-name { color: @color_education;      } .dataset-header { border-color: @color_education;      }  }
-  &.theme-Geography      { .theme-name { color: @color_geography;      } .dataset-header { border-color: @color_geography;      }  }
-  &.theme-Government     { .theme-name { color: @color_government;     } .dataset-header { border-color: @color_government;     }  }
-  &.theme-Health         { .theme-name { color: @color_health;         } .dataset-header { border-color: @color_health;         }  }
-  &.theme-Society        { .theme-name { color: @color_society;        } .dataset-header { border-color: @color_society;        }  }
-  &.theme-Spending       { .theme-name { color: @color_spending;       } .dataset-header { border-color: @color_spending;       }  }
-  &.theme-Transport      { .theme-name { color: @color_transport;      } .dataset-header { border-color: @color_transport;      }  }
-  &.theme-Administration { .theme-name { color: @color_administration; } .dataset-header { border-color: @color_administration; }  }
-  &.theme-Finance        { .theme-name { color: @color_finance;        } .dataset-header { border-color: @color_finance;        }  }
-  &.theme-Environment    { .theme-name { color: @color_environment;    } .dataset-header { border-color: @color_environment;    }  }
-  &.theme-Business       { .theme-name { color: @color_business;       } .dataset-header { border-color: @color_business;       }  }
-  &.theme-Mapping        { .theme-name { color: @color_mapping;        } .dataset-header { border-color: @color_mapping;        }  }
-  &.theme-Towns          { .theme-name { color: @color_towns;          } .dataset-header { border-color: @color_towns;          }  }
+  &.theme-Pollumajandus          { .theme-name { color: @color_pollumajandus;          } .dataset-header { border-color: @color_pollumajandus;          }  }
+  &.theme-Kultuur        { .theme-name { color: @color_kultuur;        } .dataset-header { border-color: @color_kultuur;        }  }
+  &.theme-Majandus        { .theme-name { color: @color_majandus;        } .dataset-header { border-color: @color_majandus;        }  }
+  &.theme-Toohoive      { .theme-name { color: @color_toohoive;      } .dataset-header { border-color: @color_toohoive;      }  }
+  &.theme-Haridus      { .theme-name { color: @color_haridus;      } .dataset-header { border-color: @color_haridus;      }  }
+  &.theme-Keskkond     { .theme-name { color: @color_keskkond;     } .dataset-header { border-color: @color_government;     }  }
+  &.theme-Rahandus         { .theme-name { color: @color_rahandus;         } .dataset-header { border-color: @color_rahandus;         }  }
+  &.theme-Geograafia        { .theme-name { color: @color_geograafia;        } .dataset-header { border-color: @color_geograafia;        }  }
+  &.theme-Tervis       { .theme-name { color: @color_tervis;       } .dataset-header { border-color: @color_tervis;       }  }
+  &.theme-Riigiteenused      { .theme-name { color: @color_riigiteenused;      } .dataset-header { border-color: @color_riigiteenused;      }  }
+  &.theme-Valitsemine { .theme-name { color: @color_valitsemine; } .dataset-header { border-color: @color_valitsemine; }  }
+  &.theme-Rahvastik        { .theme-name { color: @color_rahvastik;        } .dataset-header { border-color: @color_rahvastik;        }  }
+  &.theme-Transport    { .theme-name { color: @color_transport;    } .dataset-header { border-color: @color_transport;    }  }
+  &.theme-Sotsiaal       { .theme-name { color: @color_sotsiaal;       } .dataset-header { border-color: @color_sotsiaal;       }  }
 }
 .dataset-summary.mini {
   border-left: none;
@@ -600,11 +601,11 @@ table.tablesorter {
     line-height: 18px;
     color: #999;
   }
-  .left { 
-    float: none; 
+  .left {
+    float: none;
     width: auto;
   }
-  .right { 
+  .right {
     float: none;
     width: auto;
     text-align: left;
@@ -644,9 +645,9 @@ table.tablesorter {
     margin: 0 0 0 0;
     margin-bottom: -6px;
   }
-  ul { 
-    display: inline; 
-    margin: 0 0 0 0; 
+  ul {
+    display: inline;
+    margin: 0 0 0 0;
     list-style-type: none;
     padding: 0 0 0 0;
   }
@@ -689,8 +690,8 @@ table.tablesorter {
       background: #F4F4F4;
       margin-bottom: 4px;
       padding: 6px 20px 6px 48px;
-      a { 
-        color: #444; 
+      a {
+        color: #444;
       }
       &.active {
         background: #d3d3d3;
@@ -871,14 +872,14 @@ ul.ui-autocomplete {
   .dropdown {
     /* IE7 will render menus beneath content unless relative item has z-index */
     z-index: 5;
-    &.open a.dropdown-button { 
+    &.open a.dropdown-button {
       text-decoration: none;
       color: #000;
     }
     li {
       &:hover {
-        a { 
-          background: none !important; 
+        a {
+          background: none !important;
           color: auto !important;
         }
       }
@@ -953,9 +954,9 @@ body#front-page {
       left: 0;
       right: 0;
       bottom: 0;
-      small { 
+      small {
         display: block;
-        font-size: 80%; 
+        font-size: 80%;
         color: #fff;
       }
       .posttext { opacity: 0; }
@@ -975,18 +976,18 @@ body#front-page {
   .graph {
     overflow: hidden;
   }
-  .counts1 { 
-    height: 300px; 
+  .counts1 {
+    height: 300px;
     text-align: right;
   }
-  .counts2 { 
-    height: 180px; 
+  .counts2 {
+    height: 180px;
   }
-  .graph1  { 
-    height: 300px; 
+  .graph1  {
+    height: 300px;
   }
-  .graph2  { 
-    height: 180px; 
+  .graph2  {
+    height: 180px;
     text-align: right;
   }
   .count {
@@ -1007,14 +1008,14 @@ body#front-page {
 }
 // @media(max-width: 767px) { min-width: 25px; }
 // @media(max-width: 991px) { min-width: 19px; }
-@media (min-width: 450px) and (max-width:767px) { 
+@media (min-width: 450px) and (max-width:767px) {
   body#front-page {
     .col-md-4 .front-page-box{
       height: 150px;
     }
   }
 }
-@media(min-width: 768px) { 
+@media(min-width: 768px) {
   body#front-page {
     .col-md-4:nth-child(1) .front-page-box,
     .col-md-4:nth-child(2) .front-page-box {
@@ -1022,7 +1023,7 @@ body#front-page {
     }
   }
 }
-@media(min-width: 992px) { 
+@media(min-width: 992px) {
   body#front-page {
     .col-md-4:nth-child(1) .front-page-box,
     .col-md-4:nth-child(2) .front-page-box,
@@ -1109,9 +1110,9 @@ body.controller-package.action-search {
     }
     .feed-icon {
       color: #E75E00;
-      i { 
-        font-size: 32px; 
-        vertical-align: middle; 
+      i {
+        font-size: 32px;
+        vertical-align: middle;
       }
       &:hover {
         color: lighten(#E75E00,4%);
@@ -1128,22 +1129,20 @@ body.controller-package.action-search {
   color: #fff;
   font-weight: bold;
   &.theme-none           { background-color: #bbb; font-weight: normal; font-style: italic; }
-  &.theme-Crime          { background-color: @color_crime;          }
-  &.theme-Defence        { background-color: @color_defence;        }
-  &.theme-Economy        { background-color: @color_economy;        }
-  &.theme-Education      { background-color: @color_education;      }
-  &.theme-Geography      { background-color: @color_geography;      }
-  &.theme-Government     { background-color: @color_government;     }
-  &.theme-Health         { background-color: @color_health;         }
-  &.theme-Society        { background-color: @color_society;        }
-  &.theme-Spending       { background-color: @color_spending;       }
-  &.theme-Transport      { background-color: @color_transport;      }
-  &.theme-Administration { background-color: @color_administration; }
-  &.theme-Finance        { background-color: @color_finance;        }
-  &.theme-Environment    { background-color: @color_environment;    }
-  &.theme-Business       { background-color: @color_business;       }
-  &.theme-Mapping        { background-color: @color_mapping;        }
-  &.theme-Towns          { background-color: @color_towns;          }
+  &.theme-Pollumajandus          { background-color: @color_pollumajandus;          }
+  &.theme-Kultuur        { background-color: @color_kultuur;        }
+  &.theme-Majandus        { background-color: @color_majandus;        }
+  &.theme-Toohoive      { background-color: @color_toohoive;      }
+  &.theme-Haridus      { background-color: @color_haridus;      }
+  &.theme-Keskkond     { background-color: @color_keskkond;     }
+  &.theme-Rahandus         { background-color: @color_rahandus;         }
+  &.theme-Geograafia        { background-color: @color_geograafia;        }
+  &.theme-Tervis       { background-color: @color_tervis;       }
+  &.theme-Riigiteenused      { background-color: @color_riigiteenused;      }
+  &.theme-Valitsemine { background-color: @color_valitsemine; }
+  &.theme-Rahvastik        { background-color: @color_rahvastik;        }
+  &.theme-Transport    { background-color: @color_transport;    }
+  &.theme-Sotsiaal       { background-color: @color_sotsiaal;       }
 }
 body.controller-feedback,
 body.controller-package {
@@ -1226,8 +1225,8 @@ body.controller-package {
       .inner2 {
         display: block;
         padding: 9px 20px;
-        display: table-cell; 
-        vertical-align: middle; 
+        display: table-cell;
+        vertical-align: middle;
       }
     }
     .dropdown {
@@ -1246,11 +1245,11 @@ body.controller-package {
         height: 100%;
         text-align: center;
         padding-top: 38px;
-        color: #A3A3A3; 
+        color: #A3A3A3;
         text-decoration: none !important;
         &:hover {
           background: #e0e0e0;
-          color: #666; 
+          color: #666;
         }
       }
     }
@@ -1328,7 +1327,7 @@ body.controller-package.action-edit {
   #individual_resources-table,
   #additional_resources-table,
   #timeseries_resources-table {
-    td > input[type="text"], 
+    td > input[type="text"],
     td > .input-group {
       width: 100%;
       max-width: 100%;
@@ -1590,30 +1589,30 @@ body.controller-theme {
       }
       text-decoration: none;
       .img-scrollbox .description {
-        -webkit-transition: all 300ms ease-out;  
-        -moz-transition: all 300ms ease-out;  
-        -o-transition: all 300ms ease-out;  
-        -ms-transition: all 300ms ease-out;  
-        transition: all 300ms ease-out;  
-        -moz-transform: translateX(-100%);  
-        -o-transform: translateX(-100%);  
-        -webkit-transform: translateX(-100%);  
-        opacity: 1;  
-        transform: translateX(-100%);  
-      }  
+        -webkit-transition: all 300ms ease-out;
+        -moz-transition: all 300ms ease-out;
+        -o-transition: all 300ms ease-out;
+        -ms-transition: all 300ms ease-out;
+        transition: all 300ms ease-out;
+        -moz-transform: translateX(-100%);
+        -o-transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
+        opacity: 1;
+        transform: translateX(-100%);
+      }
     }
   }
-  .img-scrollbox {  
+  .img-scrollbox {
     width: 100%;
     background: #fcc;
     height: 150px;
-    position: relative;  
-    overflow: hidden;  
+    position: relative;
+    overflow: hidden;
     margin-bottom: 8px;
-    -webkit-box-shadow: 1px 1px 1px 1px #ccc;  
-    -moz-box-shadow: 1px 1px 1px 1px #ccc;  
-    box-shadow: 1px 1px 1px 1px #ccc;  
-    .img-container {  
+    -webkit-box-shadow: 1px 1px 1px 1px #ccc;
+    -moz-box-shadow: 1px 1px 1px 1px #ccc;
+    box-shadow: 1px 1px 1px 1px #ccc;
+    .img-container {
         img {
           position: absolute;
           left: -8%;
@@ -1622,29 +1621,29 @@ body.controller-theme {
         overflow: hidden;
         width: 100%;
         height: 150px;
-        position: absolute;  
-    }  
-    .description {  
-      background-color: rgba(0,0,0,0.8);  
-      position: absolute;  
-      color: #fff;  
-      z-index: 100;  
-      -webkit-transition: all 100ms ease-out;  
-      -moz-transition: all 100ms ease-out;  
-      -o-transition: all 100ms ease-out;  
-      -ms-transition: all 100ms ease-out;  
-      transition: all 100ms ease-out;  
-      left: 0;  
+        position: absolute;
+    }
+    .description {
+      background-color: rgba(0,0,0,0.8);
+      position: absolute;
+      color: #fff;
+      z-index: 100;
+      -webkit-transition: all 100ms ease-out;
+      -moz-transition: all 100ms ease-out;
+      -o-transition: all 100ms ease-out;
+      -ms-transition: all 100ms ease-out;
+      transition: all 100ms ease-out;
+      left: 0;
       width: 100%;
-      height: 170px;  
-      text-align: left;  
+      height: 170px;
+      text-align: left;
       padding: 0 0 0 0;
       left: 100%;
       .inner {
         padding: 10px;
       }
-    }  
-  }  
+    }
+  }
 }
 
 /* PAGE reports */
