@@ -3,18 +3,20 @@ import re
 # Map: Database entry -> Displayname
 # Ensure this agrees with themes.json
 THEMES = {
-    u"Health": u"Health",
-    u"Environment": u"Environment",
-    u"Education": u"Education",
-    u"Crime": u"Crime & Justice",
-    u"Government": u"Government",
-    u"Defence": u"Defence",
-    u"Economy": u"Business & Economy",
+    u"Põllumajandus, kalandus, metsandus": u"Põllumajandus, kalandus, metsandus",
+    u"Kultuur ": u"Kultuur",
+    u"Majandus ja tööstus": u"Majandus ja tööstus",
+    u"Tööhõive": u"Tööhõive",
+    u"Haridus ja teadus": u"Haridus ja teadus",
+    u"Keskkond": u"Keskkond",
+    u"Rahandus ja eelarvestamine": u"Rahandus ja eelarvestamine",
+    u"Geograafia": u"Geograafia",
+    u"Tervis": u"Tervis",
+    u"Riigiteenused": u"Riigiteenused",
+    u"Avatud valitsemine": u"Avatud valitsemine",
+    u"Rahvastiku andmed": u"Rahvastiku andmed",
     u"Transport": u"Transport",
-    u"Spending": u"Government Spending",
-    u"Society": u"Society",
-    u"Mapping": u"Mapping",
-    u"Towns": u"Towns & Cities",
+    u"Sotsiaalvaldkond": u"Sotsiaalvaldkond",
 }
 
 
@@ -139,29 +141,39 @@ organisation_name_mapping = {
     'Cancer Registry Northern Ireland':'Northern Ireland Cancer Registry',
     }
 
-update_frequency_options = ['never', 'discontinued', 'annual', 'quarterly', 'monthly']
+#update_frequency_options = ['never', 'discontinued', 'annual', 'quarterly', 'monthly']
+update_frequency_options = ['mitte kunagi', 'lõpetatud', 'iga-aastane', 'kvartaalne', 'igakuine']
 
-geographic_granularity_options = ['national', 'regional', 'local authority', 'ward', 'point']
+#geographic_granularity_options = ['national', 'regional', 'local authority', 'ward', 'point']
+geographic_granularity_options = ['riiklik', 'regionaalne', 'kov']
 
-temporal_granularity_options = ['year', 'quarter', 'month', 'week', 'day', 'hour', 'point']
+#temporal_granularity_options = ['year', 'quarter', 'month', 'week', 'day', 'hour', 'point']
+temporal_granularity_options = ['aasta', 'kvartal', 'kuu', 'nädal', 'päev', 'tund']
 
-category_options = ['Agriculture and Environment', 'Business and Energy', 'Children, Education and Skills', 'Crime and Justice', 'Economy', 'Government', 'Health and Social Care', 'Labour Market', 'People and Places', 'Population', 'Travel and Transport', 'Equality and Diversity', 'Migration']
+#category_options = ['Agriculture and Environment', 'Business and Energy', 'Children, Education and Skills', 'Crime and Justice', 'Economy', 'Government', 'Health and Social Care', 'Labour Market', 'People and Places', 'Population', 'Travel and Transport', 'Equality and Diversity', 'Migration']
+category_options = ['Põllumajandus, kalandus, metsandus', 'Kultuur', 'Majandus ja tööstus', 'Tööhõive', 'Haridus ja teadus', 'Keskkond', 'Rahandus ja eelarvestamine', 'Geograafia', 'Tervis', 'Riigiteenused', 'Avatud valitsemine', 'Rahvastiku andmed', 'Transport', 'Sotsiaalvaldkond']
 
-region_options = ('England', 'Scotland', 'Wales', 'Northern Ireland', 'Overseas', 'Global')
+#region_options = ('England', 'Scotland', 'Wales', 'Northern Ireland', 'Overseas', 'Global')
+region_options = ('Eesti', 'Baltikum', 'Euroopa', 'Maailm')
 
-region_groupings = {'United Kingdom':['England', 'Scotland', 'Wales', 'Northern Ireland'], 'Great Britain':['England', 'Scotland', 'Wales']}
+#region_groupings = {'United Kingdom':['England', 'Scotland', 'Wales', 'Northern Ireland'], 'Great Britain':['England', 'Scotland', 'Wales']}
+region_groupings = {'':['']}
 
-region_abbreviations = {'UK':'United Kingdom', 'N. Ireland':'Northern Ireland', 'GB':'Great Britain'}
+#region_abbreviations = {'UK':'United Kingdom', 'N. Ireland':'Northern Ireland', 'GB':'Great Britain'}
+region_abbreviations = {'EST':'Eesti'}
 
-tag_pool = ['accident', 'road', 'traffic', 'health', 'illness', 'disease', 'population', 'school', 'accommodation', 'children', 'married', 'emissions', 'benefit', 'alcohol', 'deaths', 'mortality', 'disability', 'unemployment', 'employment', 'armed forces', 'asylum', 'cancer', 'births', 'burglary', 'child', 'tax credit', 'criminal damage', 'drug', 'earnings', 'education', 'economic', 'fire', 'fraud', 'forgery', 'fuel', 'green', 'greenhouse gas', 'homeless', 'hospital', 'waiting list', 'housing', 'care', 'income', 'census', 'mental health', 'disablement allowance', 'jobseekers allowance', 'national curriculum', 'older people', 'living environment', 'higher education', 'living environment', 'school absence', 'local authority', 'carbon dioxide', 'energy', 'teachers', 'fostering', 'tide', 'gas', 'electricity', 'transport', 'veterinary', 'fishing', 'export', 'fisheries', 'pest', 'recycling', 'waste', 'crime', 'anti-social behaviour', 'police', 'refugee', 'identity card', 'immigration', 'planning', 'communities', 'lettings', 'finance', 'ethnicity', 'trading standards', 'trade', 'business', 'child protection', 'jobs', 'weather', 'climate', 'rainfall', 'cloud', 'snow', 'humidity', 'pressure', 'precipitation', 'sunshine', 'frost', 'temperature', 'fish']
+#tag_pool = ['accident', 'road', 'traffic', 'health', 'illness', 'disease', 'population', 'school', 'accommodation', 'children', 'married', 'emissions', 'benefit', 'alcohol', 'deaths', 'mortality', 'disability', 'unemployment', 'employment', 'armed forces', 'asylum', 'cancer', 'births', 'burglary', 'child', 'tax credit', 'criminal damage', 'drug', 'earnings', 'education', 'economic', 'fire', 'fraud', 'forgery', 'fuel', 'green', 'greenhouse gas', 'homeless', 'hospital', 'waiting list', 'housing', 'care', 'income', 'census', 'mental health', 'disablement allowance', 'jobseekers allowance', 'national curriculum', 'older people', 'living environment', 'higher education', 'living environment', 'school absence', 'local authority', 'carbon dioxide', 'energy', 'teachers', 'fostering', 'tide', 'gas', 'electricity', 'transport', 'veterinary', 'fishing', 'export', 'fisheries', 'pest', 'recycling', 'waste', 'crime', 'anti-social behaviour', 'police', 'refugee', 'identity card', 'immigration', 'planning', 'communities', 'lettings', 'finance', 'ethnicity', 'trading standards', 'trade', 'business', 'child protection', 'jobs', 'weather', 'climate', 'rainfall', 'cloud', 'snow', 'humidity', 'pressure', 'precipitation', 'sunshine', 'frost', 'temperature', 'fish']
+tag_pool = ['põllumajandus', 'kalandus', 'metsandus', 'kultuur', 'majandus', 'tööstus', 'tööhõive', 'haridus', 'teadus', 'keskkond', 'rahandus', 'eelarvestamine', 'geograafia', 'tervis', 'riigiteenused', 'valitsemine', 'avatud', 'rahvastik', 'transport', 'sotsiaalvaldkond']
 
-tag_search_fields = ['name', 'title', 'notes', 'categories', 'agency']
+#tag_search_fields = ['name', 'title', 'notes', 'categories', 'agency']
+tag_search_fields = ['nimi', 'pealkiri', 'märkused', 'kategooriad', 'agentuur']
 
-tag_words_to_join = ['ordnance survey', 'environmental protection', 'water conservation', 'water resources', 'water quality', 'climate and weather', 'nature conservation', 'waste management', 'waste policies and regulation', 'air quality', 'tariff codes', 'life stages', 'dry days']
+#tag_words_to_join = ['ordnance survey', 'environmental protection', 'water conservation', 'water resources', 'water quality', 'climate and weather', 'nature conservation', 'waste management', 'waste policies and regulation', 'air quality', 'tariff codes', 'life stages', 'dry days']
+tag_words_to_join = ['põllumajandus ja kalandus', 'majandus ja tööstus', 'haridus ja teadus', 'avatud valitsemine']
 
 def name_munge(name):
     # convert spaces to underscores
-    name = re.sub(' ', '_', name).lower()        
+    name = re.sub(' ', '_', name).lower()
     # convert symbols to dashes
     name = re.sub('[:]', '_-', name)
     name = re.sub('[/]', '-', name)
@@ -206,7 +218,7 @@ def tags_parse(tags_str):
     tag_list = re.split(',\s*|\s+', tags_str.strip())
     return [tag_munge(tag_name) for tag_name in tag_list]
 
-    
+
 class GeoCoverageType(object):
     @staticmethod
     def get_instance():
