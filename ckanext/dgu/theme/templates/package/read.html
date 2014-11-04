@@ -211,6 +211,7 @@
 
             <py:if test="res.get('scraped') or res.get('scraper_url')">
               ${h.scraper_icon(res, alt=if_(res.get('scraper_url'), "This URL leads to data files which are being added automatically, using the scraper at: https://scraperwiki.com/scrapers/%s" % res.get('scraper_url'), ""))}
+              ${h.scraper_icon(res, alt=if_(res.get('scraper_url'), "See URL viityab andmefailidele, mis lisatakse automaatselt, kasutades nn scraper teenust: https://scraperwiki.com/scrapers/%s" % res.get('scraper_url'), ""))}
             </py:if>
             ${res.get('date','')}
             ${h.resource_display_name(res)}
@@ -229,28 +230,28 @@
           </li>
           <li py:if="not gemini">
             <a href="${h.url_for(controller='package', action='resource_read', id=c.pkg_dict['name'], resource_id=res['id'])}">
-              <i class="icon-search"></i>&nbsp; ${'Preview' if h.predict_if_resource_will_preview(res) else 'Details'}
+              <i class="icon-search"></i>&nbsp; ${'Eelvaade' if h.predict_if_resource_will_preview(res) else 'Detailid'}
             </a>
           </li>
           <li py:if="not gemini">
             <a href="${res.get('url', '')}" onclick="${h.ga_download_tracking(res)}">
               <i class="icon-download-alt"></i>&nbsp;
-              <py:if test="h.dataset_type(c.pkg_extras)!='uklp'">Download</py:if>
-              <py:if test="h.dataset_type(c.pkg_extras)=='uklp'">Direct Link</py:if>
+              <py:if test="h.dataset_type(c.pkg_extras)!='uklp'">Lae alla</py:if>
+              <py:if test="h.dataset_type(c.pkg_extras)=='uklp'">Otselink</py:if>
             </a>
           </li>
           <py:with vars="cache_url, cache_timestamp = h.get_cache(res)">
             <li py:if="not gemini and cache_url">
               <a href="${cache_url}" class="js-tooltip" data-placement="bottom" title="Cached&nbsp;by&nbsp;data.gov.uk&nbsp;on ${cache_timestamp.strftime('%d/%m/%Y') if cache_timestamp else 'unknown date'}" onclick="${h.ga_download_tracking(res, 'download-cache')}">
                 <i class="icon-save"></i>&nbsp;
-                Cached
+                Puhverdatud
               </a>
             </li>
           </py:with>
           <li py:if="not gemini and not h.get_cache(res)[0]">
             <a class="disabled">
               <i class="icon-save"></i>&nbsp;
-              (no cache available)
+              (puhverdtaud versiooni ei ole)
             </a>
           </li>
         </ul><!-- /dropdown-mnu-->
