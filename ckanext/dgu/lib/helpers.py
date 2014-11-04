@@ -1,4 +1,6 @@
-﻿"""
+﻿# -*- coding: utf-8 -*-
+
+"""
 These helper functions are made available via the h variable which
 is given to every template for rendering.  To simplify the loading
 of helpers all functions *that do not start with _* will be added
@@ -762,29 +764,53 @@ def get_package_fields(package, pkg_extras, dataset_type):
             secondary_themes = str(secondary_themes)
             secondary_themes = THEMES.get(secondary_themes,
                                           secondary_themes)
+
     field_value_map = {
         # field_name : {display info}
-        'state': {'label': 'State', 'value': c.pkg.state},
-        'harvest-url': {'label': 'Harvest URL', 'value': harvest_url},
-        'harvest-date': {'label': 'Harvest Date', 'value': harvest_date},
-        'harvest-guid': {'label': 'Harvest GUID', 'value': harvest_guid},
-        'bbox': {'label': 'Extent', 'value': t.literal('Latitude: %s&deg; to %s&deg; <br/> Longitude: %s&deg; to %s&deg;' % (pkg_extras.get('bbox-north-lat'), pkg_extras.get('bbox-south-lat'), pkg_extras.get('bbox-west-long'), pkg_extras.get('bbox-east-long'))) },
-        'categories': {'label': 'ONS Category', 'value': pkg_extras.get('categories')},
-        'date_updated': {'label': 'Date data last updated', 'value': DateType.db_to_form(pkg_extras.get('date_updated', ''))},
-        'date_released': {'label': 'Date data last released', 'value': DateType.db_to_form(pkg_extras.get('date_released', ''))},
-        'temporal_coverage': {'label': 'Temporal coverage', 'value': temporal_coverage},
-        'geographic_coverage': {'label': 'Geographic coverage', 'value': GeoCoverageType.strip_off_binary(pkg_extras.get('geographic_coverage', ''))},
-        'resource-type': {'label': 'Gemini2 resource type', 'value': pkg_extras.get('resource-type')},
-        'spatial-data-service-type': {'label': 'Gemini2 service type', 'value': pkg_extras.get('spatial-data-service-type')},
-        'access_constraints': {'label': 'Access constraints', 'value': render_json(pkg_extras.get('access_constraints'))},
-        'taxonomy_url': {'label': 'Taxonomy URL', 'value': taxonomy_url},
-        'theme': {'label': 'Theme', 'value': primary_theme},
-        'theme-secondary': {'label': 'Secondary Theme(s)', 'value': secondary_themes},
-        'metadata-language': {'label': 'Metadata language', 'value': pkg_extras.get('metadata-language', '').replace('eng', 'English')},
-        'metadata-date': {'label': 'Metadata date', 'value': DateType.db_to_form(pkg_extras.get('metadata-date', ''))},
-        'dataset-reference-date': {'label': 'Dataset reference date', 'value': dataset_reference_date},
+        'state': {'label': 'Staatus', 'value': c.pkg.state},
+        'harvest-url': {'label': 'Andmekorje URL', 'value': harvest_url},
+        'harvest-date': {'label': 'Andmekorje kuupäev', 'value': harvest_date},
+        'harvest-guid': {'label': 'Andmekorje GUID', 'value': harvest_guid},
+        'bbox': {'label': 'Geogr. ulatus', 'value': t.literal('Laiuskraad: %s&deg; to %s&deg; <br/> Pikkuskraad: %s&deg; to %s&deg;' % (pkg_extras.get('bbox-north-lat'), pkg_extras.get('bbox-south-lat'), pkg_extras.get('bbox-west-long'), pkg_extras.get('bbox-east-long'))) },
+        'categories': {'label': 'ONS kategooria', 'value': pkg_extras.get('categories')},
+        'date_updated': {'label': 'Andmed viimati muudetud', 'value': DateType.db_to_form(pkg_extras.get('date_updated', ''))},
+        'date_released': {'label': 'Andmed viimati väljastatud', 'value': DateType.db_to_form(pkg_extras.get('date_released', ''))},
+        'temporal_coverage': {'label': 'Ajaline periood', 'value': temporal_coverage},
+        'geographic_coverage': {'label': 'Geograafiline kaetus', 'value': GeoCoverageType.strip_off_binary(pkg_extras.get('geographic_coverage', ''))},
+        'resource-type': {'label': 'Gemini2 ressursi tüüp', 'value': pkg_extras.get('resource-type')},
+        'spatial-data-service-type': {'label': 'Gemini2 teenuse tüüp', 'value': pkg_extras.get('spatial-data-service-type')},
+        'access_constraints': {'label': 'Ligipääsu piirangud', 'value': render_json(pkg_extras.get('access_constraints'))},
+        'taxonomy_url': {'label': 'Taksonoomia URL', 'value': taxonomy_url},
+        'theme': {'label': 'Teema', 'value': primary_theme},
+        'theme-secondary': {'label': 'Lisateema(d)', 'value': secondary_themes},
+        'metadata-language': {'label': 'Metaandmete keel', 'value': pkg_extras.get('metadata-language', '').replace('eng', 'English')},
+        'metadata-date': {'label': 'Metaandmete kuupäev', 'value': DateType.db_to_form(pkg_extras.get('metadata-date', ''))},
+        'dataset-reference-date': {'label': 'Andmehulga viitekuupäev', 'value': dataset_reference_date},
         '': {'label': '', 'value': ''},
     }
+#    field_value_map = {
+#        # field_name : {display info}
+#        'state': {'label': 'State', 'value': c.pkg.state},
+#        'harvest-url': {'label': 'Harvest URL', 'value': harvest_url},
+#        'harvest-date': {'label': 'Harvest Date', 'value': harvest_date},
+#        'harvest-guid': {'label': 'Harvest GUID', 'value': harvest_guid},
+#        'bbox': {'label': 'Extent', 'value': t.literal('Latitude: %s&deg; to %s&deg; <br/> Longitude: %s&deg; to %s&deg;' % (pkg_extras.get('bbox-north-lat'), pkg_extras.get('bbox-south-lat'), pkg_extras.get('bbox-west-long'), pkg_extras.get('bbox-east-long'))) },
+#        'categories': {'label': 'ONS Category', 'value': pkg_extras.get('categories')},
+#        'date_updated': {'label': 'Date data last updated', 'value': DateType.db_to_form(pkg_extras.get('date_updated', ''))},
+#        'date_released': {'label': 'Date data last released', 'value': DateType.db_to_form(pkg_extras.get('date_released', ''))},
+#        'temporal_coverage': {'label': 'Temporal coverage', 'value': temporal_coverage},
+#        'geographic_coverage': {'label': 'Geographic coverage', 'value': GeoCoverageType.strip_off_binary(pkg_extras.get('geographic_coverage', ''))},
+#        'resource-type': {'label': 'Gemini2 resource type', 'value': pkg_extras.get('resource-type')},
+#        'spatial-data-service-type': {'label': 'Gemini2 service type', 'value': pkg_extras.get('spatial-data-service-type')},
+#        'access_constraints': {'label': 'Access constraints', 'value': render_json(pkg_extras.get('access_constraints'))},
+#        'taxonomy_url': {'label': 'Taxonomy URL', 'value': taxonomy_url},
+#        'theme': {'label': 'Theme', 'value': primary_theme},
+#        'theme-secondary': {'label': 'Secondary Theme(s)', 'value': secondary_themes},
+#        'metadata-language': {'label': 'Metadata language', 'value': pkg_extras.get('metadata-language', '').replace('eng', 'English')},
+#        'metadata-date': {'label': 'Metadata date', 'value': DateType.db_to_form(pkg_extras.get('metadata-date', ''))},
+#        'dataset-reference-date': {'label': 'Dataset reference date', 'value': dataset_reference_date},
+#        '': {'label': '', 'value': ''},
+#    }
 
     # add in fields that only display if they have a value
     for field_name in field_names_display_only_if_value:
