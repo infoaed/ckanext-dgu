@@ -11,24 +11,24 @@
   about=""
   py:strip="">
 
-  <py:def function="page_title">${c.pkg_dict.get('title', c.pkg_dict['name'])} - Datasets</py:def>
+  <py:def function="page_title">${c.pkg_dict.get('title', c.pkg_dict['name'])} - Andmehulghad</py:def>
 
   <xi:include href="../inventory/inventory_util.html" />
 
   <py:match path="breadcrumbs">
-    <li><a href="/data/search">Datasets</a></li>
+    <li><a href="/data/search">Andmehulghad</a></li>
     <li><a href="${h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}">${c.pkg_dict.get('title', c.pkg_dict['name'])}</a></li>
   </py:match>
 
   <py:def function="package_content">
     <!-- Warn if reading old revision -->
     <div py:if="c.pkg_revision_id" class="panel panel-warning">
-      <div class="panel-heading">Viewing Dataset Revision</div>
+      <div class="panel-heading">Andmehulga revideerimine</div>
       <div class="panel-body" py:if="c.pkg_revision_not_latest">
-        This is an old revision of this dataset, as edited at ${h.render_datetime(c.pkg_revision_timestamp)}. It may differ significantly from the <a href="${h.url(controller='package', action='read', id=c.pkg.name)}">current revision</a>.
+        See on antud andmehulga vanem versioon, muudetud ${h.render_datetime(c.pkg_revision_timestamp)}. See võib erineda <a href="${h.url(controller='package', action='read', id=c.pkg.name)}">praegusest versioonist</a>.
       </div>
       <div class="panel-body" py:if="not c.pkg_revision_not_latest">
-        This is the current revision of this dataset, as edited at ${h.render_datetime(c.pkg_revision_timestamp)}.
+        See on antud andmehulga praegune versioon, muudetud ${h.render_datetime(c.pkg_revision_timestamp)}.
       </div>
     </div>
 
@@ -47,14 +47,14 @@
             ${map_preview_button_direct(c.pkg_dict, small=False)}
           </div>
           <py:if test="h.has_bounding_box(c.pkg_extras) and h.get_extent()">
-          <h3>Dataset Extent</h3>
+          <h3>Andmehulga geograafiline ulatus</h3>
           <table class="table">
             <tr>
-              <td class="key">Latitude:</td>
+              <td class="key">Laiuskraad:</td>
               <td class="value">${dict(c.pkg_extras).get('bbox-north-lat')[:7]}&deg; to ${dict(c.pkg_extras).get('bbox-south-lat')[:7]}&deg;</td>
             </tr>
             <tr>
-              <td class="key">Longitude:</td>
+              <td class="key">Pikkuskraad:</td>
               <td class="value">${dict(c.pkg_extras).get('bbox-west-long')[:7]}&deg; to ${dict(c.pkg_extras).get('bbox-east-long')[:7]}&deg;</td>
             </tr>
           </table>
@@ -74,11 +74,11 @@
     <div class="dataset-resources" py:if="not h.is_unpublished_item(c.pkg_dict)">
       <!-- Resources -->
       <py:if test="h.individual_resources()">
-        <h2>Data Resources (${len(h.individual_resources())})</h2>
+        <h2>Andmefailid (${len(h.individual_resources())})</h2>
         ${resource_table(h.individual_resources())}
       </py:if>
       <py:if test="h.timeseries_resources()">
-        <h2>Data Resources (${len(h.timeseries_resources())} in a time series)</h2>
+        <h2>Andmefailid (${len(h.timeseries_resources())} in a time series)</h2>
 	<py:for each="year, items in h.groupby(reversed(h.timeseries_resources()), lambda x: h.parse_date(x.get('date')).year)">
 	  <div class="year">
             <h3>${year} <span class="showyear"></span><span class="hideyear"></span></h3>
@@ -91,23 +91,23 @@
     </div>
     <div class="dataset-resources-additional" py:if="not h.is_unpublished_item(c.pkg_dict)">
       <py:if test="h.additional_resources() or h.gemini_resources()">
-        <h2>Additional Links (${len(h.additional_resources()) + len(h.gemini_resources())})</h2>
+        <h2>Täiendavad lingid (${len(h.additional_resources()) + len(h.gemini_resources())})</h2>
         ${resource_table(h.additional_resources() + h.gemini_resources())}
       </py:if>
 
       <py:if test="not (h.dataset_type(c.pkg_extras) == 'uklp' or h.individual_resources() or h.timeseries_resources() or h.additional_resources())">
-        <em>(none)</em>
+        <em>(pole)</em>
       </py:if>
     </div>
 
     <div class="dataset-additional-information" py:if="not h.is_unpublished_item(c.pkg_dict)">
       <!-- Dataset Information Section -->
-      <h2>Additional Information</h2>
+      <h2>Lisainformatsioon</h2>
       <table class="table table-bordered table-condensed table-dgu-fixed-size dgu-table" style="margin-bottom: 45px;">
         <tbody>
           <py:with vars="metadata=h.get_package_mini_metadata(c.pkg)">
             <tr>
-              <td class="key">Added to data.gov.uk</td>
+              <td class="key">Lisatud portaali</td>
               <td class="value">${metadata['date-added-computed']}</td>
             </tr>
           <!-- Hidden while QA/archiver changes are removed from taskstatus, if not revisions.
@@ -123,14 +123,14 @@
           </tr>
           <tr py:if="h.dataset_type(c.pkg_extras) == 'uklp' and dict(c.pkg_extras).get('resource-type') in ('dataset', 'series', 'service')">
             <py:with vars="is_service=dict(c.pkg_extras).get('resource-type')=='service'">
-            <td class="key">Coupled ${if_(is_service,'Datasets','Services')}</td>
+            <td class="key">Kokku pandud ${if_(is_service,'andmehulgad','teenused')}</td>
             <td class="value">
               <ul py:if="h.coupled_pkg_tuples(c.pkg)">
                 <li py:for="name, title in h.coupled_pkg_tuples(c.pkg)">
                   <a href="/dataset/${name}">${title}</a>
                 </li>
               </ul>
-              <span py:if="not h.coupled_pkg_tuples(c.pkg)">(none)</span>
+              <span py:if="not h.coupled_pkg_tuples(c.pkg)">(pole)</span>
             </td>
             </py:with>
           </tr>
@@ -139,12 +139,12 @@
     </div>
 
     <a href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController',action='add',id=c.pkg.name)}" class="btn btn-primary btn-mini add-feedback-button pull-right">
-      <py:if test="c.user">Add Feedback &raquo;</py:if>
-      <py:if test="not c.user">Login to Add Feedback &raquo;</py:if>
+      <py:if test="c.user">Anna tagasisidet &raquo;</py:if>
+      <py:if test="not c.user">Tagasiside andmiseks logi sisse &raquo;</py:if>
     </a>
 
     <py:if test="h.has_related_apps(c.pkg_dict.get('id'))">
-    <h2>Related Applications</h2>
+    <h2>Seotud rakendused</h2>
     <ul>
       <li py:for="rel in h.get_related_apps(c.pkg_dict.get('id'))">
         <a href="${rel.url}">${h.literal(rel.title)}</a>
@@ -152,10 +152,10 @@
     </ul>
     </py:if>
 
-    <h2>Dataset Feedback</h2>
+    <h2>Tagasiside andmehulgale</h2>
     <div class="dataset-feedback-container">
       ${feedback_summary(c.pkg_dict,render_title=False,large=True)}
-      <a class="view-feedback-link" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController',action='view',id=c.pkg.name)}">View all feedback &raquo;</a>
+      <a class="view-feedback-link" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController',action='view',id=c.pkg.name)}">Vaata kogu tagasisidet &raquo;</a>
     </div>
 
 
