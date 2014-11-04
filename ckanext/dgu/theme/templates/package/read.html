@@ -119,7 +119,7 @@
           </py:with>
           <tr py:for="field_dict, label_attributes, value_attributes in h.get_package_fields(c.pkg, dict(c.pkg_extras),h.dataset_type(c.pkg_extras))">
             <td class="key" py:attrs="label_attributes">${field_dict.get('label') or field_dict['name']}</td>
-            <td class="value" py:attrs="value_attributes">${field_dict.get('value') or 'No value'}</td>
+            <td class="value" py:attrs="value_attributes">${field_dict.get('value') or 'määramata'}</td>
           </tr>
           <tr py:if="h.dataset_type(c.pkg_extras) == 'uklp' and dict(c.pkg_extras).get('resource-type') in ('dataset', 'series', 'service')">
             <py:with vars="is_service=dict(c.pkg_extras).get('resource-type')=='service'">
