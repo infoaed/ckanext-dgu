@@ -82,7 +82,7 @@
               <li><a href="${h.url_for('report-org', report_name='openness', organization=c.group.name)}">
               Taaskasutatavuse raport</a></li>
 
-              <li><a href="/data/site-usage/dataset/${c.group.name}">Andmehulkade analüütika</a></li>
+              <li><a href="/data/site-usage/dataset/${c.group.name}">Andmehulkade kasutus</a></li>
 
               <!--!  Not ready yet
               <li py:if="h.check_access('package_create', {'owner_org':c.group.name})"><a href="${h.url_for('activity_reports', id=c.group.name)}">Activity report</a></li>
@@ -182,7 +182,7 @@
     </py:def>
 
     ${search_form(
-      placeholder='Search publisher',
+      placeholder='Otsi teabevaldajaid',
       set_fields={'publisher':c.group.name},
       extra_options=publisher_extra_options,
     )}

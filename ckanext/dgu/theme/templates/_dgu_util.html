@@ -87,7 +87,7 @@
         <div class="chevron"></div>
         <py:if test="not c.query_error" py:with="count = c.page.item_count if c.page not in (None, '') else c.package_count or 0">
           <div class="result-count">${count}</div>
-          <div class="result-count-footer">Andmehulk${if_(count!=1,'s')}</div>
+          <div class="result-count-footer">Andmehulk${if_(count!=1,'a')}</div>
         </py:if>
         <py:if test="c.query_error">
           <div class="result-count-footer">Otsinguviga</div>
