@@ -30,17 +30,10 @@
             <div class="panel-heading">Kontaktid</div>
             <div class="panel-body">
               <py:if test="render_enquiries">
-                <b>Päringud:</b>
+                <b>Küsimused:</b>
                 <ul style="margin-bottom: 5px;">
                   ${h.get_contact_name(c.pkg, dict(c.pkg_extras))}
                   ${contact_details(*h.get_contact_details(c.pkg, dict(c.pkg_extras)))}
-                </ul>
-              </py:if>
-              <py:if test="render_foi">
-                <b class="js-tooltip" title="Use the Freedom of Information Act to request more information from the body holding the data">Freedom Of Information päringud</b>:
-                <ul style="margin-bottom: 0;">
-                  ${h.get_foi_contact_name(c.pkg, dict(c.pkg_extras))}
-                  ${contact_details(*h.get_foi_contact_details(c.pkg, dict(c.pkg_extras)))}
                 </ul>
               </py:if>
             </div>

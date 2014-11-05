@@ -1,4 +1,4 @@
-﻿<html xmlns:py="http://genshi.edgewall.org/"
+<html xmlns:py="http://genshi.edgewall.org/"
   xmlns:i18n="http://genshi.edgewall.org/i18n"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   py:strip="">
@@ -6,21 +6,21 @@
   <py:def function="page_title">${c.group.display_name}</py:def>
 
   <py:match path="breadcrumbs">
-    <li><a href="/publisher">Publishers</a></li>
+    <li><a href="/publisher">Teabevaldajad</a></li>
     <li><a href="/publisher/${c.group.name}">${c.group.display_name}</a></li>
   </py:match>
 
   <py:match path="content">
     <div class="dropdown-buttons">
       <span class="dropdown">
-        <a href="#" class="js-tooltip dropdown-button" data-placement="top" data-delay="300" data-toggle="dropdown" title="" data-original-title="Contact&nbsp;Details">
+        <a href="#" class="js-tooltip dropdown-button" data-placement="top" data-delay="300" data-toggle="dropdown" title="" data-original-title="Kontaktandmed">
           <i class="icon-envelope icon-2x"></i>
           <div class="dropdown-chevron"></div>
         </a>
         <div class="panel panel-default dropdown-menu" role="menu" aria-labelledby="dLabel">
-          <div class="panel-heading">Contacts</div>
+          <div class="panel-heading">Kontaktid</div>
           <div class="panel-body">
-            <b>Enquiries:</b>
+            <b>Küsimused:</b>
             <ul style="margin-bottom: 5px;">
               ${c.group_extras.get('contact-name')}
               ${contact_details(c.group_extras.get('contact-name'),
@@ -29,24 +29,16 @@
               c.group_extras.get('website-url'),
               c.group_extras.get('website-name'))}
             </ul>
-            <b class="js-tooltip" title="Use the Freedom of Information Act to request more information from the body holding the data">FOI requests</b>:
-            <ul style="margin-bottom: 0;">
-              ${c.group_extras.get('foi-name')}
-              ${contact_details(c.group_extras.get('foi-name'),
-              c.group_extras.get('foi-email'),
-              c.group_extras.get('foi-phone'),
-              c.group_extras.get('foi-web'), '')}
-            </ul>
           </div>
         </div>
       </span>
       <span class="dropdown js-trigger-publisher-scroll">
-        <a href="#" class="js-tooltip dropdown-button" data-placement="top" data-delay="300" data-toggle="dropdown" title="" data-original-title="Publisher&nbsp;Hierarchy">
+        <a href="#" class="js-tooltip dropdown-button" data-placement="top" data-delay="300" data-toggle="dropdown" title="" data-original-title="Teabevaldajate&nbsp;hierarhia">
           <i class="icon-sitemap icon-2x"></i>
           <div class="dropdown-chevron"></div>
         </a>
         <div class="dropdown-menu panel panel-default" role="menu" aria-labelledby="dLabel">
-          <div class="panel-heading">Publisher Hierarchy</div>
+          <div class="panel-heading">Teabevaldajate hierarhia</div>
           <div class="panel-body publisher-dropdown">
             <py:def function="render_child(pub)">
                 <div class="publisher">
@@ -73,27 +65,24 @@
         </div>
       </span>
       <span class="dropdown">
-        <a href="#" class="js-tooltip dropdown-button" data-placement="top" data-delay="300" data-toggle="dropdown" title="" data-original-title="Reports&nbsp;&amp;&nbsp;Analytics">
+        <a href="#" class="js-tooltip dropdown-button" data-placement="top" data-delay="300" data-toggle="dropdown" title="" data-original-title="Raportid&nbsp;ja&nbsp;analüüsid">
           <i class="icon-bar-chart icon-2x"></i>
           <div class="dropdown-chevron"></div>
         </a>
         <div class="panel panel-default dropdown-menu" role="menu" aria-labelledby="dLabel">
-          <div class="panel-heading">Reports</div>
+          <div class="panel-heading">Raportid</div>
           <div class="panel-body">
             <ul>
               <li><a href="${h.url_for('report-org', report_name='broken-links', organization=c.group.name)}">
-              Broken links report</a></li>
+              Katkiste linkide raport</a></li>
 
               <li><a href="${h.url_for('report-org', report_name='feedback', organization=c.group.name)}">
-              Feedback report</a></li>
+              Tagasiside raport</a></li>
 
               <li><a href="${h.url_for('report-org', report_name='openness', organization=c.group.name)}">
-              Openness report</a></li>
+              Taaskasutatavuse raport</a></li>
 
-              <li py:if="h.has_commitment(c.group)"><a href="${h.url_for('commitments_publisher', id=c.group.name)}">
-              Data publication commitments</a></li>
-
-              <li><a href="/data/site-usage/dataset/${c.group.name}">Dataset analytics</a></li>
+              <li><a href="/data/site-usage/dataset/${c.group.name}">Andmehulkade analüütika</a></li>
 
               <!--!  Not ready yet
               <li py:if="h.check_access('package_create', {'owner_org':c.group.name})"><a href="${h.url_for('activity_reports', id=c.group.name)}">Activity report</a></li>
@@ -103,33 +92,33 @@
         </div>
       </span>
       <span class="dropdown" py:if="c.userobj">
-        <a href="#" class="js-tooltip dropdown-button" data-placement="top" data-delay="300" data-toggle="dropdown" title="" data-original-title="Administrators">
+        <a href="#" class="js-tooltip dropdown-button" data-placement="top" data-delay="300" data-toggle="dropdown" title="" data-original-title="Administraatorid">
           <i class="icon-group icon-2x"></i>
           <div class="dropdown-chevron"></div>
         </a>
         <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-          <b>Administrators:</b>
+          <b>Administraatorid:</b>
           <ul py:with="count = c.administrators.count()">
             <py:if test="c.is_an_official">
               <li py:for="admin in c.administrators">${h.linked_user(admin, maxlength=40)}</li>
             </py:if>
             <py:if test="not c.is_an_official">
-              <li py:if="count">${count} administrator${h.pluralise_text(count)}</li>
-              <li py:if="not count">No-one assigned</li>
+              <li py:if="count">${count} administraator${h.pluralise_text(count)}</li>
+              <li py:if="not count">Määramata</li>
             </py:if>
           </ul>
-          <b>Editors:</b>
+          <b>Toimetajad:</b>
           <ul py:with="count = c.editors.count()">
             <py:if test="c.is_an_official">
               <li py:for="editor in c.editors">${h.linked_user(editor, maxlength=35)}</li>
             </py:if>
             <py:if test="not c.is_an_official">
-              <li py:if="count">${count} editor${h.pluralise_text(count)}</li>
-              <li py:if="not count">No-one assigned</li>
+              <li py:if="count">${count} toimetaja${h.pluralise_text(count)}</li>
+              <li py:if="not count">Määramata</li>
             </py:if>
             <li py:if="not c.userobj in c.administrators and not c.userobj in c.editors">
               <b><a href="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='apply', id=c.group.name)}">
-                  <u>Request to become an ${if_(not c.administrators.count(),'Admin/')}Editor</u> &nbsp;&raquo;
+                  <u>Avalda soovi saada toimetajaks</u> &nbsp;&raquo;
               </a></b>
             </li>
           </ul>
@@ -144,7 +133,7 @@
     </h1>
     <py:if test="c.group['state'] != 'active'">
       <div class="panel panel-danger">
-        <div class="panel-heading"><strong>State:</strong> ${c.group['state']}</div>
+        <div class="panel-heading"><strong>Staatus:</strong> ${c.group['state']}</div>
       </div>
     </py:if>
     <div class="row" py:with="
@@ -154,10 +143,7 @@
       >
       <div class="${if_(adminmode,'col-md-8','col-md-12')}">
         <p py:if="h.group_category(c.group_extras)" class="pre-notes">
-          <b>Category: </b> ${h.group_category(c.group_extras)}
-        </p>
-        <p py:if="h.spending_published_by(c.group_extras)" class="pre-notes">
-          <b>Spending data published by: </b> <a href="/publisher/${h.spending_published_by(c.group_extras).name}">${h.spending_published_by(c.group_extras).title}</a>
+          <b>Kategooria: </b> ${h.group_category(c.group_extras)}
         </p>
         <div class="notes" py:with="description = (c.description or '')">
           ${h.render_markdown(description)}
@@ -166,20 +152,20 @@
       <div class="col-md-4" py:if="adminmode">
         <div class="admin-toolkit">
           <div class="panel panel-info">
-            <div class="panel-heading" style="font-weight: bold;">Administrator Tools</div>
+            <div class="panel-heading" style="font-weight: bold;">Administraatori tööriistad</div>
             <div class="panel-body">
               <ul class="administrator-tools">
                 <li py:if="organizationupdate">
-                  <a href="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='edit', id=c.group.name)}"><span class="wrap-icon"><i class="icon-edit"></i> </span>Edit publisher properties &raquo;</a>
+                  <a href="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='edit', id=c.group.name)}"><span class="wrap-icon"><i class="icon-edit"></i> </span>Muuda teabevaldaja metaandmeid &raquo;</a>
                 </li>
                 <li py:if="organizationupdate">
-                  <a href="${h.url_for(controller='ckanext.dgu.controllers.inventory:InventoryController', action='edit',id=c.group.name)}"><span class="wrap-icon"><i class="icon-archive"></i> </span>Manage unpublished datasets &raquo;</a>
+                  <a href="${h.url_for(controller='ckanext.dgu.controllers.inventory:InventoryController', action='edit',id=c.group.name)}"><span class="wrap-icon"><i class="icon-archive"></i> </span>Halda avalikustamata andmehulki &raquo;</a>
                 </li>
                 <li py:if="packagecreate">
-                  <a href="${h.url_for('dataset_new')}?owner_org=${c.group.name}"><span class="wrap-icon"><i class="icon-plus-sign-alt"></i> </span>Add a new dataset &raquo;</a>
+                  <a href="${h.url_for('dataset_new')}?owner_org=${c.group.name}"><span class="wrap-icon"><i class="icon-plus-sign-alt"></i> </span>Lisa uus andmehulk &raquo;</a>
                 </li>
                 <li py:if="organizationupdate">
-                  <a href="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='users', id=c.group.name)}"><span class="wrap-icon"><i class="icon-unlock-alt"></i> </span>Edit user permissions &raquo;</a>
+                  <a href="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='users', id=c.group.name)}"><span class="wrap-icon"><i class="icon-unlock-alt"></i> </span>Halda kasutajaõigusi &raquo;</a>
                 </li>
               </ul>
             </div>
@@ -191,7 +177,7 @@
     <py:def function="publisher_extra_options">
       <label class="checkbox" id="publisher-extra-options">
         <input type="checkbox" name="publisher-results-include-subpub" class="inline" />
-        Include datasets from sub-publishers
+        Kaasa arvatud alam-teabevaldajate andmehulgad
       </label>
     </py:def>
 
@@ -202,7 +188,7 @@
     )}
     <div class="clearfix" style="height: 30px;">&nbsp;</div>
 
-    <h2>Popular Datasets</h2>
+    <h2>Populaarsed andmehulgad</h2>
     <div py:if="c.page.items">
       ${package_list_from_dict(c.page.items,mini=True)}
     </div>
@@ -213,7 +199,7 @@
   </py:match>
 
   <py:def function="optional_feed">
-    <link rel="alternate" type="application/atom+xml" title="${g.site_title} - Datasets in organization '${c.group['title']}'"
+    <link rel="alternate" type="application/atom+xml" title="${g.site_title} - Andmehulgad organisatsioonis '${c.group['title']}'"
       href="${h.url(controller='feed', action='organization', id=c.group['name'])}" />
   </py:def>
 
