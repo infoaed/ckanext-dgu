@@ -695,8 +695,8 @@ def get_package_fields(package, pkg_extras, dataset_type):
     pkg_extras = dict(pkg_extras)
     harvest_date = harvest_guid = harvest_url = dataset_reference_date = None
 
-    # mandate field considered irrelevant for Estonian data portal.
-    field_names.remove(['mandate'])
+    # these fields considered irrelevant for Estonian data portal.
+    field_names.remove(['geographic_coverage', 'mandate', 'date-added-computed', 'date-updated-computed'])
 
     if dataset_type == 'uklp':
         field_names.add(['harvest-url', 'harvest-date', 'harvest-guid', 'bbox', 'spatial-reference-system', 'metadata-date', 'dataset-reference-date', 'frequency-of-update', 'responsible-party', 'access_constraints', 'metadata-language', 'resource-type'])

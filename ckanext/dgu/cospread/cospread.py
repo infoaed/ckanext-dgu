@@ -78,7 +78,7 @@ class CospreadDataRecords(SpreadsheetDataRecords):
         self.standard_or_other_columns = ['Geographical Granularity', 'Temporal Granularity']
         self.resource_keys = ['Download URL', 'File format', 'Download Description']
         super(CospreadDataRecords, self).__init__(data, essential_titles)
-            
+
     def find_titles(self, essential_titles):
         row_index = 0
         titles = []
@@ -129,7 +129,7 @@ class CospreadDataRecords(SpreadsheetDataRecords):
             msg = 'Columns not identified by REs: %r' % (set(self.title_map.keys()) - set(self.title_reverse_map.values()))
             msg += '\nColumns over identified by REs: %r' % (set(self.title_reverse_map.keys()) - set(self.title_map.values()))
             raise AssertionError(msg)
-            
+
     @property
     def records(self):
         '''Returns package records.
@@ -186,7 +186,7 @@ class CospreadDataRecords(SpreadsheetDataRecords):
                 resource = OrderedDict()
                 for key in self.resource_keys:
                     key_used = None
-                    if key in record:                
+                    if key in record:
                         key_used = key
                     else:
                         alt_key = self.title_reverse_map.get(key)
@@ -229,7 +229,7 @@ class CospreadImporter(SpreadsheetPackageImporter):
             u'Met Office licence':u'met-office-cp',
             u'Met Office UK Climate Projections Licence Agreement':u'met-office-cp',
         }
-    
+
     def __init__(self, include_given_tags=False, xmlrpc_settings=None,
                  generate_names=False,
                  **kwargs):
@@ -262,7 +262,7 @@ class CospreadImporter(SpreadsheetPackageImporter):
         pkg_dict['notes'] = notes
         pkg_dict['version'] = u''
         pkg_dict['groups'] = [u'ukgov']
-        
+
         pkg_dict['extras'] = OrderedDict()
         extras_dict = pkg_dict['extras']
         geo_cover = []
@@ -277,7 +277,7 @@ class CospreadImporter(SpreadsheetPackageImporter):
         for column, extra_key in [
             ('Date released', 'date_released'),
             ('Date updated', 'date_updated'),
-            ('Date update future', 'date_update_future'),
+            ('Date Update Future', 'date_update_future'),
             ('Temporal Coverage - From', 'temporal_coverage-from'),
             ('Temporal Coverage - To', 'temporal_coverage-to'),
             ]:
@@ -302,7 +302,7 @@ class CospreadImporter(SpreadsheetPackageImporter):
                     self.log("WARNING: Value for column '%s' of %r is not understood as a date format." % (column, form_value))
                     val = form_value
             extras_dict[extra_key] = val
-            
+
         field_map = [
             ['CO Identifier'],
             ['Update frequency', schema.update_frequency_options],
@@ -423,11 +423,11 @@ class CospreadImporter(SpreadsheetPackageImporter):
             license_id = 'uk-ogl'
             cls.log('WARNING: license not recognised: "%s". Defaulting to: %s.' % (license_name, license_id))
         return license_id, additional_notes
-        
+
     @classmethod
     def munge(self, name):
         # convert spaces and separating symbols to underscores
-        name = re.sub('[\s:/]', '-', name).lower()        
+        name = re.sub('[\s:/]', '-', name).lower()
         # take out not-allowed characters
         name = re.sub('[^a-z0-9-_]', '', name)
         # remove double minuses
