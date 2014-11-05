@@ -180,10 +180,10 @@ ${h.top_level_init()}
         <br/>
 
         <py:if test="h.is_sysadmin()">
-          <span class="divider-section">&nbsp; Sys Admin:</span>
-          <li><a class="${if_(url.startswith('/data/system_dashboard'),'active')}" href="${h.url_for(controller='ckanext.dgu.controllers.data:DataController', action='system_dashboard')}">System Dashboard</a></li>
-          <li><a class="${if_(url.startswith('/harvest'),'active')}" href="${h.url_for(controller='ckanext.harvest.controllers.view:ViewController', action='index')}">Harvest Sources</a></li>
-          <li><a class="${if_(url.startswith('/data/feedback/moderation'),'active')}" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController', action='moderation')}">Feedback moderation</a></li>
+          <span class="divider-section">&nbsp; Süsadmin:</span>
+          <li><a class="${if_(url.startswith('/data/system_dashboard'),'active')}" href="${h.url_for(controller='ckanext.dgu.controllers.data:DataController', action='system_dashboard')}">Süsteemi töölaud</a></li>
+          <li><a class="${if_(url.startswith('/harvest'),'active')}" href="${h.url_for(controller='ckanext.harvest.controllers.view:ViewController', action='index')}">Andmekorje allikad</a></li>
+          <li><a class="${if_(url.startswith('/data/feedback/moderation'),'active')}" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController', action='moderation')}">Tagasiside modereerimine</a></li>
         </py:if>
       </ul>
 
