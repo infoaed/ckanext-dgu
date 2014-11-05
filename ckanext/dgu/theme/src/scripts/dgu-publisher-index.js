@@ -24,7 +24,7 @@ $(function() {
   assert (searchBox.length);
 
   /* This is effectively a global variable. I am not proud */
-  /* TODO replace with multiple returns from the recursive function 
+  /* TODO replace with multiple returns from the recursive function
    * AS LONG AS it doesn't damage performance.  */
   var hacky_count = -1;
   /* Recursive. Runs through a row of the index */
@@ -37,7 +37,7 @@ $(function() {
       p.removeClass('childMatch');
       container.addClass('empty-search');
       resultCountBox.text(hacky_count);
-      resultCountFooterBox.text('Publishers');
+      resultCountFooterBox.text('Teabevaldajat');
       return;
     }
     container.removeClass('empty-search');
@@ -98,7 +98,7 @@ $(function() {
 
   // -- Init base form
   $('input[name="q"]').focus();
-  
+
   // -- Handle expand/collapse
   $('.js-expand,.js-collapse').click(function(e) {
     e.preventDefault();
