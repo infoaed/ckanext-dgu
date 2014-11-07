@@ -1,4 +1,4 @@
-﻿<html xmlns:py="http://genshi.edgewall.org/"
+<html xmlns:py="http://genshi.edgewall.org/"
   xmlns:i18n="http://genshi.edgewall.org/i18n"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:foaf="http://xmlns.com/foaf/0.1/"
@@ -20,34 +20,34 @@
   </py:def>
 
   <py:match path="breadcrumbs">
-    <li><a href="/data/search">Datasets</a></li>
+    <li><a href="/data/search">Andmehulgad</a></li>
     <li><a href="${h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}">${c.pkg_dict.get('title', c.pkg_dict['name'])}</a></li>
     <li><a href="${h.url_for(controller='package',action='resource_read',id=c.pkg_dict['name'],resource_id=c.resource.id)}">${h.resource_display_name(c.resource)}</a></li>
   </py:match>
 
   <py:def function="page_title">
-    ${h.resource_display_name(c.resource)} - Resources
+    ${h.resource_display_name(c.resource)} - ressursid
   </py:def>
 
   <div py:def="package_content">
     <hr/>
     <div py:if="c.resource.get('state') == 'deleted'" class="panel panel-danger">
-      <div class="panel-heading">Deleted resource</div>
-      <py:with vars="deleted=if_(h.dataset_type(c.pkg_extras)=='uklp','withdrawn','deleted')">
-        <div class="panel-body">This resource is <strong>${deleted}</strong>.</div>
+      <div class="panel-heading">Kustutatud ressurss</div>
+      <py:with vars="deleted=if_(h.dataset_type(c.pkg_extras)=='uklp','tühistatud','kustutatud')">
+        <div class="panel-body">See ressurss on <strong>${deleted}</strong>.</div>
       </py:with>
     </div>
 
     <div class="pull-right">
       <a py:if="c.resource.get('url')" class="btn btn-danger resource-url-analytics resource-type-${c.resource.get('resource_type')}" href="${c.resource.get('url')}" onclick="${h.ga_download_tracking(c.resource)}">
         <py:choose test="c.resource.get('resource_type')">
-          <py:when test="'listing'"><i class="icon-search"></i>&nbsp; View</py:when>
-          <py:when test="'service'"><i class="icon-search"></i>&nbsp; View</py:when>
-          <py:when test="'api'"><i class="icon-code"></i>&nbsp; API Endpoint</py:when>
+          <py:when test="'listing'"><i class="icon-search"></i>&nbsp; Vaata</py:when>
+          <py:when test="'service'"><i class="icon-search"></i>&nbsp; Vaata</py:when>
+          <py:when test="'api'"><i class="icon-code"></i>&nbsp; API link</py:when>
           <py:otherwise>
             <div class="download">
               <py:if test="not h.get_resource_wms(c.resource)">
-                <i class="icon-download"></i>&nbsp; Download
+                <i class="icon-download"></i>&nbsp; Lae alla
               </py:if>
               <py:if test="h.get_resource_wms(c.resource)">
                 <i class="icon-search"></i>&nbsp; Link
@@ -58,19 +58,19 @@
       </a>
       <py:with vars="cache_url, cache_timestamp = h.get_cache(c.resource)">
        <a py:if="cache_url and not bool(h.get_resource_wms(c.resource))" class="btn btn-danger resource-url-analytics resource-type-${c.resource.get('resource_type')}" href="${cache_url}" onclick="${h.ga_download_tracking(c.resource, 'download-cache')}">
-        <div class="download js-tooltip" data-placement="bottom" data-original-title="Cached by data.gov.uk on: ${cache_timestamp.strftime('%d/%m/%Y') if cache_timestamp else 'unknown'}">
+        <div class="download js-tooltip" data-placement="bottom" data-original-title="Puhverdatud: ${cache_timestamp.strftime('%d/%m/%Y') if cache_timestamp else 'teadmata'}">
           <py:if test="not bool(h.get_resource_wms(c.resource))">
-              <i class="icon-save"></i>&nbsp; Cached
+              <i class="icon-save"></i>&nbsp; Puhverdatud
           </py:if>
         </div>
        </a>
       </py:with>
       <py:if test="config.get('ckan.datastore.enabled', False)">
         <py:if test="c.resource.get('webstore_url')">
-          <a class="btn btn-success btn-datagov" data-toggle="modal" href=".modal-data-api-help">Data API</a>
+          <a class="btn btn-success btn-datagov" data-toggle="modal" href=".modal-data-api-help">Andmete API</a>
         </py:if>
         <py:if test="not c.resource.get('webstore_url')">
-          <a class="btn btn-datagov disabled" rel="tooltip" title="Data API is unavailable for this resource as DataStore is disabled">Data API</a>
+          <a class="btn btn-datagov disabled" rel="tooltip" title="Andmete API sellele sellele ressursile pole kättesaadav">Andmete API</a>
 
         </py:if>
       </py:if>
@@ -78,7 +78,7 @@
         ${map_preview_button_direct(c.pkg_dict,small=False)} <!--! Supply both since there is no ID in pkg_dict! -->
       </py:if>
     </div>
-    <h2>Resource: <span class="h2-subheading">&ldquo;${h.resource_display_name(c.resource)}&rdquo;</span></h2>
+    <h2>Ressurss: <span class="h2-subheading">&ldquo;${h.resource_display_name(c.resource)}&rdquo;</span></h2>
 
     <py:if test="config.get('ckan.datastore.enabled', False)">
       ${data_api_help(c.datastore_api)}
@@ -94,8 +94,8 @@
 
     <div class="recline-read-only resource-preview">
       <div class="preview-header" py:if="not h.is_wms(c.resource)">
-        <h2>Preview</h2>
-        <p>Preview is currently available for files such as CSV, spreadsheets and plain text. <span id="ckanext-datapreview-source"></span></p>
+        <h2>Eelvaade</h2>
+        <p>Eelvaade on hetkel võimalik vaid järgmiste failitüüpide jaoks: CSV, tabelarvutus ja vabatekst. <span id="ckanext-datapreview-source"></span></p>
       </div>
       <div id="ckanext-datapreview"></div>
       <div id="ckanext-datapreview-extra"></div>
@@ -104,25 +104,25 @@
 
     <table class="table table-bordered">
       <tr py:if="c.resource['last_modified']">
-        <td class="key">Last updated:</td>
+        <td class="key">Viimati muudetud:</td>
         <td class="value">${h.render_datestamp(c.resource['last_modified'])}</td>
       </tr>
       <tr py:with="fmt = (c.resource.get('format') or 'not specified').strip().lower()">
-        <td class="key">Format:</td>
+        <td class="key">Formaat:</td>
         <td class="value">${format_box(fmt)}</td>
       </tr>
       <tr py:if="c.resource.get('resource_type') in ('file', None)">
         <!--! This is data, so show 5 stars of openness -->
-        <td class="key">Resource Openness:</td>
+        <td class="key">Taaskasutatavus:</td>
         <td class="value">${h.render_resource_stars(c.resource['id'])}</td>
       </tr>
       <tr>
-        <td class="key">Quality Check:<a name="qualitycheck"></a></td>
+        <td class="key">Kvaliteedikontroll:<a name="qualitycheck"></a></td>
         <td class="value">${h.render_qa_info_for_resource(c.resource)}</td>
       </tr>
       <tr py:for="field_dict, label_attributes, value_attributes in h.get_resource_fields(c.resource,dict(c.pkg_extras))">
         <td class="dataset-label" py:attrs="label_attributes">${field_dict.get('label') or field_dict['name']}</td>
-        <td class="dataset-details" py:attrs="value_attributes">${field_dict.get('value') or 'No value'}</td>
+        <td class="dataset-details" py:attrs="value_attributes">${field_dict.get('value') or '-'}</td>
       </tr>
     </table>
 
@@ -156,48 +156,40 @@
       <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3>
-          CKAN Data API
+          CKAN API
         </h3>
       </div>
       <div class="modal-body">
-        <p><strong>Access resource data via a web API with powerful query
-          support</strong>. Further information in the <a
-          href="http://docs.ckan.org/en/latest/using-data-api.html" target="_blank">main
-          CKAN Data API and DataStore documentation</a>.</p>
+        <p><strong>Ligipääs andmetele läbi veebipõhise päringuliidese</strong>. Rohkem informatsiooni <a href="http://docs.ckan.org/en/latest/using-data-api.html" target="_blank">CKAN ametlikus Data API ja DataStore dokumentatsioonis</a>.</p>
 
         <div class="accordion-group">
           <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" href=".collapse-endpoints">Endpoints &raquo;</a>
+            <a class="accordion-toggle" data-toggle="collapse" href=".collapse-endpoints">Liidesed &raquo;</a>
           </div>
           <div class="collapse-endpoints in accordion-body collapse">
             <div class="accordion-inner">
-              <p>The Data API builds directly on ElasticSearch, with a resource API
-              endpoint being equivalent to a single index 'type' in ElasticSearch.
-              This means you can directly re-use <a
-                href="http://www.elasticsearch.org/guide/appendix/clients.html"
-                _target="blank">ElasticSearch
-                client libraries</a> when connecting to the API endpoint.</p>
+              <p>Andmete API toetub ElasticSearch teenusele selliselt, et iga ressursi API on sisuliselt võrdne ühe indeksi tüübiga ElasticSearch'is. S.t. te saate otseselt taaskasutada <a href="http://www.elasticsearch.org/guide/appendix/clients.html" _target="blank">ElasticSearch kliendi teeke</a> kui API'ga ühendute.</p>
               <table class="table-condensed table-striped table-bordered">
                 <thead></thead>
                 <tbody>
                   <tr>
-                    <th>Base</th>
+                    <th>Baas</th>
                     <td><code>${datastore_api}</code></td>
                   </tr>
                   <tr>
-                    <th>Query</th>
+                    <th>Päring</th>
                     <td>
                       <code>${datastore_api}/_search</code>
                     </td>
                   </tr>
                   <tr>
-                    <th>Query example</th>
+                    <th>Päringu näidis</th>
                     <td>
                       <code><a href="${datastore_api}/_search?size=5&amp;pretty=true" target="_blank">${datastore_api}/_search?size=5&amp;pretty=true</a></code>
                     </td>
                   </tr>
                   <tr>
-                    <th>Schema (Mapping)</th>
+                    <th>Struktuur</th>
                     <td>
                       <code><a href="${datastore_api}/_mapping" target="_blank">${datastore_api}/_mapping?pretty=true</a></code>
                     </td>
@@ -210,28 +202,28 @@
 
         <div class="accordion-group">
           <div class="accordion-heading">
-            <a class="accordion-toggle" href=".collapse-querying" data-toggle="collapse">Querying
+            <a class="accordion-toggle" href=".collapse-querying" data-toggle="collapse">Pärimine
               &raquo;</a>
           </div>
           <div class="collapse-endpoints in accordion-body">
             <div class="accordion-inner">
-              <strong>Query example (first 5 results)</strong>
+              <strong>Päringu näide (esimesed 5 tulemust)</strong>
               <p>
               <code><a href="${datastore_api}/_search?size=5&amp;pretty=true" target="_blank">${datastore_api}/_search?size=5&amp;pretty=true</a></code>
               </p>
 
-              <strong>Query example (results with 'jones' in <code>title</code> field)</strong>
+              <strong>Päringu näide (tulemused kus 'asutus' on <code>pealkiri</code> väljas)</strong>
               <p>
-              <code><a href="${datastore_api}/_search?q=title:jones&amp;size=5&amp;pretty=true"
-                  target="_blank">${datastore_api}/_search?q=title:jones&amp;size=5&amp;pretty=true</a></code>
+              <code><a href="${datastore_api}/_search?q=title:asutus&amp;size=5&amp;pretty=true"
+                  target="_blank">${datastore_api}/_search?q=title:asutus&amp;size=5&amp;pretty=true</a></code>
               </p>
 
-              <strong>Schema (Mapping)</strong>
+              <strong>Struktuur</strong>
               <p>
               <code><a href="${datastore_api}/_mapping" target="_blank">${datastore_api}/_mapping?pretty=true</a></code>
               </p>
 
-              <strong>Endpoint (for clients)</strong>
+              <strong>API link</strong>
               <p>
               <code>${datastore_api}</code>
               </p>
@@ -241,15 +233,16 @@
 
         <div class="accordion-group">
           <div class="accordion-heading">
-            <a class="accordion-toggle" href=".collapse-javascript" data-toggle="collapse">Example: Javascript</a>
+            <a class="accordion-toggle" href=".collapse-javascript" data-toggle="collapse">Näide: Javascript</a>
           </div>
           <div class="accordion-body collapse-javascript in">
             <div class="accordion-inner">
               <p>A simple ajax (JSONP) request to the data API using jQuery.</p>
+              <p>Lihtne Ajax (JSONP) päring andmete API külge kasutades jQuery't.</p>
               <pre>
       var data = {
         size: 5 // get 5 results
-        q: 'title:jones' // query on the title field for 'jones'
+        q: 'title:asutus' // query on the title field for 'asutus'
       };
       $.ajax({
         url: '${datastore_api}/_search',
@@ -265,13 +258,13 @@
 
         <div class="accordion-group">
           <div class="accordion-heading">
-            <a class="accordion-toggle" href=".collapse-javascript" data-toggle="collapse">Example: Python</a>
+            <a class="accordion-toggle" href=".collapse-javascript" data-toggle="collapse">Näide: Python</a>
           </div>
           <div class="accordion-body collapse-javascript in">
             <div class="accordion-inner">
               <pre>
       import urllib
-      url = '${datastore_api}/_search?size=5&amp;q=title:jones'
+      url = '${datastore_api}/_search?size=5&amp;q=title:asutus'
       fileobj = urllib.urlopen(url)
       print fileobj.read()
       </pre>
@@ -287,20 +280,20 @@
       <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3>
-          Embed Data Viewer
+          Integreeri Data Viewer
         </h3>
       </div>
       <div class="modal-body">
         <div>
-          <p><strong>Embed this view</strong> by copying this into your webpage:</p>
+          <p><strong>Integreeri see vaade</strong>, kopeerides järgnev lõik oma veebisaiti:</p>
           <textarea class="embedIframeText" style="width: 100%; height: 200px;"></textarea>
-          <p>Choose width and height in pixels:</p>
-          <label for="iframe-width">Width:</label>
+          <p>Vali laius ja kõrgus pikslites:</p>
+          <label for="iframe-width">Laius:</label>
           <input class="iframe-width" name="iframe-width" value="800"/>
-          <label for="iframe-height">Height:</label>
+          <label for="iframe-height">Kõrgus:</label>
           <input class="iframe-height" name="iframe-height" value="500"/>
         </div>
-        <a class="embedLink" href="">Preview</a>
+        <a class="embedLink" href="">Eelvaade</a>
       </div>
     </div>
   </py:def>
