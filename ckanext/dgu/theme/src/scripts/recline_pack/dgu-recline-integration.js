@@ -207,7 +207,7 @@ CKAN.Dgu.resourcePreviewer = (function($,my) {
       // Cannot reliably preview this item - with no mimetype/format information,
       // can't guarantee it's not a remote binary file such as an executable.
       my.showError({
-        title: 'Preview not available for data type: ' + resourceData.formatNormalized,
+        title: 'Eelvaade pole saadval sellele andmetüübile: ' + resourceData.formatNormalized,
         message: ''
       });
     }
