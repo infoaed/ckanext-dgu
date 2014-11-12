@@ -29,69 +29,69 @@
 </py:def>
 
 
-<p py:if="c.pkg.extras.get('unpublished', False)">Please complete this form to submit your views on this dataset and its potential impact if published. Your input will be reviewed as part of the process of prioritising datasets to be part of the <a href="/blog/the-national-information-infrastructure-where-are-we">National Information Infrastructure</a>.</p>
+<p py:if="c.pkg.extras.get('unpublished', False)">Palun täitke antud vorm, et anda tagasisidet andtud andmehulga ja selle võimaliku mõju kohta.</p>
 
 <p py:if="c.pkg.extras.get('unpublished', False) == False">
-Please complete this form to submit your views on this dataset and its impact. Your input will be reviewed as part of the process of prioritising datasets to be part of the <a href="/blog/the-national-information-infrastructure-where-are-we">National Information Infrastructure</a>.
+Palun täitke antud vorm, et anda tagasisidet andtud andmehulga ja selle võimaliku mõju kohta.
 </p>
 
 <div class="panel panel-danger errors" style="display:none;">
-  <div class="panel-heading">Error</div>
-  <div class="panel-body">There are errors in the form, please correct them before re-submitting.</div>
+  <div class="panel-heading">Viga</div>
+  <div class="panel-body">Vormil on vead, palun korrigeerige need enne salvestamist.</div>
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading"><strong>1. State the benefits of releasing this dataset as open data</strong></div>
+  <div class="panel-heading"><strong>1. Märkige antud andmehulga avaldamisest Teie arvates tulenevad kasud</strong></div>
   <div class="panel-body">
     <div class="control-group" id="economic-group">
       <label class="checkbox">
         <input type="checkbox" value="yes" name="economic" onclick="$('#economicdiv').toggle('slideDown');"/>
-        <strong>Economic growth</strong>
+        <strong>Majanduskasv</strong>
       </label>
       <p class="add-feedback-icon"><i class="icon-gbp"></i></p>
-      <p>i.e. releasing this dataset as open data means you or your organisation are able to provide a commercial product or service or has other positive economic impacts such as better functioning of markets.</p>
+      <p>s.t. selle andmehulga avalikustamine võimaldab Teil või Teie organisatsioonil pakkuda teatud kommertsteenuseid, või omab muud positiivset majanduslikku mõju nagu näiteks turgude parem funktsioneerimine.</p>
 
       <div id="economicdiv" class="comment_block">
-          <span class="help-block">Please give details for selection below</span>
+          <span class="help-block">Palun kirjeldage täpsemalt</span>
           <textarea name="economic_comment" rows="4" style="width:100%;"></textarea>
       </div>
     </div>
     <div class="control-group" id="social-group">
       <label class="checkbox">
         <input type="checkbox" name="social" value="yes" onclick="$('#socialdiv').toggle('slideDown');"/>
-        <strong>Social Growth</strong>
+        <strong>Sotsiaalne kasv</strong>
       </label>
       <p class="add-feedback-icon"><i class="icon-group"></i></p>
-      <p>i.e. releasing this dataset as open data means you or your organisation are able to more easily undertake social action, deliver the services of a community group or charity or has a positive environmental impact.</p>
+      <p>s.t. selle andmehulga avalikustamine võimaldab Teil või Teie organisatsioonil lihtsamini teostada teatud sotsiaalseid aktsioone, pakkuda ühiskonnagruppidele teatud sotsiaalseid teenuseid, või omab positiivset mõju keskkonnale.</p>
 
       <div id="socialdiv"  class="comment_block">
-          <span class="help-block">Please give details for selection below</span>
+          <span class="help-block">Palun kirjeldage täpsemalt</span>
           <textarea name="social_comment" rows="4" style="width:100%;"></textarea>
       </div>
     </div>
     <div class="control-group"  id="effective-group">
       <label class="checkbox">
         <input type="checkbox" name="effective" value="yes" onclick="$('#effectivediv').toggle('slideDown');"/>
-        <strong>Effective Public Services</strong>
+        <strong>Efektiivsed avalikud teenused</strong>
       </label>
       <p class="add-feedback-icon"><i class="icon-road"></i></p>
-      <p>i.e. releasing this dataset as open data means that a public service is able to run more effectively by giving greater transparency of its operation to citizens, allowing greater choice or supporting new models of provision of services.</p>
+      <p>s.t. selle andmehulga avalikustamine võimaldab teatud avalikel teenustel toimida efektiivsemalt, pakkudes kodanikele suuremat läbipaistvust vüi rohkem valikuid.</p>
 
       <div id="effectivediv"  class="comment_block">
-          <span class="help-block">Please give details for selection below</span>
+          <span class="help-block">Palun kirjeldage täpsemalt</span>
           <textarea name="effective_comment" rows="4" style="width:100%;"></textarea>
       </div>
     </div>
     <div class="control-group"  id="other-group">
       <label class="checkbox">
         <input type="checkbox" name="other" value="yes" onclick="$('#otherdiv').toggle('slideDown');"/>
-        <strong>Other Benefits</strong>
+        <strong>Muud kasulikud mõjud</strong>
       </label>
       <p class="add-feedback-icon"><i class="icon-quote-left"></i></p>
-      <p>Add your own comments...</p>
+      <p>Lisage oma kommentaarid...</p>
 
       <div id="otherdiv"  class="comment_block" >
-          <span class="help-block">Please give details for selection below</span>
+          <span class="help-block">Palun kirjeldage täpsemalt</span>
           <textarea name="other_comment" rows="4" style="width:100%;"></textarea>
       </div>
     </div>
@@ -99,27 +99,28 @@ Please complete this form to submit your views on this dataset and its impact. Y
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading"><strong>2. Potential links to other datasets</strong></div>
+  <div class="panel-heading"><strong>2. Potentsiaalsed lingid teistele andmehulkadele</strong></div>
   <div class="panel-body">
     <div class="control-group"  id="linked-group">
       <p class="add-feedback-icon"><i class="icon-code-fork"></i></p>
       <p>Does this dataset contain data which could be used to link it to other datasets?</p>
+      <p>Kas antud andmehulk sisaldab andmeid, mis võimaldab teda linkida teiste andmehulkadega?</p>
 
       <label class="radio">
         <input type="radio" name="linked" value="no" checked="checked"  onclick="$('#linkeddiv').slideUp();"/>
-        No
+        Ei
       </label>
       <label class="radio">
         <input type="radio" name="linked" value="yes" onclick="$('#linkeddiv').slideDown();"/>
-        Yes
+        Jah
       </label>
       <label class="radio">
         <input type="radio" name="linked" value="dontknow" onclick="$('#linkeddiv').slideUp();"/>
-        Don't know
+        Ei tea
       </label>
 
       <div id="linkeddiv"  class="comment_block" >
-          <span class="help-block">Please explain further</span>
+          <span class="help-block">Palun kirjeldage täpsemalt</span>
           <textarea name="linked_comment" rows="4" style="width:100%;"></textarea>
       </div>
     </div>
@@ -127,51 +128,51 @@ Please complete this form to submit your views on this dataset and its impact. Y
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading"><strong>3. Information about you</strong></div>
+  <div class="panel-heading"><strong>3. Informatsioon Teie kohta</strong></div>
   <div class="panel-body">
     <div class="control-group">
-      <p>Are you responding:</p>
+      <p>Kas Te vastate kui:</p>
       <label class="radio">
         <input type="radio" name="responding_as"  value="individual" checked="checked"  onclick="$('#orgdiv').slideUp();"/>
-        As a private individual
+        Eraisik
       </label>
       <label class="radio">
         <input type="radio" name="responding_as"  value="organisation"  onclick="$('#orgdiv').slideDown();"/>
-        On behalf of an organisation
+        Organisatsiooni esindaja
       </label>
 
       <div style="margin-left: 20px;"  class="control-group comment_block"  id="orgdiv">
           <label class="radio">
             <input type="radio" name="organisation" value="Central Government Dept" checked="checked"/>
-            A central government department
+            Valitsusasutus
           </label>
           <label class="radio">
             <input type="radio" name="organisation" value="Public Sector Org"/>
-            Another public sector organisation
+            Muu avaliku sektori organisatsioon
           </label>
           <label class="radio">
             <input type="radio" name="organisation" value="Startup"/>
-            A start-up business
+            Idufirma
           </label>
           <label class="radio">
             <input type="radio" name="organisation" value="SME"/>
-            A small to medium sized business (less than 250 employees)
+            Väike või keskmise suurusega ettevõte (vähem kui 250 töötajat)
           </label>
           <label class="radio">
             <input type="radio" name="organisation" value="Large org"/>
-            A large business (250 employees or above)
+            Suurettevõte (250 või enam töötajat)
           </label>
           <label class="radio">
             <input type="radio" name="organisation" value="NFP"/>
-            A voluntary / not-for-profit organisation
+            Mittetulunduslik organisatsioon
           </label>
           <label class="radio">
             <input type="radio" name="organisation" value="Academic"/>
-            An academic or research organisations
+            Akadeemiline -või teadusasutus
           </label>
 
           <label for="organisation_name">
-            Organisation name
+            Organisatsiooni nimi
           </label>
           <py:with vars="publishers = sorted(c.userobj.get_groups(), key=lambda x:x.title)">
             <py:if test="len(publishers) > 0">
@@ -191,29 +192,29 @@ Please complete this form to submit your views on this dataset and its impact. Y
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading"><strong>4. Future contact</strong></div>
+  <div class="panel-heading"><strong>4. Võimalik kontakteerumine Teiega</strong></div>
   <div class="panel-body">
     <div class="control-group">
-      <p>We will use the email contact in your data.gov.uk profile.</p>
+      <p>Me kasutame Teie kasutakontoga seotud e-maili aadressi.</p>
       <label class="radio">
         <input type="radio" name="contact" value="yes"/>
-        Yes
+        Jah
       </label>
       <label class="radio">
         <input type="radio" name="contact" value="no"  checked="checked"/>
-        No
+        Ei
       </label>
     </div>
   </div>
 </div>
 
 <div class="panel panel-danger errors" style="display:none;">
-  <div class="panel-heading">Errors</div>
-  <div class="panel-body">There are errors in the form, please correct them before re-submitting.</div>
+  <div class="panel-heading">Viga</div>
+  <div class="panel-body">Vormil on vead, palun korrigeerige need enne salvestamist.</div>
 </div>
 
 <div class="form-actions">
-  <button type="submit" class="btn btn-primary">Submit feedback</button>
+  <button type="submit" class="btn btn-primary">Salvesta</button>
 </div>
 
 <script type="text/javascript">

@@ -3,7 +3,7 @@
   xmlns:xi="http://www.w3.org/2001/XInclude"
   py:strip="">
 
-  <py:def function="page_title">${c.pkg.title or c.pkg.name} - Add Feedback</py:def>
+  <py:def function="page_title">${c.pkg.title or c.pkg.name} - Anna tagasisidet</py:def>
 
   <py:def function="optional_head">
     <script type="text/javascript">
@@ -12,14 +12,14 @@
   </py:def>
 
   <py:match path="breadcrumbs">
-    <li><a href="/data/search">Datasets</a></li>
+    <li><a href="/data/search">Andmehulgad</a></li>
     <li><a href="${h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}">${c.pkg_dict.get('title', c.pkg_dict['name'])}</a></li>
-    <li><a href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController',action='add',id=c.pkg_dict['name'])}">Add Feedback</a></li>
+    <li><a href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController',action='add',id=c.pkg_dict['name'])}">Anna tagasisidet</a></li>
   </py:match>
 
   <py:def function="package_content">
   <hr/>
-    <h2>Add Feedback</h2>
+    <h2>Anna tagasisidet</h2>
     ${c.form}
   </py:def>
 
