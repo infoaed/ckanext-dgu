@@ -158,9 +158,6 @@
                 <li py:if="organizationupdate">
                   <a href="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='edit', id=c.group.name)}"><span class="wrap-icon"><i class="icon-edit"></i> </span>Muuda teabevaldaja metaandmeid &raquo;</a>
                 </li>
-                <li py:if="organizationupdate">
-                  <a href="${h.url_for(controller='ckanext.dgu.controllers.inventory:InventoryController', action='edit',id=c.group.name)}"><span class="wrap-icon"><i class="icon-archive"></i> </span>Halda avalikustamata andmehulki &raquo;</a>
-                </li>
                 <li py:if="packagecreate">
                   <a href="${h.url_for('dataset_new')}?owner_org=${c.group.name}"><span class="wrap-icon"><i class="icon-plus-sign-alt"></i> </span>Lisa uus andmehulk &raquo;</a>
                 </li>
