@@ -443,9 +443,11 @@ def convert_from_extras(key, data, errors, context):
 def use_other(key, data, errors, context):
 
     other_key = key[-1] + '-other'
-    other_value = data.get((other_key,), '').strip()
-    if other_value:
-        data[key] = other_value
+    other_value_unstripped = data.get((other_key,), '')
+    if other_value_unstripped:
+        other_value = other_value_unstripped.strip()
+        if other_value:
+            data[key] = other_value
 
 
 def extract_other(option_list):

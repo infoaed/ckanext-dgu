@@ -567,6 +567,20 @@
   <p class="instructions further">Kui võimalik, siis näidake nii kuupäev kui kellaaeg. Kui andmed katavad vaid ühte päeva, siis võib teise lahtri tühjaks jätta.</p>
 </fieldset>
 
+<fieldset class="tab-pane boxed whitebox fade" id="section-state-field" py:if="h.is_sysadmin()">
+    <h4>Staatus</h4>
+    <div class="well">
+      <p>NB: Ohtlik operatsioon! (Ainult süsteemiadministraatoritele)</p>
+      <span>
+      See andmehulk on&nbsp;&nbsp;
+      <select id="state" class="dataset-delete" name="state" style="display:inline;">
+        <option py:attrs="{'selected': 'selected' if data.get('state') == 'active' else None}" value="active">aktiivne</option>
+        <option py:attrs="{'selected': 'selected' if data.get('state') == 'deleted' else None}" value="deleted">kustutatud</option>
+      </select>
+      </span>
+    </div>
+</fieldset>
+
 <div class="clearfix">&nbsp;</div>
 </div><!-- /tab-content -->
 
