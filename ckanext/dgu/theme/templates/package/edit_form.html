@@ -4,6 +4,8 @@
   xmlns:py="http://genshi.edgewall.org/"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   role="form"
+  data-module="basic-form resource-form"
+  enctype="multipart/form-data"
 >
 
 <xi:include href="../_dgu_util.html" />
@@ -287,12 +289,6 @@
                        type="text"
                        value="${res.get(col, '')}"
                        class="form-control"/>
-                <br/>
-                <input id="individual_resources__${num}__upload"
-                       name="individual_resources__${num}__upload"
-                       type="file"
-                       value=""
-                       class="form-control"/>
                 <span class="input-group-btn">
                   <button id="individual_resources__${num}__validate-resource-button"
                       class="validate-resource-button btn btn-default">Check</button>
@@ -327,6 +323,35 @@
       <button class="btn-default validate-resources-button btn" id="validate-timeseries-button">Kontrolli kõike URLe...</button>
       <span class="checking-links-label" style="display: none;">Kontrollin, palun oodake...</span><br/>
     </fieldset>
+    <hr/>
+
+    <div id="file-upload-div">
+        <p>
+            <strong>Andmehulka saab üles laadida ka faili(de)na</strong>, kasutades alljärgnevaid sisendeid.<br/>
+            Nad võivad olla kas lisa ülaltoodud linkidele, kuid võite ka piirduda ainult üle laetud failidega.<br/>
+            Samas on suuri andmekogusid otstarbekam serveeerida teabevaldaja lingi tagant, mistõttu üles laetavate failide suuruse piirang on ${config.get('ckan.max_resource_size', '10')} MB.<br/>
+            Te saate korraga üles laadida ühe faili. Uute failide laadimiseks peate antud vormile läbi andmehulga muutmise operatsiooni tagasi pöörduma.<br/>
+        </p>
+        <table class="table table-bordered table-condensed table-striped" id="file-upload-table">
+            <thead>
+                <tr>
+                    <th class="resource-name" style="width:30%"><div class="js-tooltip" title="" data-original-title="Tekst, mida kuvatakse andmehulga lingi kõrval">Faili pealkiri: <i class="icon-info-sign"></i></div></th>
+                    <th class="resource-url" style="width:50%"><div class="js-tooltip" title="" data-original-title="Tekst, mida kuvatakse andmehulga lingi kõrval">Lühikirjeldus: <i class="icon-info-sign"></i></div></th>
+                    <th class="resource-name" style="width:20%"><div class="js-tooltip" title="" data-original-title="Faili formaat">Faili formaat: <i class="icon-info-sign"></i></div></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="individual_resources__0 resource" style="background-color:#f9f9f9">
+                    <td class="resource-description"><input type="text" name="file_name" value="" class="form-control"/></td>
+                    <td class="resource-description"><input type="text" name="file_descr" value="" class="form-control"/></td>
+                    <td class="resource-format"><input type="text" name="file_format" value="" class="form-control"/></td>
+                </tr>
+                <tr class="individual_resources__1 resource">
+                    <td colspan="3"><label for="file-upload-input">Lae fail:</label>&nbsp;<input id="file-upload-input" type="file" name="file_uploaded" value="" style="display:inline"/></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <hr/>
 
     <p><strong>Formaat:</strong> Kirjeldab faili formaati. Soovitatavad väärtused:<br/>

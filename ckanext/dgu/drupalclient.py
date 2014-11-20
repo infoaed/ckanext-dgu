@@ -56,8 +56,6 @@ class DrupalClient(object):
             if config.get('dgu.xmlrpc_https'):
                 xmlrpc_url_template = 'https://%s/services/xmlrpc'
 
-            log.info('-----------------------------------------------------  xmlrpc_url_template = %s', xmlrpc_url_template)
-
             xmlrpc_url = xmlrpc_url_template % server
             xmlrpc_url_log_safe = xmlrpc_url_template % server_log_safe
         log.info('XMLRPC connection to %s', xmlrpc_url_log_safe)

@@ -143,14 +143,11 @@ organisation_name_mapping = {
     'Cancer Registry Northern Ireland':'Northern Ireland Cancer Registry',
     }
 
-#update_frequency_options = ['never', 'discontinued', 'annual', 'quarterly', 'monthly']
-update_frequency_options = ['mitte kunagi', 'lõpetatud', 'iga-aastane', 'kvartaalne', 'igakuine']
+update_frequency_options = ['never', 'discontinued', 'annual', 'quarterly', 'monthly']
 
-#geographic_granularity_options = ['national', 'regional', 'local authority', 'ward', 'point']
-geographic_granularity_options = ['riiklik', 'regionaalne', 'kov']
+geographic_granularity_options = ['national', 'regional', 'local authority', 'ward', 'point']
 
-#temporal_granularity_options = ['year', 'quarter', 'month', 'week', 'day', 'hour', 'point']
-temporal_granularity_options = ['aasta', 'kvartal', 'kuu', 'nädal', 'päev', 'tund']
+temporal_granularity_options = ['year', 'quarter', 'month', 'week', 'day', 'hour', 'point']
 
 #category_options = ['Agriculture and Environment', 'Business and Energy', 'Children, Education and Skills', 'Crime and Justice', 'Economy', 'Government', 'Health and Social Care', 'Labour Market', 'People and Places', 'Population', 'Travel and Transport', 'Equality and Diversity', 'Migration']
 category_options = ['Põllumajandus, kalandus, metsandus', 'Kultuur', 'Majandus ja tööstus', 'Tööhõive', 'Haridus ja teadus', 'Keskkond', 'Rahandus ja eelarvestamine', 'Geograafia', 'Tervis', 'Riigiteenused', 'Avatud valitsemine', 'Rahvastiku andmed', 'Transport', 'Sotsiaalvaldkond']
