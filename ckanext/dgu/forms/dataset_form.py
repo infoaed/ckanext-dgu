@@ -1,4 +1,6 @@
-﻿import re
+﻿# -*- coding: utf-8 -*-
+
+import re
 import json
 
 from ckan.lib.base import c, model
