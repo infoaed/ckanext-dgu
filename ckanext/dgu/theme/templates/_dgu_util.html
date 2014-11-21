@@ -128,10 +128,6 @@
                </div>
              </div>
              <div class="right">
-                <py:if test="h.is_core_dataset(package)">
-                  <div title="See andmehulk kuulub National Information Infrastructure (NII) alla" class="js-tooltip format-box" style='background-color: #8BC658;'>NII</div>
-                </py:if>
-
                <py:for each="format in h.formats_for_package(package)">
                  ${format_box(format.lower())}
                </py:for>
