@@ -239,6 +239,7 @@
     <!-- The resource fieldset for an individual dataset -->
     <fieldset id="package_type-individual">
 
+      <p><strong>NB! Kui kuvatud link algab antud portaali aadressiga, on see üles laetud fail (vt. vastav võimalus allpool).</strong></p>
       <table class="table table-bordered table-condensed table-striped" id="individual_resources-table">
       <thead>
         <tr>
@@ -328,9 +329,9 @@
     <div id="file-upload-div">
         <p>
             <strong>Andmehulka saab üles laadida ka faili(de)na</strong>, kasutades alljärgnevaid sisendeid.<br/>
-            Nad võivad olla kas lisa ülaltoodud linkidele, kuid võite ka piirduda ainult üle laetud failidega.<br/>
-            Samas on suuri andmekogusid otstarbekam serveeerida teabevaldaja lingi tagant, mistõttu üles laetavate failide suuruse piirang on ${config.get('ckan.max_resource_size', '10')} MB.<br/>
-            Te saate korraga üles laadida ühe faili. Uute failide laadimiseks peate antud vormile läbi andmehulga muutmise operatsiooni tagasi pöörduma.<br/>
+            Nad võivad olla lisaks ülaltoodud linkidele, kuid võite ka piirduda ainult üles laetud failidega.<br/>
+            Kuna suuri andmekogusid on otstarbekam serveeerida teabevaldaja lingilt, on laetavate failide suuruse piirang ${config.get('ckan.max_resource_size', '10')} MB. Te saate korraga üles laadida ühe faili.
+            Täiendavate failide laadimiseks peate antud vormile läbi andmehulga muutmise operatsiooni tagasi pöörduma.<br/>
         </p>
         <table class="table table-bordered table-condensed table-striped" id="file-upload-table">
             <thead>
