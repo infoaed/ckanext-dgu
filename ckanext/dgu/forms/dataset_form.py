@@ -1,6 +1,4 @@
-﻿# -*- coding: utf-8 -*-
-
-import re
+﻿import re
 import json
 
 from ckan.lib.base import c, model
@@ -42,10 +40,12 @@ geographic_granularity = [('', ''),
                           ('other', 'other - please specify')]
 
 update_frequency = [('', ''),
-                    ('annual', 'kord aastas'),
-                    ('quarterly', 'kord kvartalis'),
-                    ('monthly', 'kord kuus'),
-                    ('other', 'muu - palun täpsusta')]
+                    ('never', 'never'),
+                    ('discontinued', 'discontinued'),
+                    ('annual', 'annual'),
+                    ('quarterly', 'quarterly'),
+                    ('monthly', 'monthly'),
+                    ('other', 'other - please specify')]
 
 temporal_granularity = [("", ""),
                         ("year", "year"),
