@@ -19,7 +19,7 @@ class DrupalAuthMiddleware(object):
         self.drupal_client = None
         self._user_name_prefix = 'user_d'
 
-        minutes_between_checking_drupal_cookie = app_conf.get('minutes_between_checking_drupal_cookie', 30) 
+        minutes_between_checking_drupal_cookie = app_conf.get('minutes_between_checking_drupal_cookie', 30)
         self.seconds_between_checking_drupal_cookie = int(minutes_between_checking_drupal_cookie) * 60
         # if that int() raises a ValueError then the app will not start
 
@@ -44,7 +44,7 @@ class DrupalAuthMiddleware(object):
             cookies.load(str(cookie_string))
         except Cookie.CookieError:
             log.error("Received invalid cookie: %s" % cookie_string)
-            return False       
+            return False
         similar_cookies = []
         for cookie in cookies:
             if cookie.startswith('SESS'):
@@ -199,6 +199,59 @@ class DrupalAuthMiddleware(object):
         # ask drupal about this user
         user_properties = self.drupal_client.get_user_properties(drupal_user_id)
 
+        log.info('******************* user_properties start')
+        log.info('%r', user_properties)
+        log.info('******************* user_properties end')
+
+        user_dispname = None
+
+        if user_properties:
+            if user_properties.has_key('realname'):
+                log.info('User realname is: %r', user_properties['realname'])
+                user_dispname = user_properties['realname']
+
+        if not user_dispname and user_properties:
+            user_firstname = None
+            user_lastname = None
+
+            if user_properties.has_key('field_first_name'):
+                if isinstance(user_properties['field_first_name'], dict):
+                    first_name_dict = user_properties['field_first_name']
+                    if first_name_dict.has_key('und'):
+                        if isinstance(first_name_dict['und'], list):
+                            und_list = first_name_dict['und']
+                            if und_list:
+                                if isinstance(und_list[0], dict):
+                                    und_0_dict = und_list[0]
+                                    if und_0_dict.has_key('safe_value'):
+                                        user_firstname = und_0_dict['safe_value']
+
+            if user_properties.has_key('field_surname'):
+                if isinstance(user_properties['field_surname'], dict):
+                    last_name_dict = user_properties['field_surname']
+                    if first_name_dict.has_key('und'):
+                        if isinstance(first_name_dict['und'], list):
+                            und_list = last_name_dict['und']
+                            if und_list:
+                                if isinstance(und_list[0], dict):
+                                    und_0_dict = und_list[0]
+                                    if und_0_dict.has_key('safe_value'):
+                                        user_lastname = und_0_dict['safe_value']
+
+            if user_firstname:
+                user_dispname = user_firstname
+            if user_lastname:
+                if user_dispname:
+                    user_dispname = user_dispname + ' ' + user_lastname
+                else:
+                    user_dispname = user_lastname
+
+        if not user_dispname and user_properties:
+            if user_properties.has_key('name'):
+                user_dispname = user_properties['name']
+
+        log.info('The deducted user_dispname is: %s', user_dispname)
+
         # see if user already exists in CKAN
         ckan_user_name = DrupalUserMapping.drupal_id_to_ckan_user_name(drupal_user_id)
         from ckan import model
@@ -210,7 +263,7 @@ class DrupalAuthMiddleware(object):
             date_created = datetime.datetime.fromtimestamp(int(user_properties['created']))
             user = model.User(
                 name=ckan_user_name,
-                fullname=unicode(user_properties['name']),  # NB may change in Drupal db
+                fullname=unicode(user_dispname),  # NB may change in Drupal db
                 about=u'User account imported from Drupal system.',
                 email=user_properties['mail'], # NB may change in Drupal db
                 created=date_created,
