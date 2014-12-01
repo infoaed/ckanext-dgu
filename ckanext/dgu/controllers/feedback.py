@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 The FeedbackController is responsible for processing requests related to the
 unpublished feedback that allows users and admins to record feedback in a
@@ -106,20 +105,20 @@ class FeedbackController(BaseController):
             log.warning("No comments to send for spam check")
             success,flag = True, MOLLOM_HAM
 
-        msg = "Täname tagasiside eest"
+        msg = "Thank you for your feedback"
         if not success:
             # If we fail to check spam, force into moderation
             data["moderation_required"] = True
-            msg = "Täname tagasiside eest. " \
-                  "Teie kommentaare võidakse modereerida."
+            msg = "Thank you for your feedback. " \
+                  "Your comments have been marked for moderation."
         else:
             data["spam_score"] = flag
             if flag == MOLLOM_SPAM:
                 data["moderation_required"] = True
                 data["visible"] = False
-                msg = "Teie postitus on märgitud ebasobivaks ning jääb avaladmata."
+                msg = "Your post has been identified as spam and has not been posted."
 
-        flash_notice(unicode(msg))
+        flash_notice(msg)
         return Feedback(**data)
 
     def report_abuse(self, id):
