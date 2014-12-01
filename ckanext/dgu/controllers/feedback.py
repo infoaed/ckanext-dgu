@@ -120,7 +120,7 @@ class FeedbackController(BaseController):
                 data["visible"] = False
                 msg = "Teie postitus on märgitud ebasobivaks ning jääb avaladmata."
 
-        flash_notice(msg)
+        flash_notice(msg.decode('utf-8'))
         return Feedback(**data)
 
     def report_abuse(self, id):
