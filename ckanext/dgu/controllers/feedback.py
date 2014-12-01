@@ -1,4 +1,5 @@
-# coding=UTF-8
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 The FeedbackController is responsible for processing requests related to the
 unpublished feedback that allows users and admins to record feedback in a
@@ -119,7 +120,7 @@ class FeedbackController(BaseController):
                 data["visible"] = False
                 msg = "Teie postitus on märgitud ebasobivaks ning jääb avaladmata."
 
-        flash_notice(unicode(msg))
+        flash_notice(msg)
         return Feedback(**data)
 
     def report_abuse(self, id):
