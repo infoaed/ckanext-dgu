@@ -1,9 +1,9 @@
-# -*- coding: utf-8 -*-
 """
 The FeedbackController is responsible for processing requests related to the
 unpublished feedback that allows users and admins to record feedback in a
 specific format against unpublished datasets.
 """
+# -*- coding: utf-8 -*-
 import logging
 import json
 from ckan import model
