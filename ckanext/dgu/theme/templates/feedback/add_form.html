@@ -177,6 +177,7 @@ Palun täitke antud vorm, et anda tagasisidet andtud andmehulga ja selle võimal
           <py:with vars="publishers = sorted(c.userobj.get_groups(), key=lambda x:x.title)">
             <py:if test="len(publishers) > 0">
                 <select name="organisation_name">
+                    <option value=""></option>
                     <py:for each="group in publishers">
                       <option>${group.title}</option>
                     </py:for>
