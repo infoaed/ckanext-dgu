@@ -1,4 +1,4 @@
-# coding=utf-8
+# coding=UTF-8
 """
 The FeedbackController is responsible for processing requests related to the
 unpublished feedback that allows users and admins to record feedback in a
