@@ -147,7 +147,7 @@ ${h.top_level_init()}
           url='/user' if ('dgu_drupal_auth' in config['ckan.plugins']) else h.url_for(controller='user',action='me');
           destination='' if c.user else '?destination=%s'%request.path[1:];
         ">
-          <a class="nav-user btn btn-primary" href="${url}${destination}"><i class="icon-user"></i></a>
+         
         </py:with>
         <py:if test="bool(c.user)">
           <!-- Publisher dropdown -->
