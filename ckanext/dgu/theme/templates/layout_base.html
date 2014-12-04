@@ -234,12 +234,18 @@ ${h.top_level_init()}
 
   <div class="footer">
     <footer role="contentinfo" class="container">
-      <ul class="links">
-        <li class="menu-531 first"><a href="/about">Mis on avaandmete portaal?</a></li>
-        <li class="menu-538 "><a href="/terms-and-conditions">Kasutustingimused</a></li>
-        <li class="menu-538 last"><a href="mailto:opendatasupport@mkm.ee" title="">Kontakt</a></li>
-      </ul>
-      <div class="credits">
+      <div>
+	      <ul class="links">
+	        <li class="menu-531 first"><a href="/about">Mis on avaandmete portaal?</a></li>
+	        <li class="menu-538 "><a href="/terms-and-conditions">Kasutustingimused</a></li>
+	        <li class="menu-538 last"><a href="mailto:opendatasupport@mkm.ee" title="">Kontakt</a></li>
+	      </ul>
+	      <div style="float:right;text-align:right;font-size:0.8em">
+	        Avaandmete teabevärav valmib EL struktuurifondide programmist "Infoühiskonna teadlikkuse tõstmine"<br/>
+	                                                                      Euroopa Regionaalarengu Fondi rahastusel.
+	      </div>
+      </div>
+      <div class="credits" style="float:right;clear:both">
         <div class="credit">
           <strong>Powered by:</strong><br/>
           <a href="http://ckan.org/" title="CKAN Version:${c.__version__}">
@@ -248,12 +254,6 @@ ${h.top_level_init()}
             </div>
           </a>
         </div>
-<!--         <div class="credit" py:if="c.environ['pylons.routes_dict']['controller'].startswith('ckanext.os.')">
-          <strong>Map tool by:</strong><br/>
-          <a href="/location" title="UK Location Programme">
-            <img src="/images/uk_location.gif" />
-          </a>
-        </div> -->
       </div>
     </footer>
   </div> <!-- /footer -->
