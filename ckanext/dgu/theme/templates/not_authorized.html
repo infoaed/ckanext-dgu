@@ -5,22 +5,22 @@
   xmlns:xi="http://www.w3.org/2001/XInclude"
   py:strip="">
 
-  <py:def function="page_title">Not Authorized</py:def>
+  <py:def function="page_title">Operatsioon pole lubatud!</py:def>
 
   <py:match path="breadcrumbs">
-    <li><a href="/data/search">Datasets</a></li>
-    <li><i>Not Authorized</i></li>
+    <li><a href="/data/search">Andmehulgad</a></li>
+    <li><i>Operatsioon pole lubatud!</i></li>
   </py:match>
 
   <div py:match="content">
     <div class="panel panel-danger">
-      <div class="panel-heading">This action is not authorized</div>
+      <div class="panel-heading">See operatsioon pole lubatud!</div>
       <div class="panel-body">
         <div py:if="not c.user">
-          <p>You may <a href="${'/user' if 'dgu_drupal_auth' in config['ckan.plugins'] else h.url_for(controller='user',action='me')}?destination=${request.path[1:]}">log-in</a> and try again.</p>
+          <p>Te võite <a href="${'/user' if 'dgu_drupal_auth' in config['ckan.plugins'] else h.url_for(controller='user',action='me')}?destination=${request.path[1:]}">logida sisse</a> ja proovida uuesti.</p>
         </div>
         <div py:if="c.user">
-          <p>You are logged in as: ${h.dgu_linked_user(c.user, maxlength=100)}</p>
+          <p>Olete sisse loginud kui: ${h.dgu_linked_user(c.user, maxlength=100)}</p>
         </div>
       </div>
     </div>
