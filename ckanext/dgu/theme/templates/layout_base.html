@@ -98,12 +98,10 @@ ${h.top_level_init()}
       py:with="breakout = defined('break_out_page') and break_out_page"
   >
 
-  <div py:if="not bool(c.userobj)" id="toolbar" class="toolbar overlay-displace-top clearfix toolbar-processed">
-    <div class="ourmenu">
-        <div class="menucontainer">
-            <div class="menulogin"><a href="/user">Logi sisse</a></div>
-        </div>
-    </div>
+  <div py:if="not bool(c.userobj)" class="ourmenu">
+     <div class="menucontainer">
+         <div class="menulogin"><a href="/user">Logi sisse</a></div>
+     </div>
   </div>
 
   <div py:if="bool(c.userobj)" id="toolbar" class="toolbar overlay-displace-top clearfix toolbar-processed">
