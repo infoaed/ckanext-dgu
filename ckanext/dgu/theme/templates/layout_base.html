@@ -97,11 +97,20 @@ ${h.top_level_init()}
       id="${(defined('body_id') and body_id()) or ''}"
       py:with="breakout = defined('break_out_page') and break_out_page"
   >
+
+  <div py:if="not bool(c.userobj)" id="toolbar" class="toolbar overlay-displace-top clearfix toolbar-processed">
+    <div class="ourmenu">
+        <div class="menucontainer">
+            <div class="menulogin"><a href="/user">Logi sisse</a></div>
+        </div>
+    </div>
+  </div>
+
   <div py:if="bool(c.userobj)" id="toolbar" class="toolbar overlay-displace-top clearfix toolbar-processed">
     <div class="toolbar-menu clearfix">
       <ul id="toolbar-home">
         <li class="home first last">
-          <a href="/" title="Home"><span class="home-link">Home</span></a>
+          <a href="/" title="Home"><span class="home-link">Avaleht</span></a>
         </li>
       </ul>
       <ul id="toolbar-user">
@@ -124,6 +133,7 @@ ${h.top_level_init()}
     <div class="toolbar-drawer clearfix">
     </div>
   </div>
+
   <div id="blackbar" class="${if_(h.check_access('package_create'),'with-publisher','without-publisher')}">
     <div class="container">
       <a class="brand" href="/" rel="home"></a>
@@ -147,12 +157,12 @@ ${h.top_level_init()}
           url='/user' if ('dgu_drupal_auth' in config['ckan.plugins']) else h.url_for(controller='user',action='me');
           destination='' if c.user else '?destination=%s'%request.path[1:];
         ">
-         
+
         </py:with>
         <py:if test="bool(c.user)">
           <!-- Publisher dropdown -->
           <span py:if="h.check_access('package_create')" class="dropdown">
-            <a class="nav-publisher btn btn-info dropdown-button" data-toggle="dropdown" href="#"><i class="icon-lock"></i></a>
+            <a class="nav-publisher btn btn-info dropdown-button" data-toggle="dropdown" href="#"><i class="icon-wrench"></i></a>
             <ul class="dropdown-menu dgu-user-dropdown" role="menu" aria-labelledby="dLabel">
               <li role="presentation" class="dropdown-header">Tööriistad</li>
               <li><a href="${h.url_for('dataset_new')}">Lisa andmehulk</a></li>
