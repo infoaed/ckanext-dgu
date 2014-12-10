@@ -196,6 +196,8 @@ class DrupalAuthMiddleware(object):
             log.debug('Drupal said the session ID found in the cookie is not valid.')
             return
 
+        log.info('_do_drupal_login >>> drupal_user_id = %s', drupal_user_id)
+
         # ask drupal about this user
         user_properties = self.drupal_client.get_user_properties(drupal_user_id)
 
@@ -264,7 +266,7 @@ class DrupalAuthMiddleware(object):
             user = model.User(
                 name=ckan_user_name,
                 fullname=unicode(user_dispname),  # NB may change in Drupal db
-                about=u'User account imported from Drupal system.',
+                about=u'Drupal username: %s' % user_properties['name'],
                 email=user_properties['mail'], # NB may change in Drupal db
                 created=date_created,
             )

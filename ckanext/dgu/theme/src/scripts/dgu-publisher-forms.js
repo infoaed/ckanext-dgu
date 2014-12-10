@@ -23,6 +23,14 @@ CKAN.Dgu = function($, my) {
               label += userobj.fullname;
             }
             label += ' [' + userobj.name + ']';
+            if (userobj.about) {
+            	var prefix = 'Drupal username: ';
+            	var i = userobj.about.indexOf(prefix);
+            	if (i >= 0) {
+            		var drupal_username = userobj.about.substring(prefix.length);
+            		label += ' [id:' + drupal_username + ']';
+            	}
+            }
             userobj.label = label;
             userobj.value = userobj.name;
           });
