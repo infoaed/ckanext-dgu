@@ -95,9 +95,6 @@
         ${resource_table(h.additional_resources() + h.gemini_resources())}
       </py:if>
 
-      <py:if test="not (h.dataset_type(c.pkg_extras) == 'uklp' or h.individual_resources() or h.timeseries_resources() or h.additional_resources())">
-        <em>(pole)</em>
-      </py:if>
     </div>
 
     <div class="dataset-additional-information" py:if="not h.is_unpublished_item(c.pkg_dict)">

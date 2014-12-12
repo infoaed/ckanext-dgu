@@ -132,55 +132,6 @@
       </span>
     </div>
 
-    <div class="dataset-stars h1-subheading" style="margin-top: 0px;margin-bottom: 12px;"
-      py:with="stars,reason,last_updated=h.calculate_dataset_stars(c.pkg.id)"
-      >
-      Taaskasutatavuse skoor:
-      <span class="star-rating">
-        <span class="tooltip">
-          <div class="star-rating-reason" py:if="reason">
-            <b>Põhjus: </b>${reason}
-          </div>
-          <py:for each="i in range(5,0,-1)">
-            <div class="star-rating-entry ${if_(i>stars,'fail')}">${h.mini_stars_and_caption(i)}</div>
-          </py:for>
-          <div class="star-rating-last-updated" py:if="last_updated">
-            <b>Uuendatud skoor: </b>${h.render_datestamp(last_updated)}
-          </div>
-        </span>
-        <a href="http://lab.linkeddata.deri.ie/2010/star-scheme-by-example/" target="_blank">
-          <py:for each="i in range(0,stars or 0)">
-            <i class="icon-star"></i>
-          </py:for>
-          <py:for each="i in range((stars or 0)+1,6)">
-            <i class="icon-star-empty"></i>
-          </py:for>
-        </a>
-      </span>
-
-      <span class="dropdown" py:if="h.is_certificates_installed() and h.has_certificate(c.pkg)" style="margin-left: 24px;">
-        <py:with vars="certificate = h.get_certificate_data(c.pkg)">
-          Avaandmete sertifikaat:
-          <a href="#" class="js-tooltip dropdown-button" data-placement="top" data-delay="300" data-toggle="dropdown" title="">
-          ${certificate['level'].title()} Tase
-          </a>
-          <div class="panel panel-default dropdown-menu pre-notes" role="menu" aria-labelledby="dLabel">
-              <div class="panel-body col-md-6" style="width:400px;">
-                <img class="pull-right" src="${certificate.get('badge_url')}" width="30px" style="margin:-4px;"/>
-                <div>Sellele andmehulgale on antud avaandmete sertifikaat</div>
-                <div><b>Tase:</b> ${certificate.get('level').title()} (${certificate.get('status','').title()})</div>
-                <div><b>Kuupäev:</b> ${h.render_datestamp(certificate['created_at'])}</div>
-                <div><b>Allikas:</b> ${certificate.get('source', 'Määramata')}</div>
-                <a target="_blank" class="xpull-right" href="${certificate['certificate_url']}">Kõik detailid &rsaquo;</a>
-              </div>
-            </div>
-        </py:with>
-      </span>
-
-    </div>
-
-
-
     <div class="row"
       py:with="
         can_update=h.check_access('package_update',{'id':c.pkg.id});
