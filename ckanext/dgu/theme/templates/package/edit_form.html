@@ -498,9 +498,7 @@
     <h3>Võtmesõnad</h3>
     <p>Loetlege võtmesõnad, mis lisaks ülaltoodud teemadele iseloomustavad teie andmhulka (näited: õhusaaste, maanteed, prügilad jne). Eraldage võtmesõnad (või näiteks sõnapaarid) komadega.</p>
     <div class="form-group">
-      <input class="form-control long autocomplete-tag" data-tagcomplete-queryparam="incomplete"
-           data-tagcomplete-url="/api/2/util/tag/autocomplete"
-           id="tag_string" name="tag_string" size="60" type="text"
+      <input class="form-control long" id="tag_string" name="tag_string" size="60" type="text"
            value="${data.get('tag_string') or ', '.join(h.free_tags(data))}" />
     </div>
 </fieldset>
