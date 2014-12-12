@@ -21,7 +21,7 @@
             Teabevaldajate registreerimisest ning seostamisest võite lähemalt lugeda <a href="manuals">juhendite</a> sektsioonist.
         </p>
         <div py:if="not c.user">
-          <p><a href="${'/user' if 'dgu_drupal_auth' in config['ckan.plugins'] else h.url_for(controller='user',action='me')}?destination=${request.path[1:]}">Logige sisse</a> ja proovige uuesti.</p>
+          <p>Võite <a href="${'/user' if 'dgu_drupal_auth' in config['ckan.plugins'] else h.url_for(controller='user',action='me')}?destination=${request.path[1:]}">logida sisse</a> ja proovida uuesti.</p>
         </div>
         <div py:if="c.user">
           <p>Olete sisse loginud kasutajana: ${h.dgu_linked_user(c.user, maxlength=100)}</p>
