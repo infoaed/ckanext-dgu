@@ -21,9 +21,9 @@
       <a id="shopping-basket-reset" href="#" class="facet-kill pull-right">
         <i class="icon-large icon-remove-sign"></i>
       </a>
-      <h4 class="facet-title">Map Preview List</h4>
+      <h4 class="facet-title">Kaardi eelvaade</h4>
       <div class="facet-options" id="shopping-basket"></div>
-      <a href="/data/map-preview?" id="shopping-basket-submit" class="btn btn-info btn-basket"><span><i class="icon-map-marker"></i>&nbsp; Preview</span></a>
+      <a href="/data/map-preview?" id="shopping-basket-submit" class="btn btn-info btn-basket"><span><i class="icon-map-marker"></i>&nbsp; Eelvaade</span></a>
     </div>
 
     <py:if test="c.page.item_count">
@@ -32,7 +32,7 @@
   </py:def>
 
   <div py:match="content">
-    <a href="#" class="visible-sm visible-xs btn btn-primary btn-sm show-facets">Show Search Facets &raquo;</a>
+    <a href="#" class="visible-sm visible-xs btn btn-primary btn-sm show-facets">Näita otsingufiltreid &raquo;</a>
 
     <py:if test="c.query_error">
       <div class="panel panel-danger">
@@ -41,21 +41,28 @@
       </div>
     </py:if>
 
-    <form class="form-inline pull-right" id="search-sort-by">
-      <py:def function="sort_option(text, value, selected, disabled=False)">
-        <option value="${value}" py:attrs="{'selected':'selected' if selected else None, 'disabled': 'disabled' if disabled else None}">${text}</option>
-      </py:def>
-      <label>Sorteeri:</label>
-      <select name="dataset-results-sort" class="form-control" style="display:inline-block;">
-        <!-- Can optimise this bit of the template, particularly results_sort_by -->
-        ${sort_option('Populaarsus', c.sort_by([('popularity','desc')]), 'popularity' in h.results_sort_by())}
-        ${sort_option('Pealkiri', c.sort_by([('title_string','asc')]), 'title_string' in h.results_sort_by())}
-        ${sort_option('Viimati muudetud', c.sort_by([('metadata_modified','desc')]), 'metadata_modified' in h.results_sort_by())}
-      </select>
-      <a class="feed-icon" href="${h.url(controller='feed', action='custom')}?${c.search_url_params}" title="Uudisvoog Atom formaadis">
-        <i class="icon-rss-sign"></i>
-      </a>
-    </form>
+    <div id="dataset-search-upper-right">
+
+        <py:if test="bool(c.user) and h.check_access('package_create')">
+            <div id="add-dataset"><a href="/dataset/new"><button class="btn btn-primary">Lisa andmehulk</button></a></div>
+        </py:if>
+
+	    <form class="form-inline pull-right" id="search-sort-by">
+	      <py:def function="sort_option(text, value, selected, disabled=False)">
+	        <option value="${value}" py:attrs="{'selected':'selected' if selected else None, 'disabled': 'disabled' if disabled else None}">${text}</option>
+	      </py:def>
+	      <label>Sorteeri:</label>
+	      <select name="dataset-results-sort" class="form-control" style="display:inline-block;">
+	        <!-- Can optimise this bit of the template, particularly results_sort_by -->
+	        ${sort_option('Populaarsus', c.sort_by([('popularity','desc')]), 'popularity' in h.results_sort_by())}
+	        ${sort_option('Pealkiri', c.sort_by([('title_string','asc')]), 'title_string' in h.results_sort_by())}
+	        ${sort_option('Viimati muudetud', c.sort_by([('metadata_modified','desc')]), 'metadata_modified' in h.results_sort_by())}
+	      </select>
+	      <a class="feed-icon" href="${h.url(controller='feed', action='custom')}?${c.search_url_params}" title="Uudisvoog Atom formaadis">
+	        <i class="icon-rss-sign"></i>
+	      </a>
+	    </form>
+	</div>
 
     <py:if test="not c.query_error">
       <h1>${c.page.item_count if c.page not in (None, '') else c.package_count or 0} tulemust</h1>
