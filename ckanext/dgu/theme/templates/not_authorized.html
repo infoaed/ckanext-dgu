@@ -16,11 +16,16 @@
     <div class="panel panel-danger">
       <div class="panel-heading">See operatsioon pole lubatud!</div>
       <div class="panel-body">
+        <p>
+            Kui soovite lisada andmehulki, peate olema sisse loginud ning Teie kasutaja peab olema seostatud konkreetse registreeritud teabevaldajaga.
+            Teabevaldajate registreerimisest ning seostamisest võite lähemalt lugeda <a href="manuals">juhendite</a> sektsioonist.
+        </p>
         <div py:if="not c.user">
-          <p>Te võite <a href="${'/user' if 'dgu_drupal_auth' in config['ckan.plugins'] else h.url_for(controller='user',action='me')}?destination=${request.path[1:]}">logida sisse</a> ja proovida uuesti.</p>
+          <p><a href="${'/user' if 'dgu_drupal_auth' in config['ckan.plugins'] else h.url_for(controller='user',action='me')}?destination=${request.path[1:]}">Logige sisse</a> ja proovige uuesti.</p>
         </div>
         <div py:if="c.user">
-          <p>Olete sisse loginud kui: ${h.dgu_linked_user(c.user, maxlength=100)}</p>
+          <p>Olete sisse loginud kasutajana: ${h.dgu_linked_user(c.user, maxlength=100)}</p>
+          <p>Kui olete veendunud, et omate andmehulga lisamise õigusi, siis palume abi saamiseks pöörduda aadressile <a href="mailto:opendatasupport@mkm.ee">opendatasupport@mkm.ee</a>.</p>
         </div>
       </div>
     </div>
