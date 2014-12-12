@@ -62,16 +62,11 @@
                   ${h.url_for(controller='api', register='package', action='show', id=c.pkg.name, ver='2')}
                 </a>
               </li>
-              <li>
-                <a href="${h.url_for(controller='ckanext.dgu.controllers.data:DataController', action='api')}">
-                  Lisainformatsioon selle portaali CKAN API kohta &raquo;
-                </a>
-              </li>
             </ul>
           </div>
         </div>
       </span>
-      <py:if test="c.user"> <!-- #1272 Only viewable if you log in -->
+      <py:if test="c.user and h.check_access('sysadmin')"> <!-- #1272 Only viewable if you log in -->
         <a class="js-tooltip dropdown-button history-link" data-placement="top" title="" data-delay="300" data-original-title="Muudatuste&nbsp;ajalugu" href="${h.url_for(controller='package', action='history', id=c.pkg.name)}">
           <i class="icon-time icon-2x"></i>
         </a>
