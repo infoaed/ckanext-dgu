@@ -46,9 +46,9 @@
     <div class="panel-body">
       <div class="added-users"></div>
       <div class="control-group">
-        <p>
-            Kasutaja lisamiseks alusta tema isikukoodi või kasutajanime või ees/perenime toksimist (vähemalt 3 tähemärki).<br/>
-            Teile kuvatakse vastavate kasutajate nimed ja isikukoodid kui kasutaja on sisse loginud ID-kaardiga.
+        <p style="padding-top:10px;color:#B0B0B0;">
+            Kasutaja lisamiseks alusta tema isikukoodi või kasutajanime või ees/perenime toksimist (vähemalt 3 tähemärki) alltoodu kastis.<br/>
+            Teile kuvatakse vastavate kasutajate nimed ja isikukoodid kui kasutaja on sisse loginud ID-kaardiga. See võib võtta mõne hetke aega!
         </p>
         <p>
             <strong>NB!</strong> Kasutaja ei pruugi siia ilmuda kui ta pole veel kordagi süsteemi sisse loginud, ega külastanud suvalist lehte <a href="/data">ANDMED</a> menüü all.
@@ -57,6 +57,7 @@
         <div class="controls">
           <input class="autocomplete-publisher-user" id="users__${len(data.get('users', []))}__name" name="users__${len(data.get('users', []))}__name" type="text" autocomplete="off"/>
         </div>
+        <p><strong>NB!</strong> Salvestamisel lisatakse valitud kasutaja(d) Toimetaja rollis. Rolli muutmiseks peate antud lehele tagasi tulema.</p>
       </div>
     </div>
   </div>
