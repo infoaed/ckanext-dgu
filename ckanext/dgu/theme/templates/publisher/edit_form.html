@@ -39,7 +39,7 @@ ${h.prep_group_edit_data(data)}
         and puts munged version into the URL field.
         -->
         <input id="title" name="title" type="text" value="${data.get('title', '')}" class="js-title form-control" py:attrs="{} if editable else {'disabled':'disabled'}"/>
-        <span py:if="not editable" class="js-tooltip" data-original-title="Please contact the system administrator to change your publisher name"><img src="/images/information-grey.png"/></span>
+        <span py:if="not editable" class="js-tooltip" data-original-title="Kontakteeruge portaali valdajaga oma URL muutmiseks"><img src="/images/information-grey.png"/></span>
 
         <span class="field_error" py:if="errors.get('name', '')">${errors.get('name', '')}</span>
       </div>
@@ -78,7 +78,7 @@ ${h.prep_group_edit_data(data)}
     <div class="control-group">
       <label class="control-label" for="description">Teabevaldaja kirjeldus</label>
       <div class="controls description-field">
-        <textarea class="form-control" style="width: 100%;" rows="9" name="description" id="notes" placeholder="${_('Start with a summary sentence ...')}">${data.get('description','')}</textarea>
+        <textarea class="form-control" style="width: 100%;" rows="9" name="description" id="notes" placeholder="${_('Alusta kokkuvõtva lausega ...')}">${data.get('description','')}</textarea>
       </div>
     </div>
 

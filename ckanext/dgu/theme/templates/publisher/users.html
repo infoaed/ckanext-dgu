@@ -2,12 +2,12 @@
   xmlns:xi="http://www.w3.org/2001/XInclude"
   py:strip="">
 
-  <py:def function="page_title">Users in ${c.group.display_name}</py:def>
+  <py:def function="page_title">${c.group.display_name} kasutajad</py:def>
 
   <py:match path="breadcrumbs">
-    <li><a href="/publisher">Publishers</a></li>
+    <li><a href="/publisher">Teabevaldajad</a></li>
     <li><a href="/publisher/${c.group.name}">${c.group.title}</a></li>
-    <li><a href="${request.url}">Edit User Permissions</a></li>
+    <li><a href="${request.url}">Kasutajaõiguste haldamine</a></li>
   </py:match>
 
   <div py:match="content" class="user-edit-form">

@@ -6,9 +6,9 @@
 
 <div class="error-explanation" py:if="error_summary">
   <div class="panel panel-danger">
-    <div class="panel-heading"><strong>Errors in form</strong></div>
+    <div class="panel-heading"><strong>Vormil on vead</strong></div>
     <div class="panel-body">
-      The form contains invalid entries:
+      Vormil on järgmised vigased väärtused:
       <ul>
         <li py:for="key, error in error_summary.items()">${"%s: %s" % (key, error)}</li>
       </ul>
@@ -19,7 +19,7 @@
 <input type="hidden" id="type" name="type" value="organization" />
 
 <fieldset id="users">
-  <h2>Admins and Editors</h2>
+  <h2>Administraatorid ja toimetajad</h2>
   <py:if test="data.get('users')">
     <table class="table">
       <py:for each="num, user in enumerate(data.get('users'))">
@@ -30,36 +30,42 @@
         <td class="value" width="80%">
           <div class="form-inline">
             <input checked="checked" id="users__${num}__name" name="users__${num}__name" type="checkbox" value="${user['name']}" style="display:none;"/>
-            <label class="radio"><input type="radio" name="users__${num}__capacity" value="admin"  py:attrs="{'checked': 'checked' if user['capacity'] == 'admin' else None}"></input> Admin</label>&nbsp;&nbsp;&nbsp;&nbsp;
-            <label class="radio"><input type="radio" name="users__${num}__capacity" value="editor" py:attrs="{'checked': 'checked' if user['capacity'] in ['editor','member'] else None}"></input> Editor</label>&nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="btn btn-danger btn-xs" onclick="return delete_user(this);"><i class="icon-trash"></i> Delete</button>
+            <label class="radio"><input type="radio" name="users__${num}__capacity" value="admin"  py:attrs="{'checked': 'checked' if user['capacity'] == 'admin' else None}"></input> Administraator</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <label class="radio"><input type="radio" name="users__${num}__capacity" value="editor" py:attrs="{'checked': 'checked' if user['capacity'] in ['editor','member'] else None}"></input> Toimetaja</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-danger btn-xs" onclick="return delete_user(this);"><i class="icon-trash"></i> Eemalda</button>
           </div>
         </td>
       </tr>
       </py:for>
     </table>
   </py:if>
-  <p py:if="not data.get('users')">There are no users currently in this publisher.</p>
+  <p py:if="not data.get('users')">Hetkel teabevaldajal kasutajaid pole.</p>
 
   <div class="panel panel-info">
-    <div class="panel-heading">Add editors</div>
+    <div class="panel-heading">Lisa kasutajaid</div>
     <div class="panel-body">
       <div class="added-users"></div>
       <div class="control-group">
-        <label class="control-label" for="users__${len(data.get('users', []))}__name">User</label>
+        <p>
+            Kasutaja lisamiseks alusta tema isikukoodi või kasutajanime või ees/perenime toksimist (vähemalt 3 tähemärki).<br/>
+            Teile kuvatakse vastavate kasutajate nimed ja isikukoodid kui kasutaja on sisse loginud ID-kaardiga.
+        </p>
+        <p>
+            <strong>NB!</strong> Kasutaja ei pruugi siia ilmuda kui ta pole veel kordagi süsteemi sisse loginud, ega külastanud suvalist lehte <a href="/data">ANDMED</a> menüü all.
+        </p>
+        <label class="control-label" for="users__${len(data.get('users', []))}__name">Kasutaja</label>
         <div class="controls">
           <input class="autocomplete-publisher-user" id="users__${len(data.get('users', []))}__name" name="users__${len(data.get('users', []))}__name" type="text" autocomplete="off"/>
         </div>
-        <p>NB: A user might not appear on this list until that user has logged in and clicked on a page in the <a href="/data">Data</a> part of data.gov.uk.</p>
       </div>
     </div>
   </div>
 </fieldset>
 
 
-  <input id="save" class="btn btn-primary" name="save" type="submit" value="${_('Save')}" />
+  <input id="save" class="btn btn-primary" name="save" type="submit" value="${_('Salvesta')}" />
   <py:if test="c.group">
-    <input id="cancel" class="btn href-action" name="cancel" type="reset" value="${_('Cancel')}" action="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='read', id=c.group.name)}" />
+    <input id="cancel" class="btn href-action" name="cancel" type="reset" value="${_('Loobu')}" action="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='read', id=c.group.name)}" />
   </py:if>
 
 <script type="text/javascript">
@@ -72,10 +78,10 @@
 
 		if ( chk.prop('checked') ) {
 			$(user_controls).children("label").css({ opacity: 1 });
-			$(btn).html('Delete');
+			$(btn).html('Eemalda');
 		} else {
 			$(user_controls).children("label").css({ opacity: 0.5 });
-			$(btn).html('Cancel');
+			$(btn).html('Loobu');
 		}
 		return false;
 	}
