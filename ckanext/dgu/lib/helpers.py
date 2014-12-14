@@ -1193,7 +1193,7 @@ def get_ckan_licenses():
     return ckan_licenses
 
 def license_choices(data):
-    license_ids = ['odc-odbl', 'odc-pddl', 'odc-by', 'cc-by', 'cc-zero', 'cc-by-sa']
+    license_ids = ['cc-by', 'cc-by-sa', 'cc-zero', 'odc-by', 'odc-odbl', 'odc-pddl']
     selected_license = data.get('license_id')
     ckan_licenses = get_ckan_licenses()
     if selected_license not in license_ids and \
