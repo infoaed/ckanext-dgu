@@ -18,7 +18,7 @@
       <div class="panel-body">
         <p>
             Kui soovite lisada andmehulki, peate olema sisse loginud ning Teie kasutaja peab olema seostatud konkreetse registreeritud teabevaldajaga.
-            Teabevaldajate registreerimisest ning kasutajate seostamisest võite lähemalt lugeda <a href="manuals">juhendite</a> sektsioonist.
+            Teabevaldajate registreerimisest ning kasutajate seostamisest võite lähemalt lugeda <a href="/juhendid">juhendite</a> sektsioonist.
         </p>
         <div py:if="not c.user">
           <p>Võite <a href="${'/user' if 'dgu_drupal_auth' in config['ckan.plugins'] else h.url_for(controller='user',action='me')}?destination=${request.path[1:]}">logida sisse</a> ja proovida uuesti.</p>
