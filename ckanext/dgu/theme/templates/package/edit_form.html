@@ -128,7 +128,7 @@
     <!-- The resource fieldset for a timeseries dataset -->
     <fieldset id="package_type-timeseries">
       <div class="well form-inline">
-        <label for="update_frequency" class="js-tooltip" title="How frequently new data files are published.  For one-off data, use 'never'. For those once updated but now discontinued, use 'discontinued'.">
+        <label for="update_frequency" class="js-tooltip" title="Kui sageli faile uuendatakse. Kui on nö ühekordsed andmed, valige 'mitte kunagi'. Kui kunagi uuendati, aga nüüd enam mitte, valige 'katkestatud'.">
           Uuendussagedus <i class="icon-info-sign"></i>
         </label>
         <select style="width: 200px;" class="form-control" id="update_frequency" name="update_frequency">
@@ -626,7 +626,7 @@
   <div id="disclaimer">
     <input id="save-button" class="btn btn-primary" name="save" type="submit" value="Salvesta ja lõpeta" />
     <p class="hints">
-      <strong>Tähtis:</strong> Salvestades lubate avaldada oma andmehulga vastavalt antud portaali <a href="http://${config.get('dgu.drupal_host', 'opendata.riik.ee')}/terms-and-conditions">kasutustingimustele</a>.
+      <strong>Tähtis:</strong> Salvestades lubate avaldada oma andmehulga vastavalt antud portaali <a href="/kasutustingimused">kasutustingimustele</a>.
     </p>
   </div>
 </div><!-- /form-actions -->

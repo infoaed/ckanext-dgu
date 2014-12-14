@@ -40,12 +40,12 @@ geographic_granularity = [('', ''),
                           ('other', 'other - please specify')]
 
 update_frequency = [('', ''),
-                    ('never', 'never'),
-                    ('discontinued', 'discontinued'),
-                    ('annual', 'annual'),
-                    ('quarterly', 'quarterly'),
-                    ('monthly', 'monthly'),
-                    ('other', 'other - please specify')]
+                    ('never', 'mitte kunagi'),
+                    ('discontinued', 'katkestatud'),
+                    ('annual', 'kord aastas'),
+                    ('quarterly', 'kord kvartalis'),
+                    ('monthly', 'kord kuus'),
+                    ('other', 'sisesta muu')]
 
 temporal_granularity = [("", ""),
                         ("year", "year"),
