@@ -431,10 +431,10 @@
     <p class="field_error" py:if="errors.get('owner_org', '')">Valige teabevaldaja.</p>
     <hr/>
   <h3>Kontaktandmed</h3>
-    <p>Siin on antud andmehulga juures kuvatavad kontaktandmed. Vaikimisi on need võetud valitud teabevaldaja andmetest, aga saate neid antud andmehulga tarvis "Muuda" nupu abil muuta.</p>
+    <p>Vaikimisi kuvatakse andmehulga vaatelehel teabevaldaja infos määratud kontakandmeid. Alltoodud sektsioonis on teil võimalik neid antud andhulga tarvis "Muuda" nupu abil muuta.</p>
     <py:with vars="group=h.edit_publisher_group(data)">
       <fieldset id="publisher-information-field" class="well" >
-        <h3>Teabevaldaja kontaktandmed</h3>
+        <h3>Andmehulga valdaja kontaktandmed</h3>
         <p><b>Nimi: </b> <span id="contact-name-label">${data.get('contact-name', '')}</span></p>
         <p><b>E-mail: </b><span id="contact-email-label">${data.get('contact-email', '')}</span></p>
         <p><b>Telefon: </b><span id="contact-phone-label">${data.get('contact-phone', '')}</span></p>
