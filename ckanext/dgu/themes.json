@@ -1,71 +1,85 @@
 [   {"title": "Põllumajandus, kalandus, metsandus",
-     "stored_as": "Pollumajandus",
+     "stored_as": "Põllumajandus",
      "description": "Põllumajandus, kalandus ja metsandus.",
-     "topics": ["põllumajandus", "kalandus", "metsandus"]
+     "topics": ["põllumajandus", "kalandus", "metsandus"],
+     "css-id": "Pollumajandus"
     },
     {"title": "Kultuur",
      "stored_as": "Kultuur",
      "description": "Kultuur.",
-     "topics": ["kultuur"]
+     "topics": ["kultuur"],
+     "css-id": "Kultuur"
     },
     {"title": "Majandus ja tööstus",
      "stored_as": "Majandus",
      "description": "Majandus",
-     "topics": ["majandus", "tööstus"]
+     "topics": ["majandus", "tööstus"],
+     "css-id": "Majandus"
     },
     {"title": "Tööhõive",
-     "stored_as": "Toohoive",
+     "stored_as": "Tööhõive",
      "description": "Tööhõive.",
-     "topics": ["tööhõive", "töötus"]
+     "topics": ["tööhõive", "töötus"],
+     "css-id": "Toohoive"
     },
     {"title": "Haridus ja teadus",
      "stored_as": "Haridus",
      "description": "Haridus ja teadus.",
-     "topics": ["haridus", "teadus"]
+     "topics": ["haridus", "teadus"],
+     "css-id": "Haridus"
     },
     {"title": "Keskkond",
      "stored_as": "Keskkond",
      "description": "Keskkond, keskkonnakaitse.",
-     "topics": ["keskkond", "keskkonnakaitse"]
+     "topics": ["keskkond", "keskkonnakaitse"],
+     "css-id": "Haridus"
     },
     {"title": "Rahandus ja eelarvestamine",
      "stored_as": "Rahandus",
      "description": "Rahandus ja eelarvestamine.",
-     "topics": ["rahandus", "eelarvestamine"]
+     "topics": ["rahandus", "eelarvestamine"],
+     "css-id": "Rahandus"
     },
     {"title": "Geograafia",
      "stored_as": "Geograafia",
      "description": "Geograafia.",
-     "topics": ["Geograafia"]
+     "topics": ["Geograafia"],
+     "css-id": "Geograafia"
     },
     {"title": "Tervis",
      "stored_as": "Tervis",
      "description": "Tervis, tervishoid.",
-     "topics": ["tervis", "tervishoid"]
+     "topics": ["tervis", "tervishoid"],
+     "css-id": "Tervis"
     },
     {"title": "Riigiteenused",
      "stored_as": "Riigiteenused",
      "description": "Riigiteenused.",
-     "topics": ["riigiteenused"]
+     "topics": ["riigiteenused"],
+     "css-id": "Riigiteenused"
     },
     {"title": "Avatud valitsemine",
      "stored_as": "Valitsemine",
      "description": "Avatud valitsemine.",
-     "topics": ["avatud", "avatus", "valitsemine"]
+     "topics": ["avatud", "avatus", "valitsemine"],
+     "css-id": "Valitsemine"
     },
     {"title": "Rahvastiku andmed",
      "stored_as": "Rahvastik",
      "description": "Rahvastiku andmed.",
-     "topics": ["rahvastik"]
+     "topics": ["rahvastik"],
+     "css-id": "Rahvastik"
     },
     {"title": "Transport",
      "stored_as": "Transport",
      "description": "Transport.",
-     "topics": ["transport"]
+     "topics": ["transport"],
+     "css-id": "Transport"
     },
     {"title": "Sotsiaalvaldkond",
      "stored_as": "Sotsiaal",
      "description": "Sotsiaalvaldkond.",
-     "topics": ["sotsiaalvaldkond", "sotsiaal", "sotsiaalia"]
+     "topics": ["sotsiaalvaldkond", "sotsiaal", "sotsiaalia"],
+     "css-id": "Sotsiaal"
     }
 ]

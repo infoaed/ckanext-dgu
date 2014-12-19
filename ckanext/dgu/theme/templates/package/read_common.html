@@ -137,7 +137,9 @@
         can_delete=h.check_access('package_delete', {'id':c.pkg.id}) and not h.is_package_deleted(c.pkg);
         update_link=h.url_for(controller='package', action='edit', id=c.pkg.name) if not h.is_unpublished_item(c.pkg_dict) else h.url_for(controller='ckanext.dgu.controllers.inventory:InventoryController', action='edit_item', id=c.pkg.name);
         is_uklp=h.dataset_type(c.pkg_extras)=='uklp';
-        admin_mode = can_update or can_delete
+        admin_mode = can_update or can_delete;
+        primary_theme=h.get_primary_theme(c.pkg_dict);
+        primary_theme_cssid=h.get_theme_key(primary_theme, 'css-id', primary_theme)
     ">
       <div class="${if_(admin_mode,'col-md-8','col-md-12')}">
         <!-- Description -->
@@ -155,8 +157,8 @@
         </p>
         <!-- blank style tag avoids a bug in jquery.dotdotdot -->
         <div class="notes" style="">
-          <div class="dataset-theme theme-${h.get_primary_theme(c.pkg_dict) or 'none'}">
-            <div class="theme-name">${h.get_primary_theme(c.pkg_dict) or '(Kategoriseerimata)'}</div>
+          <div class="dataset-theme theme-${primary_theme_cssid or 'none'}">
+            <div class="theme-name">${primary_theme or '(Teema määramata)'}</div>
           </div>
           <a
             class="dataset-optional-logo"

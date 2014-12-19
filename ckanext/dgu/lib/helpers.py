@@ -1726,6 +1726,20 @@ def themes():
     from ckanext.dgu.lib.theme import Themes
     return Themes.instance().data
 
+def get_theme_key(stored_as, key, default_value):
+
+    from ckanext.dgu.lib.theme import Themes
+    themes_data = Themes.instance().data
+
+    result = default_value
+    if themes_data:
+        if themes_data.has_key(stored_as):
+            theme_dict = themes_data[stored_as]
+            if theme_dict:
+                if theme_dict.has_key(key):
+                    result = theme_dict[key]
+    return result
+
 def span_read_more(text, word_limit, classes=""):
     trimmed = truncate(text,length=word_limit,whole_word=True)
     if trimmed==text:
