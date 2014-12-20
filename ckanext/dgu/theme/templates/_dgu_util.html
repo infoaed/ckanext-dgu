@@ -228,15 +228,13 @@
           <i class="icon-remove-circle icon-4x"></i>
         </a>
       </div>
-      <py:if test="request.params.get('parent_publishers','')">
-        ${facet_box(
-            'Teabevaldaja',
-            h.search_facets_unselected(['parent_publishers']),
-            h.search_facets_selected(['parent_publishers']),
-            'Rohkem teabevaldaja filtreid pole.',
-            more_button='more-publishers-button'
-        )}
-      </py:if>
+      ${facet_box(
+          'Teabevaldaja',
+          h.search_facets_unselected(['publisher']),
+          h.search_facets_selected(['publisher']),
+          'Rohkem teabevaldaja filtreid pole.',
+          more_button='more-publishers-button'
+      )}
       <div class="facet-divider"></div>
       <div class="facets-theme-primary">
       ${facet_box(
@@ -254,13 +252,6 @@
           h.search_facets_selected(['res_format']),
           'Rohkem formaadi filtreid pole.',
           more_button='more-formats-button'
-      )}
-      <div class="facet-divider"></div>
-      ${facet_box(
-          'Litsents',
-          h.search_facets_unselected(['license_id-is-ogl']),
-          h.search_facets_selected(['license_id-is-ogl']),
-          'Rohkem faile pole.'
       )}
     </div><!-- /facet-filters -->
   </div>
