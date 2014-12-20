@@ -21,7 +21,7 @@
         </py:if>
       </div>
       <p>
-        <strong>Lisanud:</strong> ${h.dgu_linked_user(item.user_id,maxlength=32,organisation=item.organisation_name)} kuupäeval ${h.render_datetime(item.created, date_format="%d/%m/%Y", with_hours=False)}
+        <strong>Lisanud:</strong> ${h.dgu_linked_user(item.user_id,maxlength=32,organisation=item.organisation_name)} kuupäeval ${h.render_datetime(item.created, date_format="%d.%m.%Y", with_hours=False)}
         <br/>
         <strong>Lisatud kui:</strong>
         <py:if test="item.responding_as=='individual'">Eraisik</py:if>
@@ -75,7 +75,7 @@
           <py:if test="not item.visible">See tagasiside ei ole hetkel nähtav.</py:if>
         </li>
         <li>
-          <strong>Lisanud</strong>: ${h.linked_user(item.user_id, maxlength=40)} kuupäeval ${h.render_datetime(item.created, date_format="%d/%m/%Y", with_hours=False)}
+          <strong>Lisanud</strong>: ${h.linked_user(item.user_id, maxlength=40)} kuupäeval ${h.render_datetime(item.created, date_format="%d.%m.%Y", with_hours=False)}
         </li>
         <li py:if="item.organisation_name">
           <strong>Organisatsioon</strong>: ${item.organisation_name}
