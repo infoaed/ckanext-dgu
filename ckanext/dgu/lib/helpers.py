@@ -1329,8 +1329,8 @@ def facet_values(facet_tuples, facet_key):
 
 def get_package_mini_metadata(pkg):
     return {
-        'date-added-computed': pkg.metadata_created.strftime("%d/%m/%Y"),
-        'date-updated-computed': pkg.metadata_modified.strftime("%d/%m/%Y")
+        'date-added-computed': pkg.metadata_created.strftime("%Y-%m-%d"),
+        'date-updated-computed': pkg.metadata_modified.strftime("%Y-%m-%d")
     }
 
 def get_extent():
