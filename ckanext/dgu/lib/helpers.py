@@ -20,7 +20,7 @@ import random
 import ckan.plugins.toolkit as t
 c = t.c
 from webhelpers.text import truncate
-from webhelpers.text import escape
+from webhelpers.html import escape
 from pylons import config
 from pylons import request
 
