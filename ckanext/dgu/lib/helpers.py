@@ -156,36 +156,39 @@ def get_wms_info(pkg_dict):
     * extent is a tuple of (N, W, E, S) representing max extent
     '''
     urls = []
-    for r in pkg_dict.get('resources',[]):
-        wms_url = get_resource_wms(r)
-        if wms_url:
-            urls.append(('url', wms_url))
-        wfs_url = get_resource_wfs(r)
-        if wfs_url:
-            urls.append(('wfsurl', wfs_url))
-            urls.append(('resid', r['id']))
-            resname = pkg_dict['title']
-            if r['description']:
-                resname += ' - %s' % r['description']
-            urls.append(('resname', resname.encode('utf8')))
+
+# Out-commenting below block as a really quick and dirty fix for disabling WMS-related functionality.
+
+#    for r in pkg_dict.get('resources',[]):
+#        wms_url = get_resource_wms(r)
+#        if wms_url:
+#            urls.append(('url', wms_url))
+#        wfs_url = get_resource_wfs(r)
+#        if wfs_url:
+#            urls.append(('wfsurl', wfs_url))
+#            urls.append(('resid', r['id']))
+#            resname = pkg_dict['title']
+#            if r['description']:
+#                resname += ' - %s' % r['description']
+#            urls.append(('resname', resname.encode('utf8')))
     # Extent
-    extras = pkg_dict['extras']
-    extent = {'n': get_from_flat_dict(extras, 'bbox-north-lat', ''),
-              'e': get_from_flat_dict(extras, 'bbox-east-long', ''),
-              'w': get_from_flat_dict(extras, 'bbox-west-long', ''),
-              's': get_from_flat_dict(extras, 'bbox-south-lat', '')}
+#    extras = pkg_dict['extras']
+#    extent = {'n': get_from_flat_dict(extras, 'bbox-north-lat', ''),
+#              'e': get_from_flat_dict(extras, 'bbox-east-long', ''),
+#              'w': get_from_flat_dict(extras, 'bbox-west-long', ''),
+#              's': get_from_flat_dict(extras, 'bbox-south-lat', '')}
     extent_list = []
-    for direction in 'nwes':
-        if extent[direction] in (None, ''):
-            extent_list = []
-            break
-        try:
-            # check it is a number
-            float(extent[direction])
-        except ValueError, e:
-            log.error('Package %r has invalid bbox value %r: %s' %
-                      (pkg_dict.get('name'), extent[direction], e))
-        extent_list.append(extent[direction])
+#    for direction in 'nwes':
+#        if extent[direction] in (None, ''):
+#            extent_list = []
+#            break
+#        try:
+#            # check it is a number
+#            float(extent[direction])
+#        except ValueError, e:
+#            log.error('Package %r has invalid bbox value %r: %s' %
+#                      (pkg_dict.get('name'), extent[direction], e))
+#        extent_list.append(extent[direction])
     return urllib.urlencode(urls), tuple(extent_list)
 
 def get_from_flat_dict(list_of_dicts, key, default=None):
