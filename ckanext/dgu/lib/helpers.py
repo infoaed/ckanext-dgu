@@ -127,24 +127,34 @@ def publisher_hierarchy_mini(group_name_or_id):
     return _publisher_hierarchy_recur(my_root_node)
 
 def is_wms(resource):
-    from ckanext.dgu.lib.helpers import get_resource_wms
-    return bool(get_resource_wms(resource))
+    '''Temporarily disable WMS detection.'''
+#    from ckanext.dgu.lib.helpers import get_resource_wms
+#    return bool(get_resource_wms(resource))
+    return False
 
 
 def get_resource_wms(resource_dict):
     '''For a given resource, return the WMS url if it is a WMS data type.'''
     # plenty of WMS resources have res['format']='' so
     # also search for WMS in the url
-    url = resource_dict.get('url') or ''
-    format = resource_dict.get('format') or ''
+
+    '''Temporarily disable WMS detection.'''
+#    url = resource_dict.get('url') or ''
+#    format = resource_dict.get('format') or ''
+    url = ''
+    format = ''
     # NB This WMS detection condition must match that in ckanext-os/ckanext/os/controller.py
     if 'wms' in url.lower() or format.lower() == 'wms':
         return url
 
 def get_resource_wfs(resource_dict):
     '''For a given resource, return the WMS url if it is a WMS data type.'''
-    wfs_service = resource_dict.get('wfs_service') or ''
-    format_ = resource_dict.get('format') or ''
+
+    '''Temporarily disable WMS detection.'''
+#    wfs_service = resource_dict.get('wfs_service') or ''
+#    format_ = resource_dict.get('format') or ''
+    wfs_service = ''
+    format_ = ''
     # NB This WMS detection condition must match that in ckanext-os/ckanext/os/controller.py
     if wfs_service == 'ckanext_os' or format_.lower() == 'wfs':
         return urljoin(config['ckan.site_url'], '/data/wfs')
