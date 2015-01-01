@@ -779,7 +779,7 @@ def get_package_fields(package, pkg_extras, dataset_type):
                  for theme in json.loads(secondary_themes)])
         except ValueError:
             # string for single value
-            secondary_themes = str(secondary_themes)
+            secondary_themes = unicode(secondary_themes)
             secondary_themes = THEMES.get(secondary_themes,
                                           secondary_themes)
 
@@ -1245,11 +1245,21 @@ def edit_publisher_group(data):
     return c.publishers.get(group_name, {}) if group_id else data
 
 def secondary_themes(data):
+
     secondary_themes_raw = data.get('theme-secondary', '')
+
     if isinstance(secondary_themes_raw, basestring):
-      secondary_themes = set(map(lambda s: s.strip(), re.sub('[["\]]', '', data.get('theme-secondary', '')).split(',')))
+
+        str1 = re.sub('(\[u\')', '', secondary_themes_raw)
+        str1 = re.sub('(\', u\')', ', ', str1)
+        str1 = re.sub('[\["\]]', '', str1)
+        str1 = re.sub('\'', '', str1)
+        splitted = str1.split(',')
+
+        secondary_themes = set(map(lambda s: s.strip(), splitted))
     else:
-      secondary_themes = set(secondary_themes_raw)
+        secondary_themes = set(secondary_themes_raw)
+
     return secondary_themes
 
 def free_tags(data):
@@ -1943,3 +1953,15 @@ def parse_date(date_string):
         class FakeDate:
             year = ''
         return FakeDate()
+
+def get_package_field_disp_value(value):
+
+    rslt = value
+    if value:
+        if isinstance(value, basestring):
+            if value.startswith('[u\'') and value.endswith('\']'):
+                rslt = re.sub('(\[u\')', '', value)
+                rslt = re.sub('(\', u\')', ', ', rslt)
+                rslt = re.sub('(\'\])', '', rslt)
+
+    return rslt
