@@ -107,11 +107,11 @@ class FeedbackController(BaseController):
             log.warning("No comments to send for spam check")
             success,flag = True, MOLLOM_HAM
 
-        msg = "Täname tagasiside eest!"
+        msg = unicode("Täname tagasiside eest!")
         if not success:
             # If we fail to check spam, force into moderation
             data["moderation_required"] = True
-            msg = "Täname tagasiside eest!"
+            msg = unicode("Täname tagasiside eest!")
         else:
             data["spam_score"] = flag
             if flag == MOLLOM_SPAM:
