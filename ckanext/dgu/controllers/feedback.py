@@ -117,7 +117,7 @@ class FeedbackController(BaseController):
             if flag == MOLLOM_SPAM:
                 data["moderation_required"] = True
                 data["visible"] = False
-                msg = "Your post has been identified as spam and has not been posted."
+                msg = u'Teie postitusel leiti rämpsposti tunnuseid ja see jäeti avaldamata.'
 
         flash_notice(msg)
         return Feedback(**data)
