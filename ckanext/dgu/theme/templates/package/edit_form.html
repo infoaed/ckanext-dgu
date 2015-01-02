@@ -590,8 +590,8 @@
   <p>Ajaline periood, mida antud andmehulk katab.</p>
   <div class="form-inline">
     <div class="form-group">
-      <input style="width:300px;" class="form-control" id="temporal_coverage-from" name="temporal_coverage-from" type="text" value="${data.get('temporal_coverage-from', '')}" /> -
-      <input style="width:300px;" class="form-control" id="temporal_coverage-to" name="temporal_coverage-to" type="text" value="${data.get('temporal_coverage-to', '')}" />
+      <input style="width:300px;" class="form-control needs-datepicker" id="temporal_coverage-from" name="temporal_coverage-from" type="text" value="${data.get('temporal_coverage-from', '')}" /> -
+      <input style="width:300px;" class="form-control needs-datepicker" id="temporal_coverage-to" name="temporal_coverage-to" type="text" value="${data.get('temporal_coverage-to', '')}" />
     </div>
   </div>
   <p style="display: block;" class="field_error" py:if="errors.get('temporal_coverage-from', '')">${errors.get('temporal_coverage-from', '')}</p>

@@ -783,6 +783,13 @@ def get_package_fields(package, pkg_extras, dataset_type):
             secondary_themes = THEMES.get(secondary_themes,
                                           secondary_themes)
 
+    update_frequency = pkg_extras.get('update_frequency')
+    if update_frequency:
+        for freq_name, freq_desc in c.update_frequency:
+            if update_frequency==freq_name and freq_desc:
+                update_frequency = freq_desc
+                break
+
     field_value_map = {
         # field_name : {display info}
         'state': {'label': 'Staatus', 'value': c.pkg.state},
@@ -801,6 +808,7 @@ def get_package_fields(package, pkg_extras, dataset_type):
         'taxonomy_url': {'label': 'Taksonoomia URL', 'value': taxonomy_url},
         'theme': {'label': 'Teema', 'value': primary_theme},
         'theme-secondary': {'label': 'Lisateema(d)', 'value': secondary_themes},
+        'update_frequency': {'label': 'Uuendussagedus', 'value': update_frequency},
         'metadata-language': {'label': 'Metaandmete keel', 'value': pkg_extras.get('metadata-language', '').replace('eng', 'English')},
         'metadata-date': {'label': 'Metaandmete kuupäev', 'value': DateType.db_to_form(pkg_extras.get('metadata-date', ''))},
         'dataset-reference-date': {'label': 'Andmehulga viitekuupäev', 'value': dataset_reference_date},
