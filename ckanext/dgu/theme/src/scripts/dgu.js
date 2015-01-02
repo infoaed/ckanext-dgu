@@ -332,7 +332,7 @@ CKAN.Dgu = function($, my) {
       // Date rows think they have a datepicker applied, but they are copies. They don't.
       newRow.find('.needs-datepicker').removeClass('hasDatepicker');
       // So give them a datepicker:
-      newRow.find('.needs-datepicker').datepicker({dateFormat:'dd/mm/yy', dayNamesMin:["P", "E", "T", "K", "N", "R", "L"], dayNamesShort:["P", "E", "T", "K", "N", "R", "L"], monthNames: ["Jaanuar", "Veebruar", "Märts", "Aprill", "Mai", "Juuni", "Juuli", "August", "September", "Oktoober", "November", "Detsember"]});
+      newRow.find('.needs-datepicker').datepicker({dateFormat:'dd/mm/yy', firstDay:1, dayNamesMin:["P", "E", "T", "K", "N", "R", "L"], dayNamesShort:["P", "E", "T", "K", "N", "R", "L"], monthNames: ["Jaanuar", "Veebruar", "Märts", "Aprill", "Mai", "Juuni", "Juuli", "August", "September", "Oktoober", "November", "Detsember"]});
       return newRow;
   };
 
