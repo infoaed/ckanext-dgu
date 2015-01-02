@@ -1,3 +1,5 @@
+﻿# -*- coding: utf-8 -*-
+
 """
 The FeedbackController is responsible for processing requests related to the
 unpublished feedback that allows users and admins to record feedback in a
@@ -105,12 +107,11 @@ class FeedbackController(BaseController):
             log.warning("No comments to send for spam check")
             success,flag = True, MOLLOM_HAM
 
-        msg = "Thank you for your feedback"
+        msg = "Täname tagasiside eest!"
         if not success:
             # If we fail to check spam, force into moderation
             data["moderation_required"] = True
-            msg = "Thank you for your feedback. " \
-                  "Your comments have been marked for moderation."
+            msg = "Täname tagasiside eest!"
         else:
             data["spam_score"] = flag
             if flag == MOLLOM_SPAM:
@@ -138,7 +139,7 @@ class FeedbackController(BaseController):
                 fb.visible = False
                 flash_notice("Queued. As you are an administrator, this item has been hidden")
             else:
-                flash_notice("Thank you for your feedback, the item has been queued for moderation")
+                flash_notice("Täname tagasiside eest!")
             model.Session.add(fb)
             model.Session.commit()
 
