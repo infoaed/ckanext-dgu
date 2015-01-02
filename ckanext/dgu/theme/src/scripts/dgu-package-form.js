@@ -171,8 +171,9 @@
     $('.format-typeahead').autocomplete({source: DGU_RESOURCE_FORMATS, items:5});
 
     /* Additional resources scraper fields */
-    CKAN.Dgu.setupAdditionalResourcesScrapers();
+    // Out-commenting below line as it caused assertion error
+    // CKAN.Dgu.setupAdditionalResourcesScrapers();
 
     /* Apply a datepicker to all date rows */
-    $('.needs-datepicker').datepicker({dateFormat:'dd/mm/yy'});
+    $('.needs-datepicker').datepicker({dateFormat:'dd/mm/yy', dayNamesMin:["P", "E", "T", "K", "N", "R", "L"], dayNamesShort:["P", "E", "T", "K", "N", "R", "L"], monthNames: ["Jaanuar", "Veebruar", "Märts", "Aprill", "Mai", "Juuni", "Juuli", "August", "September", "Oktoober", "November", "Detsember"]});
   });
