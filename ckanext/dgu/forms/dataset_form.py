@@ -155,6 +155,8 @@ class DatasetForm(p.SingletonPlugin):
         if 'save' in context:
             c.publishers = self.get_publishers()
             c.publishers_json = json.dumps(c.publishers)
+            c.publishers_by_id = self.get_publishers('id')
+            c.publishers_json_by_id = json.dumps(c.publishers_by_id)
 
         c.resource_columns = ('description', 'url', 'format')
 
@@ -367,7 +369,7 @@ class DatasetForm(p.SingletonPlugin):
     def check_data_dict(self, data_dict, package_type=None):
         return
 
-    def get_publishers(self):
+    def get_publishers(self, key='name'):
         from ckan.model.group import Group
 
         if dgu_helpers.is_sysadmin():
@@ -403,7 +405,7 @@ class DatasetForm(p.SingletonPlugin):
             'foi-web': g.extras.get('foi-web', ''),
         } for g in groups]
 
-        return dict((g['name'], g) for g in groups)
+        return dict((g[key], g) for g in groups)
 
 
 def date_to_db(value, context):

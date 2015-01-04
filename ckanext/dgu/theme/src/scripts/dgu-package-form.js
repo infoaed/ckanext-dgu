@@ -112,7 +112,7 @@
       "foi-web",
       "foi-phone"
     ];
-    $('#groups__0__name').change(function() {
+    $('#owner_org').change(function() {
       var selectedPublisherName = $(this).val();
       var publisher = publishers[selectedPublisherName];
       if(publisher === undefined){
