@@ -5,20 +5,20 @@ import re
 # Map: Database entry -> Displayname
 # Ensure this agrees with themes.json
 THEMES = {
-    u"Põllumajandus, kalandus, metsandus": u"Põllumajandus, kalandus, metsandus",
+    u"Põllumajandus": u"Põllumajandus, kalandus, metsandus",
     u"Kultuur ": u"Kultuur",
-    u"Majandus ja tööstus": u"Majandus ja tööstus",
+    u"Majandus": u"Majandus ja tööstus",
     u"Tööhõive": u"Tööhõive",
-    u"Haridus ja teadus": u"Haridus ja teadus",
+    u"Haridus": u"Haridus ja teadus",
     u"Keskkond": u"Keskkond",
-    u"Rahandus ja eelarvestamine": u"Rahandus ja eelarvestamine",
+    u"Rahandus": u"Rahandus ja eelarvestamine",
     u"Geograafia": u"Geograafia",
     u"Tervis": u"Tervis",
     u"Riigiteenused": u"Riigiteenused",
-    u"Avatud valitsemine": u"Avatud valitsemine",
-    u"Rahvastiku andmed": u"Rahvastiku andmed",
+    u"Valitsemine": u"Avatud valitsemine",
+    u"Rahvastik": u"Rahvastiku andmed",
     u"Transport": u"Transport",
-    u"Sotsiaalvaldkond": u"Sotsiaalvaldkond",
+    u"Sotsiaal": u"Sotsiaalvaldkond",
 }
 
 

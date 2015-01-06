@@ -773,10 +773,7 @@ def get_package_fields(package, pkg_extras, dataset_type):
     secondary_themes = pkg_extras.get('theme-secondary')
     if secondary_themes:
         try:
-            # JSON for multiple values
-            secondary_themes = ', '.join(
-                [THEMES.get(theme, theme) \
-                 for theme in json.loads(secondary_themes)])
+            secondary_themes = secondary_themes_display_csv(secondary_themes)
         except ValueError:
             # string for single value
             secondary_themes = unicode(secondary_themes)
@@ -1260,7 +1257,7 @@ def secondary_themes(data):
 
         str1 = re.sub('(\[u\')', '', secondary_themes_raw)
         str1 = re.sub('(\', u\')', ', ', str1)
-        str1 = re.sub('[\["\]]', '', str1)
+        str1 = re.sub('[\["\]\{\}]', '', str1)
         str1 = re.sub('\'', '', str1)
         splitted = str1.split(',')
 
@@ -1269,6 +1266,30 @@ def secondary_themes(data):
         secondary_themes = set(secondary_themes_raw)
 
     return secondary_themes
+
+def secondary_themes_display_csv(secondary_themes_raw):
+    from ckanext.dgu.schema import THEMES
+
+    if isinstance(secondary_themes_raw, basestring):
+
+        str1 = re.sub('(\[u\')', '', secondary_themes_raw)
+        str1 = re.sub('(\', u\')', ', ', str1)
+        str1 = re.sub('[\["\]\{\}]', '', str1)
+        str1 = re.sub('\'', '', str1)
+        splitted = str1.split(',')
+
+        theme_set = set(map(lambda s: s.strip(), splitted))
+    else:
+        theme_set = set(secondary_themes_raw)
+
+    result_str = ''
+    for theme in theme_set:
+        theme_label = THEMES.get(theme, theme)
+        if (len(result_str) > 0):
+            result_str = '%s, ' % result_str
+        result_str = '%s%s' % (result_str, theme_label)
+
+    return result_str
 
 def free_tags(data):
     all_tags = [t['name'] for t in data.get('tags', [])]

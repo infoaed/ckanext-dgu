@@ -295,7 +295,7 @@ class DatasetForm(p.SingletonPlugin):
             'publish-restricted': [ignore_missing, bool, convert_to_extras],
 
             'theme-primary': [ignore_missing, unicode, convert_to_extras],
-            'theme-secondary': [ignore_missing, unicode, convert_to_extras],
+            'theme-secondary': [ignore_missing, convert_to_extras],
             'extras': default_schema.default_extras_schema(),
 
             # This is needed by the core CKAN update_resource, but isn't found by it because
