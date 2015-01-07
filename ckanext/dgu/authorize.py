@@ -45,11 +45,6 @@ def dgu_dataset_delete(context, data_dict):
     if user_obj.sysadmin:
         return {'success': True}
 
-    # Don't allow admin/editor to delete (apart from UKLP datasets which CAN be
-    # withdrawn by the appropriate admin/editor)
-    if package.extras.get('UKLP', '') != 'True':
-        return {'success': False}
-
     # Leave the core CKAN auth to work out the hierarchy stuff
     return ckan.logic.auth.delete.package_delete(context, data_dict)
 
