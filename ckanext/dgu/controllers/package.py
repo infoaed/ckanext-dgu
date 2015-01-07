@@ -52,21 +52,21 @@ class PackageController(ckan.controllers.package.PackageController):
                         action = 'withdrawn'
                         resource_type = get_from_flat_dict(pkg_dict['extras'], 'resource-type') + ' record'
                     else:
-                        action = 'deleted'
-                        resource_type = 'dataset'
-                    h.flash_success('Successfully %s %s.' \
-                                    % (action, resource_type))
+                        action = 'kustutatud'
+                        resource_type = 'Andmehulk'
+                    h.flash_success('%s edukalt %s.' \
+                                    % (resource_type, action))
                     self._form_save_redirect(package_name, 'edit')
                 except NotAuthorized:
-                    abort(401, _('Unauthorized to delete package %s') % id)
+                    abort(401, _('Andmehulga kustutamine pole lubatud: %s') % id)
                 except ObjectNotFound, e:
-                    abort(404, _('Package not found'))
+                    abort(404, _('Andmehulka ei leitud'))
                 except DataError:
                     abort(400, _(u'Integrity Error'))
                 except SearchIndexError, e:
                     abort(500, _(u'Unable to update search index.') + repr(e.args))
                 except ValidationError, e:
-                    abort(400, _('Unable to delete package.') + repr(e.error_dict))
+                    abort(400, _('Viga andmhulga kustutamisel.') + repr(e.error_dict))
             else:
                 abort(400, 'Parameter error')
 
@@ -75,7 +75,7 @@ class PackageController(ckan.controllers.package.PackageController):
         try:
             check_access('package_delete', context)
         except NotAuthorized, e:
-            abort(401, _('Unauthorized to delete package.'))
+            abort(401, _('Andmehulga kustutamine pole lubatud.'))
         package_type = self._get_package_type(id)
         self._setup_template_variables(context, {'id': id}, package_type=package_type)
         return render('package/delete.html')
