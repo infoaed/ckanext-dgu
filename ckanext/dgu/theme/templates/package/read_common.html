@@ -225,7 +225,7 @@
         <div class="panel-heading">${deleted} andmehulk</div>
       </py:with>
       <py:with vars="deleted=if_(h.dataset_type(c.pkg_extras)=='uklp','tühistatud','kustutatud')">
-        <div class="panel-body">See andmehulk on ${deleted}. Vaid administraatorid saavad seda näha.</div>
+        <div class="panel-body">See andmehulk on ${deleted}. Vaid süsteemi ja teabevaldaja administraatorid saavad seda näha.</div>
       </py:with>
     </div>
     ${package_content()}
