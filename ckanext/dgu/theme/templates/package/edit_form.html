@@ -140,7 +140,7 @@
         </select>
         <label style="margin-left: 20px;" class="" for="update_frequency-other" title="Täita kui uuendussageduseks on valitud 'sisesta muu'.">Muu:</label>
         <input class="form-control" style="width: 200px;" id="update_frequency-other" name="update_frequency-other" type="text" value="${data.get('update_frequency-other', '')}"/>
-        <span style="font-size:0.8em;color:#8C8C8C;">(täida kui valisid uuendussageduseks 'muu')</span>
+        <span style="font-size:0.75em;color:#8C8C8C;">(täida kui valisid 'muu sagedus')</span>
       </div><!-- /well -->
       <py:if test="errors.get('update_frequency')">
         <div class="alert alert-danger">${errors.get('update_frequency', '')}</div>

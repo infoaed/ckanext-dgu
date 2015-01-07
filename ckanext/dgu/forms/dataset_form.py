@@ -45,7 +45,7 @@ update_frequency = [('', ''),
                     ('annual', 'kord aastas'),
                     ('quarterly', 'kord kvartalis'),
                     ('monthly', 'kord kuus'),
-                    ('other', 'sisesta muu')]
+                    ('other', 'muu sagedus')]
 
 temporal_granularity = [("", ""),
                         ("year", "year"),
