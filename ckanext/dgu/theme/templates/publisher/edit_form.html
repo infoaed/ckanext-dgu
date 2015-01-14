@@ -182,7 +182,7 @@ ${h.prep_group_edit_data(data)}
 <div class="form-actions">
   <input id="save" class="btn btn-primary" name="save" type="submit" value="${_('Salvesta')}" />
   <py:if test="c.group">
-    <input id="cancel" class="btn href-action" name="cancel" type="reset" value="${_('Tagasi')}" action="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='read', id=c.group.name)}" />
+    <input id="cancel" class="btn href-action" name="cancel" type="reset" value="${_('Loobu')}" action="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='read', id=c.group.name)}" />
   </py:if>
 </div>
 
