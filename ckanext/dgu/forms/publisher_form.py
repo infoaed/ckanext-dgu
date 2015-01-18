@@ -117,7 +117,7 @@ class PublisherForm(SingletonPlugin):
             'contact-name': [ignore_missing, unicode, convert_to_extras],
             'contact-email': [ignore_missing, unicode, convert_to_extras],
             'contact-phone': [ignore_missing, unicode, convert_to_extras],
-            'category': [validate_publisher_category, convert_to_extras],
+            'category': [ignore_missing, convert_to_extras],
             'abbreviation': [ignore_missing, unicode, convert_to_extras],
         }
         schema.update( group_form_schema() )
