@@ -256,17 +256,26 @@ class DrupalAuthMiddleware(object):
 
         # see if user already exists in CKAN
         ckan_user_name = DrupalUserMapping.drupal_id_to_ckan_user_name(drupal_user_id)
+        ckan_user_about = u'Drupal username: %s' % user_properties['name']
+
         from ckan import model
         from ckan.model.meta import Session
+
+        looked_by_about = False
+
         query = Session.query(model.User).filter_by(name=unicode(ckan_user_name))
         if not query.count():
-            # need to add this user to CKAN
+            looked_by_about = True
+            log.debug('Drupal user not found in CKAN by Drupal user id, querying by \"about\" field ...')
+            query = Session.query(model.User).filter_by(about=unicode(ckan_user_about)).order_by('created desc')
 
+        if not query.count():
+            # need to add this user to CKAN
             date_created = datetime.datetime.fromtimestamp(int(user_properties['created']))
             user = model.User(
                 name=ckan_user_name,
                 fullname=unicode(user_dispname),  # NB may change in Drupal db
-                about=u'Drupal username: %s' % user_properties['name'],
+                about=ckan_user_about,
                 email=user_properties['mail'], # NB may change in Drupal db
                 created=date_created,
             )
@@ -275,7 +284,13 @@ class DrupalAuthMiddleware(object):
             log.debug('Drupal user added to CKAN as: %s', user.name)
         else:
             user = query.one()
-            log.debug('Drupal user found in CKAN: %s', user.name)
+            if looked_by_about:
+                log.info('Drupal user found in CKAN by \"about\" field! Going to change its name which is currently %s', user.name)
+                Session.execute("update \"user\" set name = '%s' where id = '%s'" % (ckan_user_name, user.id))
+                Session.commit()
+                log.info('User name changed to %s', ckan_user_name)
+            else:
+                log.info('Drupal user found in CKAN by Drupal id, its CKAN user name is: %s', ckan_user_name)
 
         self.set_roles(ckan_user_name, user_properties['roles'].values())
 
@@ -300,8 +315,8 @@ class DrupalAuthMiddleware(object):
             new_headers.extend(headers)
 
         # Tell app during this request that the user is logged in
-        environ['REMOTE_USER'] = user.name
-        log.debug('Set REMOTE_USER = %r', user.name)
+        environ['REMOTE_USER'] = ckan_user_name
+        log.debug('Set REMOTE_USER = %r', ckan_user_name)
 
     def set_roles(self, user_name, drupal_roles):
         '''Sets CKAN user roles based on the drupal roles.
