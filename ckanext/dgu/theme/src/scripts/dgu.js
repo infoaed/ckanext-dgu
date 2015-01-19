@@ -356,11 +356,11 @@ CKAN.Dgu = function($, my) {
         source: function(request, callback) {
           // here request.term is whole list of tags so need to get last
           var _realTerm = $.trim( request.term.split(',').pop() );
-          var url = CKAN.SITE_URL + '/api/2/util/tag/autocomplete?incomplete=' + _realTerm;
+          var url = CKAN.SITE_URL + '/api/action/tag_autocomplete?vocabulary_id=eurovoc&query=' + _realTerm;
           $.getJSON(url, function(data) {
             // data = { ResultSet: { Result: [ {Name: tag} ] } } (Why oh why?)
-            var tags = $.map(data.ResultSet.Result, function(value, idx) {
-              return value.Name;
+            var tags = $.map(data.result, function(value, idx) {
+              return value;
             });
             callback(
               $.ui.autocomplete.filter(tags, _realTerm)

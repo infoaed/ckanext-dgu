@@ -501,7 +501,7 @@
         Soovitame kasutada <a href="http://eurovoc.europa.eu/drupal/?q=et/navigation&amp;cl=et" target="_blank">EuroVoc sõnastikku</a>.
     </p>
     <div class="form-group">
-      <input class="form-control long" id="tag_string" name="tag_string" size="60" type="text"
+      <input class="form-control long autocomplete-tag" data-tagcomplete-queryparam="query" data-tagcomplete-url="/api/action/tag_autocomplete" id="tag_string" name="tag_string" size="60" type="text"
            value="${data.get('tag_string') or ', '.join(h.free_tags(data))}" />
     </div>
 </fieldset>
