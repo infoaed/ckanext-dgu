@@ -1503,7 +1503,7 @@ def search_facets_unselected(facet_keys,sort_by='count'):
         params_to_keep = dict(facet_params_to_keep())
         del params_to_keep['publisher']
         link = dgu_drill_down_url(params_to_keep.items(), {'parent_publishers':request.params.get('publisher','')})
-        unselected.append( (link,'Include sub-publishers',None) )
+        unselected.append( (link,'Kaasa arvatud alam-teabevaldajad',None) )
     return unselected
 
 def search_facets_selected(facet_keys):
@@ -1519,7 +1519,7 @@ def search_facets_selected(facet_keys):
         params_to_keep = dict(facet_params_to_keep())
         del params_to_keep['parent_publishers']
         link = dgu_drill_down_url(params_to_keep.items(), {'publisher':request.params.get('parent_publishers','')})
-        selected.append( (link,'Include sub-publishers',None) )
+        selected.append( (link,'Kaasa arvatud alam-teabevaldajad',None) )
     return selected
 
 def search_facet_text(key,value):
