@@ -694,16 +694,22 @@ def get_resource_fields(resource, pkg_extras):
     # calculate displayable field values
     return  DisplayableFields(field_names, field_value_map, pkg_extras)
 
-def get_package_fields(package, pkg_extras, dataset_type, pkg_dict):
+def get_package_fields(package, pkg_extras, dataset_type, pkg_tags):
     from ckan.lib.base import h
     from ckan.lib.field_types import DateType
     from ckanext.dgu.schema import GeoCoverageType
     from ckanext.dgu.lib.resource_helpers import DatasetFieldNames, DisplayableFields
     from ckanext.dgu.schema import THEMES
 
-    log.info('______________________________________ pkg_dict start')
-    log.info('%r', pkg_dict)
-    log.info('______________________________________ pkg_dict end')
+    log.info('______________________________________ pkg_tags start')
+    log.info('%r', pkg_tags)
+    log.info('______________________________________ pkg_tags end')
+
+    pkg_has_tags = False
+    if pkg_tags:
+        pkg_has_tags = True
+
+    log.info('__________________ pkg_has_tags = %s', pkg_has_tags)
 
     field_names = DatasetFieldNames()
     field_names_display_only_if_value = ['date_update_future', 'precision', 'update_frequency', 'temporal_granularity', 'taxonomy_url'] # (mostly deprecated) extra field names, but display values anyway if the metadata is there

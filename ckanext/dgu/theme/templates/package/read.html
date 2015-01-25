@@ -108,7 +108,7 @@
               <td class="value">${metadata['date-added-computed']}</td>
             </tr>
           </py:with>
-          <tr py:for="field_dict, label_attributes, value_attributes in h.get_package_fields(c.pkg, dict(c.pkg_extras),h.dataset_type(c.pkg_extras),c.pkg_dict)">
+          <tr py:for="field_dict, label_attributes, value_attributes in h.get_package_fields(c.pkg, dict(c.pkg_extras),h.dataset_type(c.pkg_extras),c.pkg_dict.get('tags'))">
             <td class="key" py:attrs="label_attributes">${field_dict.get('label') or field_dict['name']}</td>
             <td class="value" py:attrs="value_attributes">${h.get_package_field_disp_value(field_dict.get('value')) or 'määramata'}</td>
           </tr>
