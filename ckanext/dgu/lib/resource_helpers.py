@@ -1,7 +1,4 @@
-import logging
 import re
-
-log = logging.getLogger(__name__)
 
 class FieldNames:
     def add(self, field_names):
@@ -58,5 +55,4 @@ class DisplayableFields:
             if 'value_title' in field:
                 value_attributes['title'] = field['value_title']
             label_attributes = {'title': field['label_title']} if 'label_title' in field else {}
-            log.info('_________ field: %r', field)
             yield (field, label_attributes, value_attributes)
