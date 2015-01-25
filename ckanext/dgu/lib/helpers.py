@@ -722,7 +722,7 @@ def get_package_fields(package, pkg_extras, dataset_type, pkg_tags):
     log.info('__________________ tags_csv = %s', tags_csv)
 
     field_names = DatasetFieldNames()
-    field_names_display_only_if_value = ['date_update_future', 'precision', 'update_frequency', 'temporal_granularity', 'taxonomy_url'] # (mostly deprecated) extra field names, but display values anyway if the metadata is there
+    field_names_display_only_if_value = ['date_update_future', 'precision', 'update_frequency', 'temporal_granularity', 'taxonomy_url', 'tags'] # (mostly deprecated) extra field names, but display values anyway if the metadata is there
     if c.is_an_official:
         field_names_display_only_if_value.append('external_reference')
     # work out the dataset_type
@@ -809,6 +809,7 @@ def get_package_fields(package, pkg_extras, dataset_type, pkg_tags):
 
     field_value_map = {
         # field_name : {display info}
+        'state': {'label': 'Võtmesõnad', 'value': tags_csv},
         'state': {'label': 'Staatus', 'value': c.pkg.state},
         'harvest-url': {'label': 'Andmekorje URL', 'value': harvest_url},
         'harvest-date': {'label': 'Andmekorje kuupäev', 'value': harvest_date},
