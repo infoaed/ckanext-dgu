@@ -701,26 +701,6 @@ def get_package_fields(package, pkg_extras, dataset_type, pkg_tags):
     from ckanext.dgu.lib.resource_helpers import DatasetFieldNames, DisplayableFields
     from ckanext.dgu.schema import THEMES
 
-    log.info('______________________________________ pkg_tags start')
-    log.info('%r', pkg_tags)
-    log.info('______________________________________ pkg_tags end')
-
-    pkg_has_tags = False
-    if pkg_tags:
-        pkg_has_tags = True
-
-    log.info('__________________ pkg_has_tags = %s', pkg_has_tags)
-
-    tags_csv = ''
-    for tag_dict in pkg_tags:
-        tag_value = tag_dict.get('display_name', tag_dict.get('name'))
-        if tag_value:
-            if len(tags_csv) > 0:
-                tags_csv = tags_csv + ', '
-            tags_csv = tags_csv + tag_value
-
-    log.info('__________________ tags_csv = %s', tags_csv)
-
     field_names = DatasetFieldNames()
     field_names_display_only_if_value = ['date_update_future', 'precision', 'update_frequency', 'temporal_granularity', 'taxonomy_url'] # (mostly deprecated) extra field names, but display values anyway if the metadata is there
     if c.is_an_official:
@@ -807,6 +787,18 @@ def get_package_fields(package, pkg_extras, dataset_type, pkg_tags):
                 update_frequency = freq_desc
                 break
 
+    tags_csv = ''
+    if pkg_tags:
+        for tag_dict in pkg_tags:
+            tag_value = tag_dict.get('display_name', tag_dict.get('name'))
+            if tag_value:
+                if len(tags_csv) > 0:
+                    tags_csv = tags_csv + ', '
+                tags_csv = tags_csv + tag_value
+
+    if len(tags_csv) > 0:
+        field_names.add(['tags'])
+
     field_value_map = {
         # field_name : {display info}
         'tags': {'label': u'Võtmesõnad', 'value': unicode(tags_csv)},
@@ -860,9 +852,6 @@ def get_package_fields(package, pkg_extras, dataset_type, pkg_tags):
     for field_name in field_names_display_only_if_value:
         if pkg_extras.get(field_name):
             field_names.add([field_name])
-
-    if len(tags_csv) > 0:
-        field_names.add(['tags'])
 
     # calculate displayable field values
     return DisplayableFields(field_names, field_value_map, pkg_extras)
