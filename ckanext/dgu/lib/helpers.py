@@ -716,8 +716,8 @@ def get_package_fields(package, pkg_extras, dataset_type, pkg_tags):
         tag_value = tag_dict.get('display_name', tag_dict.get('name'))
         if tag_value:
             if len(tags_csv) > 0:
-                tags_csv = tags_csv % ', '
-            tags_csv = tags_csv % tag_value
+                tags_csv = tags_csv + ', '
+            tags_csv = tags_csv + tag_value
 
     log.info('__________________ tags_csv = %s', tags_csv)
 
