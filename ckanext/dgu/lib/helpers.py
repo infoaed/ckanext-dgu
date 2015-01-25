@@ -711,6 +711,16 @@ def get_package_fields(package, pkg_extras, dataset_type, pkg_tags):
 
     log.info('__________________ pkg_has_tags = %s', pkg_has_tags)
 
+    tags_csv = ''
+    for tag_dict in pkg_tags:
+        tag_value = tag_dict.get('display_name', tag_dict.get('name'))
+        if tag_value:
+            if len(tags_csv) > 0:
+                tags_csv = tags_csv % ', '
+            tags_csv = tags_csv % tag_value
+
+    log.info('__________________ tags_csv = %s', tags_csv)
+
     field_names = DatasetFieldNames()
     field_names_display_only_if_value = ['date_update_future', 'precision', 'update_frequency', 'temporal_granularity', 'taxonomy_url'] # (mostly deprecated) extra field names, but display values anyway if the metadata is there
     if c.is_an_official:
