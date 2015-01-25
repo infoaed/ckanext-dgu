@@ -701,6 +701,10 @@ def get_package_fields(package, pkg_extras, dataset_type):
     from ckanext.dgu.lib.resource_helpers import DatasetFieldNames, DisplayableFields
     from ckanext.dgu.schema import THEMES
 
+    log.info('______________________________________ package start')
+    log.info('%r', package)
+    log.info('______________________________________ package end')
+
     field_names = DatasetFieldNames()
     field_names_display_only_if_value = ['date_update_future', 'precision', 'update_frequency', 'temporal_granularity', 'taxonomy_url'] # (mostly deprecated) extra field names, but display values anyway if the metadata is there
     if c.is_an_official:
