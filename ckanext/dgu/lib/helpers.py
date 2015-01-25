@@ -809,7 +809,7 @@ def get_package_fields(package, pkg_extras, dataset_type, pkg_tags):
 
     field_value_map = {
         # field_name : {display info}
-        'tags': {'label': 'Keywords', 'value': unicode(tags_csv)},
+        'tags': {'label': unicode('Võtmesõnad'), 'value': unicode(tags_csv)},
         'state': {'label': 'Staatus', 'value': c.pkg.state},
         'harvest-url': {'label': 'Andmekorje URL', 'value': harvest_url},
         'harvest-date': {'label': 'Andmekorje kuupäev', 'value': harvest_date},
