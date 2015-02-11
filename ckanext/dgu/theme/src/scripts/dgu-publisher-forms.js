@@ -13,15 +13,12 @@ CKAN.Dgu = function($, my) {
 
  my.setupPublisherUserAutocomplete = function(elements) {
     elements.autocomplete({
-      minLength: 2,
+      minLength: 11,
       source: function(request, callback) {
         var url = '/api/2/util/user/autocomplete?q=' + request.term;
         $.getJSON(url, function(data) {
           $.each(data, function(idx, userobj) {
             var label = '';userobj.name;
-            if (userobj.fullname) {
-              label += userobj.fullname;
-            }
             label += ' [' + userobj.name + ']';
             if (userobj.about) {
             	var prefix = 'Drupal username: ';
