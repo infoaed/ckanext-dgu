@@ -11,12 +11,12 @@
   about=""
   py:strip="">
 
-  <py:def function="page_title">${c.pkg_dict.get('title', c.pkg_dict['name'])} - Andmehulghad</py:def>
+  <py:def function="page_title">${c.pkg_dict.get('title', c.pkg_dict['name'])} - Andmehulgad</py:def>
 
   <xi:include href="../inventory/inventory_util.html" />
 
   <py:match path="breadcrumbs">
-    <li><a href="/data/search">Andmehulghad</a></li>
+    <li><a href="/data/search">Andmehulgad</a></li>
     <li><a href="${h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}">${c.pkg_dict.get('title', c.pkg_dict['name'])}</a></li>
   </py:match>
 
