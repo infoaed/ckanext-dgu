@@ -86,10 +86,10 @@
       <span class="js-tooltip" data-placement="right" title="Andmehulga unikaalne identifikaator. Võiks olla inimloetav, sõnad eraldatult sidekriipsuga, vältida täpitähti. Näiteks: liiklusonnetuste-statistika-2010 or kov-kulutused-2012.">
         Loo andmehulga URL: <i class="icon-info-sign"></i>
       </span>
-      &nbsp;&nbsp;<span style="font-style: italic;" py:if="not h.is_package_edit_form(data)" class="js-url-is-valid">&nbsp;</span>
+      &nbsp;&nbsp;<span style="font-style: italic;" py:if="not h.is_package_edit_form(data) or h.is_sysadmin()" class="js-url-is-valid">&nbsp;</span>
     </label>
     <div class="input-group">
-      <span class="input-group-addon">/dataset/</span><input py:attrs="{'readonly':'readonly'} if h.is_package_edit_form(data) else {}" class="field_req js-url-input form-control" id="name" maxlength="100" name="name" type="text" value="${data.get('name', '')}"/>
+      <span class="input-group-addon">/dataset/</span><input py:attrs="{'readonly':'readonly'} if (h.is_package_edit_form(data) and not h.is_sysadmin()) else {}" class="field_req js-url-input form-control" id="name" maxlength="100" name="name" type="text" value="${data.get('name', '')}"/>
     </div>
   </div>
   <py:if test="errors.get('name', '')">
