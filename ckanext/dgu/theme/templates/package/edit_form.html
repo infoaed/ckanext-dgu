@@ -43,7 +43,7 @@
 
 <div id="form-tabs" class="tabbable tabs-left">
   <div class="row">
-    <div class="col-lg-3 col-sm-4">
+    <div class="col-lg-3 col-sm-4" id="dataset-edit-tabs-ul">
       <ul class="nav nav-pills nav-stacked" py:with="
           boilerplate={'disabled':'disabled'} if h.use_wizard(data, errors) else {};
           classes = 'disabled' if h.use_wizard(data, errors) else '';
@@ -59,7 +59,7 @@
         <li py:if="h.is_sysadmin()"><a data-toggle="tab" class="${classes}" data-hash="tab-state" id="section-state" py:attrs="boilerplate" href="#section-state-field">Staatus</a></li>
       </ul>
     </div>
-    <div class="col-lg-9 col-sm-8">
+    <div class="col-lg-9 col-sm-8" id="dataset-edit-workarea">
 
   <div class="tab-content">
 <fieldset class="tab-pane boxed whitebox fade active in" id="section-name-fields">
