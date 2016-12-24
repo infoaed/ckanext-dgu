@@ -123,13 +123,13 @@ ${h.top_level_init()}
             </ul>
           </div>
           <ul id="toolbar-user">
-            <li class="logout"><a href="${h.url_for('/user')}"><img src="/assets/img/icon-log-in-avatar.png" /> Log in</a></li>
+            <li class="login"><a href="${h.url_for('/user')}"><img src="/assets/img/icon-log-in-avatar.png" /> Log in</a></li>
           </ul>
         </py:when>
         <py:otherwise>
           <ul id="toolbar-user">
             <li class="account first">
-              <a href="${h.url_for('/user')}" title="User account">User: <strong>${c.userobj.display_name}</strong></a>
+              <a href="${h.url_for('/user')}" title="User account" disabled="disabled">User: <strong>${c.userobj.display_name}</strong></a>
             </li>
             <li class="logout last">
               <a href="${if_('dgu_drupal_auth' in config['ckan.plugins'],'/user/logout',h.url_for('/data/user/logout'))}">Log out</a>
