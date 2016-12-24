@@ -104,24 +104,41 @@ ${h.top_level_init()}
      </div>
   </div>
 
-  <div py:if="bool(c.userobj)" id="toolbar" class="toolbar overlay-displace-top clearfix toolbar-processed">
+  <div id="toolbar" class="toolbar overlay-displace-top clearfix">
     <div class="toolbar-menu clearfix">
       <ul id="toolbar-home">
-        <li class="home first last">
-          <a href="/" title="Home"><span class="home-link">Avaleht</span></a>
-        </li>
+        <li class="home first last"><a href="${h.url_for('/')}" title="Home"><span class="home-link">Home</span></a></li>
       </ul>
-      <ul id="toolbar-user">
-        <li class="account first">
-          <a href="/user" title="User account">Kasutaja <strong>${c.userobj.display_name}</strong></a>
-        </li>
-        <li class="logout last">
-          <a href="${if_('dgu_drupal_auth' in config['ckan.plugins'],'/user/logout',h.url_for('/data/user/logout'))}">Logi välja</a>
-        </li>
-      </ul>
+      <py:choose test="bool(c.userobj)">
+        <py:when test="False">
+          <div class="menulanguage">
+            <ul class="language-switcher-locale-url">
+               <py:for each="locale in h.get_available_locales()">
+                <li class="${h.lang()} language-link${if_(h.lang()==locale,' active')}">
+                      <a class="language-link${if_(h.lang()==locale,' active')}" href="${h.full_current_url().replace('/'+h.lang(), '/'+str(locale), 1)}" lang="${locale}">
+                        ${locale.display_name.capitalize() or locale.english_name}
+                     </a>
+                  </li>
+               </py:for>
+            </ul>
+          </div>
+          <ul id="toolbar-user">
+            <li class="logout"><a href="${h.url_for('/user')}"><img src="/assets/img/icon-log-in-avatar.png" /> Log in</a></li>
+          </ul>
+        </py:when>
+        <py:otherwise>
+          <ul id="toolbar-user">
+            <li class="account first">
+              <a href="${h.url_for('/user')}" title="User account">User: <strong>${c.userobj.display_name}</strong></a>
+            </li>
+            <li class="logout last">
+              <a href="${if_('dgu_drupal_auth' in config['ckan.plugins'],'/user/logout',h.url_for('/data/user/logout'))}">Log out</a>
+            </li>
+          </ul>
+          </py:otherwise>
+      </py:choose>
     </div>
-    <div class="toolbar-drawer clearfix">
-    </div>
+    <div class="toolbar-drawer clearfix"></div>
   </div>
 
   <div id="blackbar" class="${if_(h.check_access('package_create'),'with-publisher','without-publisher')}">
