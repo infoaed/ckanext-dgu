@@ -658,13 +658,13 @@ CKAN.Dgu.UrlEditor = (function() {
       this.lastSlug = slug;
       if (this.updateTimer) { clearTimeout(this.updateTimer); }
       if (slug.length<2) {
-        this.validMsg.html('<span style="font-weight: bold; color: #444;">URL on liiga lühike.</span>');
+        this.validMsg.html('<span style="font-weight: bold; color: #444;">URL is too short.</span>');
       }
       else if (slug==this.originalUrl) {
-        this.validMsg.html('<span style="font-weight: bold; color: #000;">See on praegune URL.</span>');
+        this.validMsg.html('<span style="font-weight: bold; color: #000;">This is the current URL.</span>');
       }
       else {
-        this.validMsg.html('<span style="color: #777;">Kontrollin...</span>');
+        this.validMsg.html('<span style="color: #777;">Checking...</span>');
         var self = this;
         this.updateTimer = setTimeout(function () {
           self.checkSlugIsValid(slug);
@@ -693,9 +693,9 @@ CKAN.Dgu.UrlEditor = (function() {
   /* Called when the slug-validator gets back to us */
   UrlEditor.prototype.apiCallback = function(data) {
       if (data.valid) {
-        this.validMsg.html('<span style="font-weight: bold; color: #0c0">See URL on vaba!</span>');
+        this.validMsg.html('<span style="font-weight: bold; color: #0c0">This URL is available!</span>');
       } else {
-        this.validMsg.html('<span style="font-weight: bold; color: #c00">See URL on juba võetud!</span>');
+        this.validMsg.html('<span style="font-weight: bold; color: #c00">This URL is not available.</span>');
       }
   };
 

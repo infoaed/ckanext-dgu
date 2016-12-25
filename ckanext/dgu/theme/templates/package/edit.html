@@ -3,12 +3,12 @@
   xmlns:xi="http://www.w3.org/2001/XInclude"
   py:strip="">
 
-  <py:def function="page_title">${c.pkg.title or c.pkg.name} - Muutmine</py:def>
+  <py:def function="page_title">${c.pkg.title or c.pkg.name} - Edit</py:def>
 
   <py:match path="breadcrumbs">
-    <li><a href="/data/search">Andmehulgad</a></li>
+    <li><a href="/data/search">Datasets</a></li>
     <li><a href="${h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}">${c.pkg_dict.get('title', c.pkg_dict['name'])}</a></li>
-    <li><a href="${h.url_for(controller='package',action='edit',id=c.pkg_dict['name'])}">Muutmine</a></li>
+    <li><a href="${h.url_for(controller='package',action='edit',id=c.pkg_dict['name'])}">Edit</a></li>
   </py:match>
 
   <py:def function="optional_head">
@@ -23,7 +23,7 @@
   </py:def>
 
   <div py:match="content" class="dataset-edit-form">
-    <h1>Andmehulga muutmine</h1>
+    <h1>Dataset Editor</h1>
     ${c.form}
   </div>
 

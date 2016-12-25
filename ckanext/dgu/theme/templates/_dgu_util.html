@@ -1,10 +1,4 @@
-﻿<html
-  xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:i18n="http://genshi.edgewall.org/i18n"
-  xmlns:py="http://genshi.edgewall.org/"
-  xmlns:xi="http://www.w3.org/2001/XInclude"
-  py:strip=""
-  >
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:i18n="http://genshi.edgewall.org/i18n" xmlns:py="http://genshi.edgewall.org/" xmlns:xi="http://www.w3.org/2001/XInclude" py:strip="">
 
   <!--! Herein can be found generic helper methods for a whole bunch of common
         templating issues -->
@@ -50,13 +44,13 @@
   <!-- pure one-liner to avoid whitespace glitches -->
   <py:def function="if_(testValue,stringIfTrue,stringIfFalse='')"><py:if test="testValue">${stringIfTrue}</py:if><py:if test="not testValue">${stringIfFalse}</py:if></py:def>
 
-  <div py:def="search_form(mini=False, placeholder='Otsi andmehulki...', set_fields=None, extra_options=None)" class="search-area">
+  <div py:def="search_form(mini=False, placeholder=_('Search for datasets...'), set_fields=None, extra_options=None)" class="search-area">
     <div class="clearfix dgu-equal-height" data-selector=".auto-height">
       <div class="${if_(mini,'mini','left')}">
         <div class="left-inner auto-height">
         <form class="form-search" action="${h.url_for(controller='package', action='search')}" method="GET">
           <div class="input-group">
-            <input class="form-control" type="text" name="q" value="${c.q}" results="0" placeholder="${placeholder}" />
+            <input class="form-control" type="text" name="q" value="${c.q}" results="0" placeholder="${placeholder}"/>
             <span class="input-group-btn">
               <button type="submit" class="btn btn-default">
                 <i class="icon-search"></i>
@@ -70,11 +64,11 @@
           </py:if>
           <py:if test="set_fields">
             <py:for each="(k, v) in set_fields.items()">
-              <input type="hidden" name="${k}" value="${v}" />
+              <input type="hidden" name="${k}" value="${v}"/>
             </py:for>
           </py:if>
           <py:if test="request.params.get('ext_bbox','')">
-            <input type="hidden" id="ext_bbox" name="ext_bbox" value="${request.params.get('ext_bbox','')}" />
+            <input type="hidden" id="ext_bbox" name="ext_bbox" value="${request.params.get('ext_bbox','')}"/>
           </py:if>
         </form>
         <py:if test="extra_options">
@@ -87,10 +81,10 @@
         <div class="chevron"></div>
         <py:if test="not c.query_error" py:with="count = c.page.item_count if c.page not in (None, '') else c.package_count or 0">
           <div class="result-count">${count}</div>
-          <div class="result-count-footer">Andmehulk${if_(count!=1,'a')}</div>
+          <div class="result-count-footer">${if_(count==1,_('Dataset'),_('Datasets'))}</div>
         </py:if>
         <py:if test="c.query_error">
-          <div class="result-count-footer">Otsinguviga</div>
+          <div class="result-count-footer">Search Error</div>
         </py:if>
         </div>
       </div>
@@ -140,24 +134,18 @@
                    <span style="display: none;" class="js-data-extent">${','.join(h.get_wms_info_extent(package))}</span>
                    ${map_preview_button_direct(package)}
                    <py:with vars="in_basket=package.id in session.get('preview_list',[])">
-                     <span
-                          class="preview-add js-dataset-${package.id}-add"
-                          style="${if_(in_basket,'display: none;')}">
-                            <button data-id="${package.id}" class="btn btn-default btn-xs btn-info btn-preview btn-basket"><i class="icon-shopping-cart"></i>&nbsp; Lisa eelvaate loetellu</button>
+                     <span class="preview-add js-dataset-${package.id}-add" style="${if_(in_basket,'display: none;')}">
+                            <button data-id="${package.id}" class="btn btn-default btn-xs btn-info btn-preview btn-basket"><i class="icon-shopping-cart"></i>&nbsp;Add to Preview List</button>
                      </span>
-                     <span
-                          class="preview-remove js-dataset-${package.id}-remove"
-                          style="${if_(not in_basket,'display: none;')}">
-                          <button data-id="${package.id}" class="btn btn-danger btn-xs btn-preview btn-basket"><i class="icon-shopping-cart"></i>&nbsp; Eemalda loetelust</button>
+                     <span class="preview-remove js-dataset-${package.id}-remove" style="${if_(not in_basket,'display: none;')}">
+                          <button data-id="${package.id}" class="btn btn-danger btn-xs btn-preview btn-basket"><i class="icon-shopping-cart"></i>&nbsp;Remove from List</button>
                      </span>
                    </py:with>
                  </div>
                </py:if>
              </div>
              <div class="clearfix clearfix-ie7"> &nbsp;</div>
-             <a class="view-data-link" href="${h.url_for(controller='package', action='read', id=package.get('name'))}">
-               Vaata andmeid
-             </a>
+             <a class="view-data-link" href="${h.url_for(controller='package', action='read', id=package.get('name'))}">View Data</a>
            </div>
            </div>
          </div>
@@ -168,12 +156,12 @@
 
   <py:def function="feedback_summary(package,render_title=True,large=False)">
     <div class="feedback-summary ${if_(large,'large')}" py:with="comment_dict=h.feedback_comment_counts(package)">
-      <div py:if="render_title" class="pull-left feedback-summary-title">Tagasiside:</div>
-      <a class="js-tooltip" data-toggle="tooltip" data-placement="bottom" title="Majanduskasv" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController',action='view',id=package.name)}"><i class="icon-eur"></i>  ${comment_dict['economic']}</a>
-      <a class="js-tooltip" data-toggle="tooltip" data-placement="bottom" title="Sotsiaalne kasv" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController',action='view',id=package.name)}"><i class="icon-group"></i>  ${comment_dict['social']}</a>
-      <a class="js-tooltip" data-toggle="tooltip" data-placement="bottom" title="Efektiivsed avalikud teenused" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController',action='view',id=package.name)}"><i class="icon-road"></i>  ${comment_dict['effective']}</a>
-      <a class="js-tooltip" data-toggle="tooltip" data-placement="bottom" title="Potentsiaalsed lingid teistele andmehulkadele" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController',action='view',id=package.name)}"><i class="icon-code-fork"></i>  ${comment_dict['linked']}</a>
-      <a class="js-tooltip" data-toggle="tooltip" data-placement="bottom" title="Muud olulised andmed" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController',action='view',id=package.name)}"><i class="icon-quote-left"></i>  ${comment_dict['other']}</a>
+      <div py:if="render_title" class="pull-left feedback-summary-title">Feedback:</div>
+      <a class="js-tooltip" data-toggle="tooltip" data-placement="bottom" title="Economic Growth" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController',action='view',id=package.name)}"><i class="icon-eur"></i>  ${comment_dict['economic']}</a>
+      <a class="js-tooltip" data-toggle="tooltip" data-placement="bottom" title="Social Growth" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController',action='view',id=package.name)}"><i class="icon-group"></i>  ${comment_dict['social']}</a>
+      <a class="js-tooltip" data-toggle="tooltip" data-placement="bottom" title="Effective Public Services" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController',action='view',id=package.name)}"><i class="icon-road"></i>  ${comment_dict['effective']}</a>
+      <a class="js-tooltip" data-toggle="tooltip" data-placement="bottom" title="Potential links to other datasets" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController',action='view',id=package.name)}"><i class="icon-code-fork"></i>  ${comment_dict['linked']}</a>
+      <a class="js-tooltip" data-toggle="tooltip" data-placement="bottom" title="Other Benefits" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController',action='view',id=package.name)}"><i class="icon-quote-left"></i>  ${comment_dict['other']}</a>
       <div class="clearfix"></div>
     </div>
     <div class="clearfix"></div>
@@ -209,10 +197,10 @@
         <py:if test="more_button is not None and len(unselected)>5">
           <a id="${more_button}" class="facet-expand-collapse" href="#">
             <div class="expander">
-              <i class="icon-double-angle-down"></i>&nbsp; rohkem &nbsp;<i class="icon-double-angle-down"></i>
+              <i class="icon-double-angle-down"></i>&nbsp; more &nbsp;<i class="icon-double-angle-down"></i>
             </div>
             <div class="collapser">
-              <i class="icon-double-angle-up"></i>&nbsp; vähem &nbsp;<i class="icon-double-angle-up"></i>
+              <i class="icon-double-angle-up"></i>&nbsp; less &nbsp;<i class="icon-double-angle-up"></i>
             </div>
           </a>
         </py:if>
@@ -229,28 +217,28 @@
         </a>
       </div>
       ${facet_box(
-          'Teabevaldaja',
+          _('Publisher'),
           h.search_facets_unselected(['publisher']),
           h.search_facets_selected(['publisher']),
-          'Rohkem teabevaldaja filtreid pole.',
+          _('No more publisher filters.'),
           more_button='more-publishers-button'
       )}
       <div class="facet-divider"></div>
       <div class="facets-theme-primary">
       ${facet_box(
-          'Teema',
+          _('Theme'),
           h.search_facets_unselected(['theme-primary']),
           h.search_facets_selected(['theme-primary']),
-          'Rohkem teema filtreid pole.',
+          _('No further theme filters to apply.'),
           more_button='more-prithemes-button'
       )}
       </div>
       <div class="facet-divider"></div>
       ${facet_box(
-          'Formaat',
+          _('Format'),
           h.search_facets_unselected(['res_format']),
           h.search_facets_selected(['res_format']),
-          'Rohkem formaadi filtreid pole.',
+          _('No further format filters to apply.'),
           more_button='more-formats-button'
       )}
     </div><!-- /facet-filters -->
@@ -259,23 +247,19 @@
   <!--! Contact details -->
   <py:def function="contact_details(name, email, phone, web_url, web_name)">
         <py:choose test="">
-          <li py:when="email and '@' in email">E-mail:
-            <a href="mailto:${email}">${email}</a>
+          <li py:when="email and '@' in email">E-mail:<a href="mailto:${email}">${email}</a>
           </li>
-          <li py:when="email and 'http' in email">Kontaktivorm:
-            <a href="${email}">${email}</a>
+          <li py:when="email and 'http' in email">Web contact form: <a href="${email}">${email}</a>
           </li>
-          <li py:when="email">E-mail:
-            ${email}
-          </li>
+          <li py:when="email">Email:
+            ${email}</li>
         </py:choose>
-        <li py:if="phone">Telefon:
-          ${phone}
-        </li>
+        <li py:if="phone">Phone:
+          ${phone}</li>
         <li py:if="web_url">Web:
           <a href="${web_url}">${h.truncate(web_name or web_url, 32)}</a>
         </li>
-        <p py:if="not (email or phone or web_url)"><em>Detailinfo puudub</em></p>
+        <p py:if="not (email or phone or web_url)"><em>No details supplied</em></p>
   </py:def>
 
   <py:def function="format_box(format_name)">

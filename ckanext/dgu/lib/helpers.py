@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 """
 These helper functions are made available via the h variable which
@@ -722,7 +722,7 @@ def get_package_fields(package, pkg_extras, dataset_type, pkg_tags):
             harvest_source = get_action('harvest_source_for_a_dataset')(context,{'id':package.id})
             harvest_url = harvest_source['url']
         except NotFound:
-            harvest_url = 'Metadata not available'
+            harvest_url = _('Metadata not available')
         harvest_object_id = pkg_extras.get('harvest_object_id')
         if harvest_object_id:
             try:
@@ -734,7 +734,7 @@ def get_package_fields(package, pkg_extras, dataset_type, pkg_tags):
                 if harvest_object:
                     harvest_date = harvest_object.gathered.strftime("%d/%m/%Y %H:%M")
                 else:
-                    harvest_date = 'Metadata not available'
+                    harvest_date = _('Metadata not available')
                 harvest_guid = pkg_extras.get('guid')
                 harvest_source_reference = pkg_extras.get('harvest_source_reference')
                 if harvest_source_reference and harvest_source_reference != harvest_guid:
@@ -801,52 +801,29 @@ def get_package_fields(package, pkg_extras, dataset_type, pkg_tags):
 
     field_value_map = {
         # field_name : {display info}
-        'tags': {'label': u'Võtmesõnad', 'value': unicode(tags_csv)},
-        'state': {'label': 'Staatus', 'value': c.pkg.state},
-        'harvest-url': {'label': 'Andmekorje URL', 'value': harvest_url},
-        'harvest-date': {'label': 'Andmekorje kuupäev', 'value': harvest_date},
-        'harvest-guid': {'label': 'Andmekorje GUID', 'value': harvest_guid},
-        'bbox': {'label': 'Geogr. ulatus', 'value': t.literal('Laiuskraad: %s&deg; to %s&deg; <br/> Pikkuskraad: %s&deg; to %s&deg;' % (pkg_extras.get('bbox-north-lat'), pkg_extras.get('bbox-south-lat'), pkg_extras.get('bbox-west-long'), pkg_extras.get('bbox-east-long'))) },
-        'categories': {'label': 'ONS kategooria', 'value': pkg_extras.get('categories')},
-        'date_updated': {'label': 'Andmed viimati muudetud', 'value': DateType.db_to_form(pkg_extras.get('date_updated', ''))},
-        'date_released': {'label': 'Andmed viimati väljastatud', 'value': DateType.db_to_form(pkg_extras.get('date_released', ''))},
-        'temporal_coverage': {'label': 'Ajaline periood', 'value': temporal_coverage},
-        'geographic_coverage': {'label': 'Geograafiline kaetus', 'value': GeoCoverageType.strip_off_binary(pkg_extras.get('geographic_coverage', ''))},
-        'resource-type': {'label': 'Gemini2 ressursi tüüp', 'value': pkg_extras.get('resource-type')},
-        'spatial-data-service-type': {'label': 'Gemini2 teenuse tüüp', 'value': pkg_extras.get('spatial-data-service-type')},
-        'access_constraints': {'label': 'Ligipääsu piirangud', 'value': render_json(pkg_extras.get('access_constraints'))},
-        'taxonomy_url': {'label': 'Taksonoomia URL', 'value': taxonomy_url},
-        'theme': {'label': 'Teema', 'value': primary_theme},
-        'theme-secondary': {'label': 'Lisateema(d)', 'value': secondary_themes},
-        'update_frequency': {'label': 'Uuendussagedus', 'value': update_frequency},
-        'metadata-language': {'label': 'Metaandmete keel', 'value': pkg_extras.get('metadata-language', '').replace('eng', 'English')},
-        'metadata-date': {'label': 'Metaandmete kuupäev', 'value': DateType.db_to_form(pkg_extras.get('metadata-date', ''))},
-        'dataset-reference-date': {'label': 'Andmehulga viitekuupäev', 'value': dataset_reference_date},
+        'tags': {'label': _('Keywords'), 'value': unicode(tags_csv)},
+        'tags': {'label': _('Keywords'), 'value': unicode(tags_csv)},
+        'state': {'label': _('State'), 'value': c.pkg.state},
+        'harvest-url': {'label': _('Harvest URL'), 'value': harvest_url},
+        'harvest-date': {'label': _('Harvest Date'), 'value': harvest_date},
+        'harvest-guid': {'label': _('Harvest GUID'), 'value': harvest_guid},
+        'bbox': {'label': _('Extent'), 'value': t.literal('Latitude: %s&deg; to %s&deg; <br/> Longitude: %s&deg; to %s&deg;' % (pkg_extras.get('bbox-north-lat'), pkg_extras.get('bbox-south-lat'), pkg_extras.get('bbox-west-long'), pkg_extras.get('bbox-east-long'))) },
+        'categories': {'label': _('ONS Category'), 'value': pkg_extras.get('categories')},
+        'date_updated': {'label': _('Date data last updated'), 'value': DateType.db_to_form(pkg_extras.get('date_updated', ''))},
+        'date_released': {'label': _('Date data last released'), 'value': DateType.db_to_form(pkg_extras.get('date_released', ''))},
+        'temporal_coverage': {'label': _('Temporal coverage'), 'value': temporal_coverage},
+        'geographic_coverage': {'label': _('Geographic coverage'), 'value': GeoCoverageType.strip_off_binary(pkg_extras.get('geographic_coverage', ''))},
+        'resource-type': {'label': _('Gemini2 resource type'), 'value': pkg_extras.get('resource-type')},
+        'spatial-data-service-type': {'label': _('Gemini2 service type'), 'value': pkg_extras.get('spatial-data-service-type')},
+        'access_constraints': {'label': _('Access constraints'), 'value': render_json(pkg_extras.get('access_constraints'))},
+        'taxonomy_url': {'label': _('Taxonomy URL'), 'value': taxonomy_url},
+        'theme': {'label': _('Theme'), 'value': primary_theme},
+        'theme-secondary': {'label': _('Secondary Theme(s)'), 'value': secondary_themes},
+        'update_frequency': {'label': _('Update frequency'), 'value': update_frequency},        'metadata-language': {'label': _('Metadata language'), 'value': pkg_extras.get('metadata-language', '').replace('eng', 'English')},
+        'metadata-date': {'label': _('Metadata date'), 'value': DateType.db_to_form(pkg_extras.get('metadata-date', ''))},
+        'dataset-reference-date': {'label': _('Dataset reference date'), 'value': dataset_reference_date},
         '': {'label': '', 'value': ''},
     }
-#    field_value_map = {
-#        # field_name : {display info}
-#        'state': {'label': 'State', 'value': c.pkg.state},
-#        'harvest-url': {'label': 'Harvest URL', 'value': harvest_url},
-#        'harvest-date': {'label': 'Harvest Date', 'value': harvest_date},
-#        'harvest-guid': {'label': 'Harvest GUID', 'value': harvest_guid},
-#        'bbox': {'label': 'Extent', 'value': t.literal('Latitude: %s&deg; to %s&deg; <br/> Longitude: %s&deg; to %s&deg;' % (escape(pkg_extras.get('bbox-north-lat')), escape(pkg_extras.get('bbox-south-lat')), escape(pkg_extras.get('bbox-west-long')), escape(pkg_extras.get('bbox-east-long')))) },
-#        'categories': {'label': 'ONS Category', 'value': pkg_extras.get('categories')},
-#        'date_updated': {'label': 'Date data last updated', 'value': DateType.db_to_form(pkg_extras.get('date_updated', ''))},
-#        'date_released': {'label': 'Date data last released', 'value': DateType.db_to_form(pkg_extras.get('date_released', ''))},
-#        'temporal_coverage': {'label': 'Temporal coverage', 'value': temporal_coverage},
-#        'geographic_coverage': {'label': 'Geographic coverage', 'value': GeoCoverageType.strip_off_binary(pkg_extras.get('geographic_coverage', ''))},
-#        'resource-type': {'label': 'Gemini2 resource type', 'value': pkg_extras.get('resource-type')},
-#        'spatial-data-service-type': {'label': 'Gemini2 service type', 'value': pkg_extras.get('spatial-data-service-type')},
-#        'access_constraints': {'label': 'Access constraints', 'value': render_json(pkg_extras.get('access_constraints'))},
-#        'taxonomy_url': {'label': 'Taxonomy URL', 'value': taxonomy_url},
-#        'theme': {'label': 'Theme', 'value': primary_theme},
-#        'theme-secondary': {'label': 'Secondary Theme(s)', 'value': secondary_themes},
-#        'metadata-language': {'label': 'Metadata language', 'value': pkg_extras.get('metadata-language', '').replace('eng', 'English')},
-#        'metadata-date': {'label': 'Metadata date', 'value': DateType.db_to_form(pkg_extras.get('metadata-date', ''))},
-#        'dataset-reference-date': {'label': 'Dataset reference date', 'value': dataset_reference_date},
-#        '': {'label': '', 'value': ''},
-#    }
 
     # add in fields that only display if they have a value
     for field_name in field_names_display_only_if_value:
@@ -1182,24 +1159,24 @@ def _translate_ckan_string(o):
     """DGU uses different words for things compared to CKAN, so
     adjust the language of errors using mappings."""
     field_name_map = {
-        'groups': 'Teabevaldaja',
-        'organization': 'Teabevaldaja',
-        'individual_resources': 'Andmefailid',
-        'timeseries_resources': 'Andmefailid',
-        'title': 'Pealkiri',
-        'name': 'Unikaalne nimi',
-        'url': 'URL',
-        'notes': 'Kirjeldus',
-        'theme-primary': 'Peamine teema',
-        'license_id': 'Litsents'
+        'groups': _('Publisher'),
+        'organization': _('Publisher'),
+        'individual_resources': _('Data Files'),
+        'timeseries_resources': _('Data Files'),
+        'title': _('Name'),
+        'name': _('Unique identifier'),
+        'url': _('URL'),
+        'notes': _('Description'),
+        'theme-primary': _('Primary Theme'),
+        'license_id': _('Licence')
     }
     field_error_key_map = {
-        'group': 'teabevaldaja',
-        'organization': 'teabevaldaja',
-        'description': 'pealkiri',
+        'group': 'publisher',
+        'organization': 'publisher',
+        'description': 'title',
     }
     field_error_value_map = {
-        'That group name or ID does not exist.': 'puudu',
+        _('That group name or ID does not exist.'): _('Missing value'),
     }
 
     o = field_name_map.get(o,o)
@@ -1395,8 +1372,8 @@ def facet_values(facet_tuples, facet_key):
 
 def get_package_mini_metadata(pkg):
     return {
-        'date-added-computed': pkg.metadata_created.strftime("%d.%m.%Y"),
-        'date-updated-computed': pkg.metadata_modified.strftime("%d.%m.%Y")
+        'date-added-computed': pkg.metadata_created.strftime(_("%d/%m/%Y")),
+        'date-updated-computed': pkg.metadata_modified.strftime(_("%d/%m/%Y"))
     }
 
 def get_extent():
@@ -1516,7 +1493,7 @@ def search_facets_unselected(facet_keys,sort_by='count'):
         params_to_keep = dict(facet_params_to_keep())
         del params_to_keep['publisher']
         link = dgu_drill_down_url(params_to_keep.items(), {'parent_publishers':request.params.get('publisher','')})
-        unselected.append( (link,'Kaasa arvatud alam-teabevaldajad',None) )
+        unselected.append( (link,_('Include sub-publishers'),None) )
     return unselected
 
 def search_facets_selected(facet_keys):
@@ -1532,24 +1509,24 @@ def search_facets_selected(facet_keys):
         params_to_keep = dict(facet_params_to_keep())
         del params_to_keep['parent_publishers']
         link = dgu_drill_down_url(params_to_keep.items(), {'publisher':request.params.get('parent_publishers','')})
-        selected.append( (link,'Kaasa arvatud alam-teabevaldajad',None) )
+        selected.append( (link,_('Include sub-publishers'),None) )
     return selected
 
 def search_facet_text(key,value):
     if key=='core_dataset':
         if value=='true':
-            return 'Näita NII andmehulki'
-        return 'Näita NII andmehulki'
+            return _('Show NII datasets')
+        return _('Hide NII datasets')
     if key=='unpublished':
         if value=='true':
-            return 'Avalikustamata andmehulki'
-        return 'Avalikustatud andmehulki'
+            return _('Unpublished datasets')
+        return _('Published datasets')
     if key=='license_id-is-ogl':
         if value=='true':
-            return 'Open Government Licence'
+            return _('Open Government Licence')
         elif value=='unpublished':
-            return 'Avalikustamata andmehulk'
-        return 'Non-Open Government Licence'
+            return _('Unpublished dataset')
+        return _('Non-Open Government Licence')
     if key=='openness_score':
         try:
             stars = int(value)

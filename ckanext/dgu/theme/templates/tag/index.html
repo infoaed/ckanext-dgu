@@ -31,11 +31,11 @@
           <div class="right-inner auto-height">
           <div class="chevron"></div>
             <py:if test="c.query_error">
-              <div class="result-count-footer">Otsinguviga</div>
+              <div class="result-count-footer">Search Error</div>
             </py:if>
             <py:if test="not c.query_error">
               <div class="result-count">${c.page.item_count if c.page not in (None, '') else c.package_count or 0}</div>
-              <div class="result-count-footer">${if_('q' in request.params,'Tulemust','Võtmesõna')}</div>
+              <div class="result-count-footer">${if_('q' in request.params,_('Results'),_('Keywords'))}</div>
             </py:if>
           </div>
         </div>

@@ -26,7 +26,7 @@
             ${c.group.title}
         </py:if>
         <py:if test="not c.group">
-            <select id="parent" name="parent" class="chzn-select" data-placeholder="Please choose a publisher">
+            <select id="parent" name="parent" class="chzn-select" data-placeholder="${_('Please choose a publisher')}">
                 <option value=""></option>
                     <py:for each="pg in c.possible_parents">
                         <option py:attrs="{'selected': 'selected' if c.group and pg.id == c.group.id else None}" value="${pg.id}">${pg.title}</option>

@@ -37,7 +37,7 @@ $(function() {
       p.removeClass('childMatch');
       container.addClass('empty-search');
       resultCountBox.text(hacky_count);
-      resultCountFooterBox.text('Teabevaldajat');
+      resultCountFooterBox.text('Publishers');
       return;
     }
     container.removeClass('empty-search');

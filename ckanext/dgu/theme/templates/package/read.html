@@ -11,24 +11,24 @@
   about=""
   py:strip="">
 
-  <py:def function="page_title">${c.pkg_dict.get('title', c.pkg_dict['name'])} - Andmehulgad</py:def>
+  <py:def function="page_title">${c.pkg_dict.get('title', c.pkg_dict['name'])} - Datasets</py:def>
 
   <xi:include href="../inventory/inventory_util.html" />
 
   <py:match path="breadcrumbs">
-    <li><a href="/data/search">Andmehulgad</a></li>
+    <li><a href="/data/search">Datasets</a></li>
     <li><a href="${h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}">${c.pkg_dict.get('title', c.pkg_dict['name'])}</a></li>
   </py:match>
 
   <py:def function="package_content">
     <!-- Warn if reading old revision -->
     <div py:if="c.pkg_revision_id" class="panel panel-warning">
-      <div class="panel-heading">Andmehulga revideerimine</div>
+      <div class="panel-heading">Viewing Dataset Revision</div>
       <div class="panel-body" py:if="c.pkg_revision_not_latest">
-        See on antud andmehulga vanem versioon, muudetud ${h.render_datetime(c.pkg_revision_timestamp)}. See võib erineda <a href="${h.url(controller='package', action='read', id=c.pkg.name)}">praegusest versioonist</a>.
+        This is an old revision of this dataset, as edited at ${h.render_datetime(c.pkg_revision_timestamp)}. It may differ significantly from the <a href="${h.url(controller='package', action='read', id=c.pkg.name)}">current revision</a>.
       </div>
       <div class="panel-body" py:if="not c.pkg_revision_not_latest">
-        See on antud andmehulga praegune versioon, muudetud ${h.render_datetime(c.pkg_revision_timestamp)}.
+        This is the current revision of this dataset, as edited at ${h.render_datetime(c.pkg_revision_timestamp)}.
       </div>
     </div>
 
@@ -47,14 +47,14 @@
             ${map_preview_button_direct(c.pkg_dict, small=False)}
           </div>
           <py:if test="h.has_bounding_box(c.pkg_extras) and h.get_extent()">
-          <h3>Andmehulga geograafiline ulatus</h3>
+          <h3>Dataset Extent</h3>
           <table class="table">
             <tr>
-              <td class="key">Laiuskraad:</td>
+              <td class="key">Latitude:</td>
               <td class="value">${dict(c.pkg_extras).get('bbox-north-lat')[:7]}&deg; to ${dict(c.pkg_extras).get('bbox-south-lat')[:7]}&deg;</td>
             </tr>
             <tr>
-              <td class="key">Pikkuskraad:</td>
+              <td class="key">Longitude:</td>
               <td class="value">${dict(c.pkg_extras).get('bbox-west-long')[:7]}&deg; to ${dict(c.pkg_extras).get('bbox-east-long')[:7]}&deg;</td>
             </tr>
           </table>
@@ -74,11 +74,11 @@
     <div class="dataset-resources">
       <!-- Resources -->
       <py:if test="h.individual_resources()">
-        <h2>Andmefailid (${len(h.individual_resources())})</h2>
+        <h2>Data Resources (${len(h.individual_resources())})</h2>
         ${resource_table(h.individual_resources())}
       </py:if>
       <py:if test="h.timeseries_resources()">
-        <h2>Andmefailid (${len(h.timeseries_resources())} ajaseerias)</h2>
+        <h2>Data Resources (${len(h.timeseries_resources())} in a time series)</h2>
 	<py:for each="year, items in h.groupby(reversed(h.timeseries_resources()), lambda x: h.parse_date(x.get('date')).year)">
 	  <div class="year">
             <h3>${year} <span class="showyear"></span><span class="hideyear"></span></h3>
@@ -91,7 +91,7 @@
     </div>
     <div class="dataset-resources-additional" py:if="not h.is_unpublished_item(c.pkg_dict)">
       <py:if test="h.additional_resources() or h.gemini_resources()">
-        <h2>Täiendavad lingid (${len(h.additional_resources()) + len(h.gemini_resources())})</h2>
+        <h2>Additional Links (${len(h.additional_resources()) + len(h.gemini_resources())})</h2>
         ${resource_table(h.additional_resources() + h.gemini_resources())}
       </py:if>
 
@@ -99,29 +99,29 @@
 
     <div class="dataset-additional-information" py:if="not h.is_unpublished_item(c.pkg_dict)">
       <!-- Dataset Information Section -->
-      <h2>Lisainformatsioon</h2>
+      <h2>Additional Information</h2>
       <table class="table table-bordered table-condensed table-dgu-fixed-size dgu-table" style="margin-bottom: 45px;">
         <tbody>
           <py:with vars="metadata=h.get_package_mini_metadata(c.pkg)">
             <tr>
-              <td class="key">Lisatud portaali</td>
+              <td class="key">Added to portal</td>
               <td class="value">${metadata['date-added-computed']}</td>
             </tr>
           </py:with>
           <tr py:for="field_dict, label_attributes, value_attributes in h.get_package_fields(c.pkg, dict(c.pkg_extras),h.dataset_type(c.pkg_extras),c.pkg_dict.get('tags'))">
             <td class="key" py:attrs="label_attributes">${field_dict.get('label') or field_dict['name']}</td>
-            <td class="value" py:attrs="value_attributes">${h.get_package_field_disp_value(field_dict.get('value')) or 'määramata'}</td>
+            <td class="value" py:attrs="value_attributes">${h.get_package_field_disp_value(field_dict.get('value')) or _('No value')}</td>
           </tr>
           <tr py:if="h.dataset_type(c.pkg_extras) == 'uklp' and dict(c.pkg_extras).get('resource-type') in ('dataset', 'series', 'service')">
             <py:with vars="is_service=dict(c.pkg_extras).get('resource-type')=='service'">
-            <td class="key">Kokku pandud ${if_(is_service,'andmehulgad','teenused')}</td>
+            <td class="key">Coupled ${if_(is_service,_('Datasets'),_('Services'))}</td>
             <td class="value">
               <ul py:if="h.coupled_pkg_tuples(c.pkg)">
                 <li py:for="name, title in h.coupled_pkg_tuples(c.pkg)">
                   <a href="/dataset/${name}">${title}</a>
                 </li>
               </ul>
-              <span py:if="not h.coupled_pkg_tuples(c.pkg)">(pole)</span>
+              <span py:if="not h.coupled_pkg_tuples(c.pkg)">(none)</span>
             </td>
             </py:with>
           </tr>
@@ -130,12 +130,12 @@
     </div>
 
     <a href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController',action='add',id=c.pkg.name)}" class="btn btn-primary btn-mini add-feedback-button pull-right">
-      <py:if test="c.user">Anna tagasisidet &raquo;</py:if>
-      <py:if test="not c.user">Tagasiside andmiseks logi sisse &raquo;</py:if>
+      <py:if test="c.user">Add Feedback &raquo;</py:if>
+      <py:if test="not c.user">Login to Add Feedback &raquo;</py:if>
     </a>
 
     <py:if test="h.has_related_apps(c.pkg_dict.get('id'))">
-    <h2>Seotud rakendused</h2>
+    <h2>Related Applications</h2>
     <ul>
       <li py:for="rel in h.get_related_apps(c.pkg_dict.get('id'))">
         <a href="${rel.url}">${h.literal(rel.title)}</a>
@@ -143,10 +143,10 @@
     </ul>
     </py:if>
 
-    <h2>Tagasiside andmehulgale</h2>
+    <h2>Dataset Feedback</h2>
     <div class="dataset-feedback-container">
       ${feedback_summary(c.pkg_dict,render_title=False,large=True)}
-      <a class="view-feedback-link" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController',action='view',id=c.pkg.name)}">Vaata kogu tagasisidet &raquo;</a>
+      <a class="view-feedback-link" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController',action='view',id=c.pkg.name)}">View all feedback &raquo;</a>
     </div>
 
 
@@ -201,8 +201,7 @@
             </py:if>
 
             <py:if test="res.get('scraped') or res.get('scraper_url')">
-              ${h.scraper_icon(res, alt=if_(res.get('scraper_url'), "This URL leads to data files which are being added automatically, using the scraper at: https://scraperwiki.com/scrapers/%s" % res.get('scraper_url'), ""))}
-              ${h.scraper_icon(res, alt=if_(res.get('scraper_url'), "See URL viityab andmefailidele, mis lisatakse automaatselt, kasutades nn scraper teenust: https://scraperwiki.com/scrapers/%s" % res.get('scraper_url'), ""))}
+              ${h.scraper_icon(res, alt=if_(res.get('scraper_url'), _("This URL leads to data files which are being added automatically, using the scraper at: https://scraperwiki.com/scrapers/%s") % res.get('scraper_url'), ""))}
             </py:if>
             ${res.get('date','')}
             ${h.resource_display_name(res)}
@@ -221,28 +220,28 @@
           </li>
           <li py:if="not gemini">
             <a href="${h.url_for(controller='package', action='resource_read', id=c.pkg_dict['name'], resource_id=res['id'])}">
-              <i class="icon-search"></i>&nbsp; ${'Eelvaade' if h.predict_if_resource_will_preview(res) else 'Detailid'}
+              <i class="icon-search"></i>&nbsp; ${_('Preview') if h.predict_if_resource_will_preview(res) else _('Details')}
             </a>
           </li>
           <li py:if="not gemini">
             <a href="${res.get('url', '')}" onclick="${h.ga_download_tracking(res)}">
               <i class="icon-download-alt"></i>&nbsp;
-              <py:if test="h.dataset_type(c.pkg_extras)!='uklp'">Laadi alla</py:if>
-              <py:if test="h.dataset_type(c.pkg_extras)=='uklp'">Otselink</py:if>
+              <py:if test="h.dataset_type(c.pkg_extras)!='uklp'">Download</py:if>
+              <py:if test="h.dataset_type(c.pkg_extras)=='uklp'">Direct Link</py:if>
             </a>
           </li>
           <py:with vars="cache_url, cache_timestamp = h.get_cache(res)">
             <li py:if="not gemini and cache_url">
               <a href="${cache_url}" class="js-tooltip" data-placement="bottom" title="Cached&nbsp;by&nbsp;data.gov.uk&nbsp;on ${cache_timestamp.strftime('%d/%m/%Y') if cache_timestamp else 'unknown date'}" onclick="${h.ga_download_tracking(res, 'download-cache')}">
                 <i class="icon-save"></i>&nbsp;
-                Puhverdatud
+                Cached
               </a>
             </li>
           </py:with>
           <li py:if="not gemini and not h.get_cache(res)[0]">
             <a class="disabled">
               <i class="icon-save"></i>&nbsp;
-              (puhverdtaud versiooni ei ole)
+              (no cache available)
             </a>
           </li>
         </ul><!-- /dropdown-mnu-->

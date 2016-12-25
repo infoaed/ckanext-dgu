@@ -11,7 +11,7 @@
   about=""
   py:strip="">
 
-  <py:def function="page_title">${c.pkg_dict.get('title', c.pkg_dict['name'])} - Andmehulgad</py:def>
+  <py:def function="page_title">${c.pkg_dict.get('title', c.pkg_dict['name'])} - Datasets</py:def>
 
   <xi:include href="../inventory/inventory_util.html" />
 
@@ -22,15 +22,15 @@
         render_foi=h.have_foi_contact_details(c.pkg, dict(c.pkg_extras));
       ">
         <span class="dropdown" py:if="render_enquiries or render_foi">
-          <a href="#" class="js-tooltip dropdown-button" data-placement="top" data-delay="300" data-toggle="dropdown" title="" data-original-title="Kontaktandmed">
+          <a href="#" class="js-tooltip dropdown-button" data-placement="top" data-delay="300" data-toggle="dropdown" title="" data-original-title="${_('Contact&nbsp;Details')}">
             <i class="icon-envelope icon-2x"></i>
             <div class="dropdown-chevron"></div>
           </a>
           <div class="panel panel-default dropdown-menu" role="menu" aria-labelledby="dLabel">
-            <div class="panel-heading">Kontaktid</div>
+            <div class="panel-heading">Contacts</div>
             <div class="panel-body">
               <py:if test="render_enquiries">
-                <b>Küsimused:</b>
+                <b>Enquiries:</b>
                 <ul style="margin-bottom: 5px;">
                   ${h.get_contact_name(c.pkg, dict(c.pkg_extras))}
                   ${contact_details(*h.get_contact_details(c.pkg, dict(c.pkg_extras)))}
@@ -41,22 +41,19 @@
         </span>
       </py:with>
       <span class="dropdown">
-        <a href="#" class="js-tooltip dropdown-button" data-placement="top" data-delay="300" data-toggle="dropdown" title="" data-original-title="API&nbsp;ja&nbsp;rakendused">
+        <a href="#" class="js-tooltip dropdown-button" data-placement="top" data-delay="300" data-toggle="dropdown" title="" data-original-title="${_('API&nbsp;&amp;&nbsp;Apps')}">
           <i class="icon-code icon-2x"></i>
           <div class="dropdown-chevron"></div>
         </a>
         <div class="panel panel-default dropdown-menu" role="menu" aria-labelledby="dLabel">
-          <div class="panel-heading">Lisategevused nende andmetega</div>
+          <div class="panel-heading">Do More With This Data</div>
           <div class="panel-body">
 
 
             <ul>
-              <li><a href="/node/add/app?dataset=${c.pkg_dict.get('name')}">Jaga oma rakendust &raquo;</a><br/></li>
-              <li><a href="/node/add/data-request?dataset=${c.pkg_dict.get('name')}">Küsi uusi andmeid &raquo;</a></li>
-            </ul>
-
-            Andmehulha metaandmed on saadaval ka JSON formaadis.
-            <ul>
+              <li><a href="/node/add/app?dataset=${c.pkg_dict.get('name')}">Share your app &raquo;</a><br/></li>
+              <li><a href="/node/add/data-request?dataset=${c.pkg_dict.get('name')}">Request new data &raquo;</a></li>
+            </ul>The information on this page (the dataset metadata) is also available in JSON format.<ul>
               <li>
                 <b>API: </b><a href="${h.url_for(controller='api', register='package', action='show', id=c.pkg.name, ver='2')}">
                   ${h.url_for(controller='api', register='package', action='show', id=c.pkg.name, ver='2')}
@@ -66,36 +63,28 @@
           </div>
         </div>
       </span>
-      <py:if test="c.user and h.check_access('sysadmin')"> <!-- #1272 Only viewable if you log in -->
-        <a class="js-tooltip dropdown-button history-link" data-placement="top" title="" data-delay="300" data-original-title="Muudatuste&nbsp;ajalugu" href="${h.url_for(controller='package', action='history', id=c.pkg.name)}">
+     <py:if test="c.user and h.check_access('sysadmin')"> <!-- #1272 Only viewable if you log in -->
+        <a class="js-tooltip dropdown-button history-link" data-placement="top" title="" data-delay="300" data-original-title="${_('History&nbsp;of&nbsp;changes')}" href="${h.url_for(controller='package', action='history', id=c.pkg.name)}">
           <i class="icon-time icon-2x"></i>
         </a>
       </py:if>
 
 
     </div>
-    <h1>${c.pkg_dict.get('title', c.pkg_dict['name'])} <span class="unpublished-text" py:if="h.is_unpublished_item(c.pkg_dict)">(Avalikustamata)</span></h1>
+    <h1>${c.pkg_dict.get('title', c.pkg_dict['name'])} <span class="unpublished-text" py:if="h.is_unpublished_item(c.pkg_dict)">(Unpublished)</span></h1>
     <div class="h1-subheading" py:with="
       all_licences = h.get_licenses(c.pkg);
       publisher = c.pkg_dict.get('organization')
     ">
-      <py:if test="publisher">
-        Teabevaldaja:
-        <a href="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='read', id=c.pkg_dict.get('organization',{}).get('name',''))}">
+      <py:if test="publisher">Published by<a href="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='read', id=c.pkg_dict.get('organization',{}).get('name',''))}">
           ${c.pkg_dict.get('organization',{}).get('title','')}.
         </a>
       </py:if>
-      <py:if test="not publisher">
-        Teabevaldaja puudub.
-      </py:if>
+      <py:if test="not publisher">No publisher specified.</py:if>
       &nbsp;
       <span property="dc:rights">
-        <py:if test="len(all_licences)==0">
-          Litsents puudub.
-        </py:if>
-        <py:if test="len(all_licences)!=0">
-          Kasutuslitsents:
-        </py:if>
+        <py:if test="len(all_licences)==0">No licence specified.</py:if>
+        <py:if test="len(all_licences)!=0">Licensed under:</py:if>
         <py:for each="i in range(len(all_licences))">
           <py:with vars="
             (license_text, url, isopen, isogl) = all_licences[i];
@@ -144,21 +133,21 @@
       <div class="${if_(admin_mode,'col-md-8','col-md-12')}">
         <!-- Description -->
         <p class="pre-notes" py:if="dict(c.pkg_extras).get('provider')">
-          <b>Avaldaja:</b> ${dict(c.pkg_extras).get('provider')}
+          <b>Provider:</b> ${dict(c.pkg_extras).get('provider')}
         </p>
         <p class="pre-notes" py:if="h.dataset_type(c.pkg_extras) == 'uklp' and dict(c.pkg_extras).get('responsible-party')">
-          <b>Vastutaja:</b> ${dict(c.pkg_extras).get('responsible-party')}
+          <b>Responsible Party:</b> ${dict(c.pkg_extras).get('responsible-party')}
         </p>
         <p class="pre-notes" py:if="h.is_unpublished_item(c.pkg_dict) and c.pkg.extras.get('publish-date') and not c.pkg.extras.get('publish-restricted', False)">
-          <b>Avaldamise kuupäev:</b> ${h.render_db_date(c.pkg.extras.get('publish-date'))}
+          <b>Publish date:</b> ${h.render_db_date(c.pkg.extras.get('publish-date'))}
         </p>
         <p class="pre-notes" py:if="c.is_an_official and c.pkg_dict['state']!='active'">
-          <b>Staatus:</b> ${c.pkg_dict['state']}
+          <b>State:</b> ${c.pkg_dict['state']}
         </p>
         <!-- blank style tag avoids a bug in jquery.dotdotdot -->
         <div class="notes" style="">
           <div class="dataset-theme theme-${primary_theme_cssid or 'none'}">
-            <div class="theme-name">${primary_theme or '(Teema määramata)'}</div>
+            <div class="theme-name">${primary_theme or _('(Uncategorised)')}</div>
           </div>
           <a
             class="dataset-optional-logo"
@@ -178,34 +167,32 @@
           <div class="notes-inner">
             ${h.render_markdown(c.pkg_dict.get('notes',''))}
             <py:if test="h.is_unpublished_item(c.pkg_dict)" py:with="notes=c.pkg.extras.get('release-notes','').strip()">
-              <strong py:if="notes">Väljastamise märkused:</strong>
+              <strong py:if="notes">Release Notes:</strong>
               ${h.render_markdown(notes)}
             </py:if>
-            <a href="#" class="notes-read-more"><i class="icon-double-angle-down"></i> Loe lisa <i class="icon-double-angle-down"></i></a>
+            <a href="#" class="notes-read-more"><i class="icon-double-angle-down"></i>Read More<i class="icon-double-angle-down"></i></a>
           </div>
         </div>
       </div>
       <div class="col-md-4" py:if="admin_mode">
         <div class="panel panel-info">
-          <div class="panel-heading" style="font-weight: bold;">Administraatori tööriistad</div>
+          <div class="panel-heading" style="font-weight: bold;">Administrator Tools</div>
           <div class="panel-body">
             <ul class="administrator-tools">
               <li py:if="can_update">
                 <span class="wrap-icon"><i class="icon-edit"></i></span>
-                <a href="${update_link}">Andmehulga metaandmete muutmine &raquo;</a>
+                <a href="${update_link}">Edit dataset properties &raquo;</a>
               </li>
               <li py:if="can_delete">
                 <span class="wrap-icon"><i class="icon-trash"></i></span>
                 <a href="${h.url_for(controller='ckanext.dgu.controllers.package:PackageController', action='delete', id=c.pkg.name)}">
-                  ${if_(is_uklp,'Tühista andmehulk','Kustuta andmehulk')} &raquo;
+                  ${if_(is_uklp,_('Withdraw this dataset'),_('Delete this dataset'))} &raquo;
                 </a>
               </li>
               <li py:if="can_update and h.is_unpublished_item(c.pkg_dict)">
                 <py:with vars="will_be_published,when=h.will_be_published(c.pkg_dict)">
                   <a href="${h.url_for(controller='ckanext.dgu.controllers.package:PackageController', action='edit', id=c.pkg.name)}">
-                    <span class="wrap-icon"><i class="icon-flag"></i></span>
-                    Konverteeri avalikustatud andmehulgaks
-                  </a>
+                    <span class="wrap-icon"><i class="icon-flag"></i></span>Convert to published dataset</a>
                 </py:with>
               </li>
             </ul>
@@ -216,16 +203,16 @@
 
     <!-- Warn if unpublished -->
     <div py:if="h.is_unpublished_item(c.pkg_dict)" class="panel panel-warning">
-      <div class="panel-heading">Avalikustamata andmehulk</div>
-      <div class="panel-body">See on kirje andmehulga kohta, mis on veel avalikustamata.</div>
+      <div class="panel-heading">Unpublished Dataset</div>
+      <div class="panel-body">This is a record for data which is not published.</div>
     </div>
     <!-- Warn if deleted -->
     <div py:if="c.pkg_dict.get('state') == 'deleted'" class="panel panel-warning">
-      <py:with vars="deleted=if_(h.dataset_type(c.pkg_extras)=='uklp','Tühistatud','Kustutatud')">
-        <div class="panel-heading">${deleted} andmehulk</div>
+      <py:with vars="deleted=if_(h.dataset_type(c.pkg_extras)=='uklp',_('Withdrawn'),_('Deleted'))">
+        <div class="panel-heading">${deleted} Dataset</div>
       </py:with>
-      <py:with vars="deleted=if_(h.dataset_type(c.pkg_extras)=='uklp','tühistatud','kustutatud')">
-        <div class="panel-body">See andmehulk on ${deleted}. Vaid süsteemi ja teabevaldaja administraatorid saavad seda näha.</div>
+      <py:with vars="deleted=if_(h.dataset_type(c.pkg_extras)=='uklp',_('withdrawn'),_('deleted'))">
+        <div class="panel-body">This dataset is ${deleted}. Only system and publisher administrators can view it in this state.</div>
       </py:with>
     </div>
     ${package_content()}

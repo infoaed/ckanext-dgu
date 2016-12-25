@@ -34,11 +34,9 @@
 
 
   <div class="panel panel-danger error-explanation" py:if="bool(errors)">
-    <div class="panel-heading"><strong>Vormil on vead</strong></div>
-    <div class="panel-body">
-      Vormil on puudulikke või vigaseid sisestusi:
-      ${dump(errors)}
-    </div>
+    <div class="panel-heading"><strong>Errors in form</strong></div>
+    <div class="panel-body">The form contains invalid entries:
+      ${dump(errors)}</div>
   </div>
 
 <div id="form-tabs" class="tabbable tabs-left">
@@ -48,14 +46,14 @@
           boilerplate={'disabled':'disabled'} if h.use_wizard(data, errors) else {};
           classes = 'disabled' if h.use_wizard(data, errors) else '';
         ">
-        <li class="active"><a data-toggle="tab" data-hash="tab-name" id="section-name" href="#section-name-fields">Nimi</a></li>
-        <li><a data-toggle="tab" class="${classes}" data-hash="tab-data" id="section-data" py:attrs="boilerplate" href="#section-data-field">Andmefailid</a></li>
-        <li><a data-toggle="tab" class="${classes}" data-hash="tab-description" id="section-description" py:attrs="boilerplate" href="#section-description-field">Kirjeldus</a></li>
-        <li><a data-toggle="tab" class="${classes}" data-hash="tab-licence" id="section-licence" py:attrs="boilerplate" href="#section-licence-field">Litsents</a></li>
-        <li><a data-toggle="tab" class="${classes}" data-hash="tab-publisher" id="section-publisher" py:attrs="boilerplate" href="#section-publisher-field">Teabevaldaja</a></li>
-        <li><a data-toggle="tab" class="${classes}" data-hash="tab-themes" id="section-themes" py:attrs="boilerplate" href="#section-themes-field">Teemad</a></li>
-        <li><a data-toggle="tab" class="${classes}" data-hash="tab-additional_resources" id="section-additional_resources" py:attrs="boilerplate" href="#section-additional_resources-field">Täiendavad ressursid</a></li>
-        <li><a data-toggle="tab" class="${classes}" data-hash="tab-temporal" id="section-temporal" py:attrs="boilerplate" href="#section-temporal-field">Ajaline periood</a></li>
+        <li class="active"><a data-toggle="tab" data-hash="tab-name" id="section-name" href="#section-name-fields">Name</a></li>
+        <li><a data-toggle="tab" class="${classes}" data-hash="tab-data" id="section-data" py:attrs="boilerplate" href="#section-data-field">Data Files</a></li>
+        <li><a data-toggle="tab" class="${classes}" data-hash="tab-description" id="section-description" py:attrs="boilerplate" href="#section-description-field">Description</a></li>
+        <li><a data-toggle="tab" class="${classes}" data-hash="tab-licence" id="section-licence" py:attrs="boilerplate" href="#section-licence-field">Licence</a></li>
+        <li><a data-toggle="tab" class="${classes}" data-hash="tab-publisher" id="section-publisher" py:attrs="boilerplate" href="#section-publisher-field">Publisher</a></li>
+        <li><a data-toggle="tab" class="${classes}" data-hash="tab-themes" id="section-themes" py:attrs="boilerplate" href="#section-themes-field">Tags</a></li>
+        <li><a data-toggle="tab" class="${classes}" data-hash="tab-additional_resources" id="section-additional_resources" py:attrs="boilerplate" href="#section-additional_resources-field">Additional resources</a></li>
+        <li><a data-toggle="tab" class="${classes}" data-hash="tab-temporal" id="section-temporal" py:attrs="boilerplate" href="#section-temporal-field">Temporal coverage</a></li>
         <li py:if="h.is_sysadmin()"><a data-toggle="tab" class="${classes}" data-hash="tab-state" id="section-state" py:attrs="boilerplate" href="#section-state-field">Staatus</a></li>
       </ul>
     </div>
@@ -63,10 +61,9 @@
 
   <div class="tab-content">
 <fieldset class="tab-pane boxed whitebox fade active in" id="section-name-fields">
-  <p>Andke oma andmehulgale nimi.</p>
+  <p>Please name your data record.</p>
   <div class="form-group">
-    <label for="title" class="js-tooltip tooltip-paragraph" data-placement="right" title="Kirjeldab lühidalt ja võimalikult informatiivselt andmehulga sisu ja eesmärki.">
-      Nimi <i class="icon-info-sign"></i>
+    <label for="title" class="js-tooltip tooltip-paragraph" data-placement="right" title="Briefely describes the main subject and purpose of the dataset.">Name<i class="icon-info-sign"></i>
     </label>
     <input class="form-control field_req js-title input-xlarge" id="title" name="title" type="text" value="${data.get('title', '')}"/>
   </div>
@@ -83,8 +80,7 @@
 
   <div class="form-group">
     <label for="name">
-      <span class="js-tooltip" data-placement="right" title="Andmehulga unikaalne identifikaator. Võiks olla inimloetav, sõnad eraldatult sidekriipsuga, vältida täpitähti. Näiteks: liiklusonnetuste-statistika-2010 or kov-kulutused-2012.">
-        Loo andmehulga URL: <i class="icon-info-sign"></i>
+      <span class="js-tooltip" data-placement="right" title="A public unique identifier for the dataset.  It should be roughly readable, with dashes separating words.  Format: Two or more lowercase alphanumeric, dash (-) or underscore (_) characters. e.g. uk-road-traffic-statistics-2008 or local-authority-spend-over-500-harlow">Create a URL:<i class="icon-info-sign"></i>
       </span>
       &nbsp;&nbsp;<span style="font-style: italic;" py:if="not h.is_package_edit_form(data) or h.is_sysadmin()" class="js-url-is-valid">&nbsp;</span>
     </label>
@@ -98,38 +94,29 @@
 </fieldset>
 
 <fieldset class="tab-pane boxed whitebox fade" id="section-data-field">
-  <h3>Andmefailid</h3>
-  <p>Siin saate sisestada lingid (s.t. URL) teie andmefailidele.</p>
+  <h3>Data Files</h3>
+  <p>In this tab you enter the links to the files containing the actual data at the heart of this record.</p>
 
-  <p>
-    Kui teie andmefailist genereeritakse sama lingi taga perioodiliselt uus versioon, siis valige andmehulga tüübiks "Perioodiline" ning täitke Uuendussageduse väli. Vastasel juhul valige andmehulga tüübiks "Ühekordne".<br/>
-    Mõlema valiku puhul saate sisestada mitu linki, kasutades "Lisa rida" nuppu. Iga link peab sellisel juhul esindama sama andmhulka erinevates formaatides.
-  </p>
-
-  <p>
-    <strong>NB! Ärge sisestage siia linke veebilehtedele.</strong> Sisestatud lingid peavad viitama tooretele andmefailidele. Veebilehtedele viitamiseks kasutage "Täiendavad ressursid" lehte.
-  </p>
+  <p>Your record may be creating a single file record (a record which points to just one file) or you may be creating a timeseries record (where multiple files are released over time. If the data relates to a period of time, choose "A timeseries record", otherwise choose "A single file record".<br/>
+  If your data comes in multiple formats, use a line for each.</p>
+  <p><strong>NB: Do not put links to web pages here.</strong> These and other useful documents that are not actually the data should go in the 'Additional Resources' section.</p>
   <hr/>
-  <p>See andmehulk on:</p>
+  <p>This record is:</p>
 
   <div class="radio">
     <label>
-      <input py:attrs="{'checked': 'checked' if not h.are_timeseries_resources(data) else None}" id="package_type-individual-radio" type="radio" name="package_type" value="individual"/>
-      Ühekordne
-    </label>
+      <input py:attrs="{'checked': 'checked' if not h.are_timeseries_resources(data) else None}" id="package_type-individual-radio" type="radio" name="package_type" value="individual"/>A single file record</label>
   </div>
   <div class="radio">
     <label>
-      <input py:attrs="{'checked': 'checked' if h.are_timeseries_resources(data) else None}" id="package_type-timeseries-radio" type="radio" name="package_type" value="timeseries"/>
-      Perioodiline
-    </label>
+      <input py:attrs="{'checked': 'checked' if h.are_timeseries_resources(data) else None}" id="package_type-timeseries-radio" type="radio" name="package_type" value="timeseries"/>A timeseries record</label>
   </div>
 
     <!-- The resource fieldset for a timeseries dataset -->
     <fieldset id="package_type-timeseries">
       <div class="well form-inline">
-        <label for="update_frequency" class="js-tooltip" title="Kui sageli faile uuendatakse. Kui on nö ühekordsed andmed, valige 'mitte kunagi'. Kui kunagi uuendati, aga nüüd enam mitte, valige 'katkestatud'.">
-          Uuendussagedus <i class="icon-info-sign"></i>
+        <label for="update_frequency" class="js-tooltip" title="How frequently new data files are published.  For one-off data, use 'never'. For those once updated but now discontinued, use 'discontinued'.">
+          Update frequency <i class="icon-info-sign"></i>
         </label>
         <select style="width: 200px;" class="form-control" id="update_frequency" name="update_frequency">
             <py:for each="freq_name, freq_desc in c.update_frequency">
@@ -138,9 +125,9 @@
               </option>
             </py:for>
         </select>
-        <label style="margin-left: 20px;" class="" for="update_frequency-other" title="Täita kui uuendussageduseks on valitud 'sisesta muu'.">Muu:</label>
+        <label style="margin-left: 20px;" class="" for="update_frequency-other" title="Fill in if update frequency doesn't fit under choices provided.">Other:</label>
         <input class="form-control" style="width: 200px;" id="update_frequency-other" name="update_frequency-other" type="text" value="${data.get('update_frequency-other', '')}"/>
-        <span style="font-size:0.75em;color:#8C8C8C;">(täida kui valisid 'muu sagedus')</span>
+        <span style="font-size:0.75em;color:#8C8C8C;">(fill in if you chose to specify 'other' frequency)</span>
       </div><!-- /well -->
       <py:if test="errors.get('update_frequency')">
         <div class="alert alert-danger">${errors.get('update_frequency', '')}</div>
@@ -150,10 +137,10 @@
       <thead>
         <tr>
           <th class="resource-move-cell"></th>
-          <th class="resource-date">  <div class="js-tooltip" title="Perioodilisuse alguskuupäev. Kui pole kindel, siis praegune kuupäev. Formaat: PP/KK/AAAA">Kuupäev: <i class="icon-info-sign"></i></div></th>
-          <th class="resource-name">  <div class="js-tooltip" title="Tekst, mida kuvatakse andmehulga lingi kõrval">Faili pealkiri: <i class="icon-info-sign"></i></div></th>
-          <th class="resource-url">   <div class="js-tooltip" title="Link veebiaadressile, kust andmehulk on alla tõmmatav">URL: <i class="icon-info-sign"></i></div></th>
-          <th class="resource-format"><div class="js-tooltip" title="Andmehulga faili formaat. Soovitatavad väärtused: CSV | RDF | XML | XBRL | SDMX | HTML+RDFa | Muu vastavalt sobivusele.">Formaat: <i class="icon-info-sign"></i></div></th>
+          <th class="resource-date">  <div class="js-tooltip" title="Start date for time series. If not sure, use the current date. Format: DD/MM/YYYY">Date: <i class="icon-info-sign"></i></div></th>
+          <th class="resource-name">  <div class="js-tooltip" title="Text that is displayed next to the link on the dataset record">File Title: <i class="icon-info-sign"></i></div></th>
+          <th class="resource-url">   <div class="js-tooltip" title="Where the file is already hosted">URL: <i class="icon-info-sign"></i></div></th>
+          <th class="resource-format"><div class="js-tooltip" title="The file format of the linked resource. Format choices: CSV | RDF | XML | XBRL | SDMX | HTML+RDFa | Other as appropriate.">Format: <i class="icon-info-sign"></i></div></th>
         </tr>
       </thead>
       <tbody>
@@ -199,8 +186,7 @@
                            value="${res.get(col, '')}"
                            class="form-control"/>
                     <span class="input-group-btn">
-                      <button id="timeseries_resources__${num}__validate-resource-button"
-                        class="validate-resource-button btn btn-default">Kontrolli</button>
+                      <button id="timeseries_resources__${num}__validate-resource-button" class="validate-resource-button btn btn-default">Check</button>
                     </span>
                   </span>
                 </py:when>
@@ -228,25 +214,25 @@
         </py:for>
       </tbody>
       </table>
-      <a href="javascript:;" id="timeseries_resources-add" class="btn btn-primary pull-right add-button"><i class="icon-plus"></i> &nbsp;Lisa rida</a>
+      <a href="javascript:;" id="timeseries_resources-add" class="btn btn-primary pull-right add-button"><i class="icon-plus"></i> &nbsp;Add Row</a>
 
-      <p class="field_error" py:if="errors.get('timeseries_resources', '')">Read vaid osaliselt täidetud.</p>
-      <button class="validate-resources-button btn btn-default" id="validate-timeseries-button">Kontrolli kõiki URLe</button>
-      <span class="checking-links-label" style="display: none;">Kontrollin, palun oodake...</span><br/>
+      <p class="field_error" py:if="errors.get('timeseries_resources', '')">Row(s) partially filled.</p>
+      <button class="validate-resources-button btn btn-default" id="validate-timeseries-button">Check all URLs</button>
+      <span class="checking-links-label" style="display: none;">Checking, please wait...</span><br/>
     </fieldset>
 
 
     <!-- The resource fieldset for an individual dataset -->
     <fieldset id="package_type-individual">
 
-      <p><strong>NB! Kui kuvatud link algab antud portaali aadressiga, on see üles laaditud fail</strong>(vt. vastav võimalus allpool).</p>
+      <p><strong>NB! If the displayed link begins with the portal address, it is an uploaded file</strong> (see entry field below).</p>
       <table class="table table-bordered table-condensed table-striped" id="individual_resources-table">
       <thead>
         <tr>
           <th></th>
-          <th class="resource-name"><div class="js-tooltip" title="Tekst, mida kuvatakse andmehulga lingi kõrval">Faili pealkiri: <i class="icon-info-sign"></i></div></th>
-          <th class="resource-url"> <div class="js-tooltip" title="Link veebiaadressile, kust andmehulk on alla tõmmatav">URL: <i class="icon-info-sign"></i></div></th>
-          <th class="resource-url"> <div class="js-tooltip" title="Andmehulga faili formaat. Soovitatavad väärtused: CSV | RDF | XML | XBRL | SDMX | HTML+RDFa | Muu vastavalt sobivusele.">Formaat: <i class="icon-info-sign"></i></div></th>
+          <th class="resource-name"><div class="js-tooltip" title="Text that is displayed next to the link of the dataset record">File title: <i class="icon-info-sign"></i></div></th>
+          <th class="resource-url"> <div class="js-tooltip" title="Where the file is already hosted">URL: <i class="icon-info-sign"></i></div></th>
+          <th class="resource-url"> <div class="js-tooltip" title="Format choices for the dataset: CSV | RDF | XML | XBRL | SDMX | HTML+RDFa | Other as appropriate">Format: <i class="icon-info-sign"></i></div></th>
         </tr>
       </thead>
       <tbody>
@@ -264,53 +250,24 @@
 
                     Code is long hand to keep the list comp understandable -->
               <py:for each="col in h.resource_extra_fields(res)">
-                <input
-                       id="individual_resources__${num}__${col}"
-                       name="individual_resources__${num}__${col}"
-                       type="hidden"
-                       value="${res.get(col, '')}"/>
+                <input id="individual_resources__${num}__${col}" name="individual_resources__${num}__${col}" type="hidden" value="${res.get(col, '')}"/>
               </py:for>
-              <span class="resource-id"><input name="individual_resources__${num}__id" type="hidden" value="${res.get('id', '')}" /></span>
-              <span class="resource-type"><input name="individual_resources__${num}__resource_type" type="hidden" value="${res.get('resource_type', '')}" /></span>
+              <span class="resource-id"><input name="individual_resources__${num}__id" type="hidden" value="${res.get('id', '')}"/></span>
+              <span class="resource-type"><input name="individual_resources__${num}__resource_type" type="hidden" value="${res.get('resource_type', '')}"/></span>
             </div>
           </td>
           <py:for each="col in c.resource_columns">
             <td class="resource-${col}">
             <py:choose test="">
-              <input py:when="col=='description'"
-                     id="individual_resources__${num}__${col}"
-                     name="individual_resources__${num}__${col}"
-                     type="text"
-                     value="${res.get(col, '')}"
-                     class="form-control ${'field_error' if h.cell_has_errors(errors,'individual_resources', num, col) else ''}"
-                     />
+              <input py:when="col=='description'" id="individual_resources__${num}__${col}" name="individual_resources__${num}__${col}" type="text" value="${res.get(col, '')}" class="form-control ${'field_error' if h.cell_has_errors(errors,'individual_resources', num, col) else ''}"/>
               <span class="input-group ${'error' if h.cell_has_errors(errors,'individual_resources', num, col) else ''}" py:when="col=='url'">
-                <input id="individual_resources__${num}__${col}"
-                       name="individual_resources__${num}__${col}"
-                       type="text"
-                       value="${res.get(col, '')}"
-                       class="form-control"/>
+                <input id="individual_resources__${num}__${col}" name="individual_resources__${num}__${col}" type="text" value="${res.get(col, '')}" class="form-control"/>
                 <span class="input-group-btn">
-                  <button id="individual_resources__${num}__validate-resource-button"
-                      class="validate-resource-button btn btn-default" style="font-weight:0.9em">Kontrolli</button>
+                  <button id="individual_resources__${num}__validate-resource-button" class="validate-resource-button btn btn-default" style="font-weight:0.9em">Kontrolli</button>
                 </span>
               </span>
-              <input py:when="col=='format'"
-                     id="individual_resources__${num}__${col}"
-                     name="individual_resources__${num}__${col}"
-                     type="text"
-                     value="${res.get(col, '')}"
-                     data-provider="typeahead"
-                     data-items="8"
-                     class="form-control format-typeahead ${'field_error' if h.cell_has_errors(errors,'additional_resources', num, col) else ''}"
-                     />
-              <input py:otherwise=""
-                     id="individual_resources__${num}__${col}"
-                     name="individual_resources__${num}__${col}"
-                     type="text"
-                     value="${res.get(col, '')}"
-                     class="input-small ${'field_error' if h.cell_has_errors(errors,'individual_resources', num, col) else ''}"
-                     />
+              <input py:when="col=='format'" id="individual_resources__${num}__${col}" name="individual_resources__${num}__${col}" type="text" value="${res.get(col, '')}" data-provider="typeahead" data-items="8" class="form-control format-typeahead ${'field_error' if h.cell_has_errors(errors,'additional_resources', num, col) else ''}"/>
+              <input py:otherwise="" id="individual_resources__${num}__${col}" name="individual_resources__${num}__${col}" type="text" value="${res.get(col, '')}" class="input-small ${'field_error' if h.cell_has_errors(errors,'individual_resources', num, col) else ''}"/>
             </py:choose>
             </td>
           </py:for>
@@ -318,27 +275,27 @@
         </py:for>
       </tbody>
       </table>
-      <a href="javascript:;" id="individual_resources-add" class="btn btn-primary pull-right add-button"><i class="icon-plus"></i> &nbsp;Lisa rida</a>
+      <a href="javascript:;" id="individual_resources-add" class="btn btn-primary pull-right add-button"><i class="icon-plus"></i> &nbsp;Add Row</a>
 
-      <p class="field_error" py:if="errors.get('individual_resources', '')">Read vaid osaliselt täidetud.</p>
-      <button class="btn-default validate-resources-button btn" id="validate-timeseries-button">Kontrolli kõike URLe...</button>
-      <span class="checking-links-label" style="display: none;">Kontrollin, palun oodake...</span><br/>
+      <p class="field_error" py:if="errors.get('individual_resources', '')">Row(s) partially filled.</p>
+      <button class="btn-default validate-resources-button btn" id="validate-timeseries-button">Check all URLs</button>
+      <span class="checking-links-label" style="display: none;">Checking, please wait...</span><br/>
     </fieldset>
     <hr/>
 
     <div id="file-upload-div">
         <p>
-            <strong>Andmehulka saab üles laadida ka faili(de)na</strong>, kasutades alljärgnevaid sisendeid.<br/>
-            Nad võivad olla lisaks ülaltoodud linkidele, kuid võite ka piirduda ainult üles laaditud failidega.<br/>
-            Kuna suuri andmekogusid on otstarbekam serveeerida teabevaldaja lingilt, on laaditavate failide <strong>suuruse piirang ${config.get('ckan.max_resource_size', '10')} MB</strong>. Te saate korraga üles laadida ühe faili.
-            Täiendavate failide laadimiseks peate antud vormile läbi andmehulga muutmise operatsiooni tagasi pöörduma.<br/>
+            <strong>Datasets can also be uploaded as files</strong>, using the following inputs.<br/>
+            This can be done in addition to the links referred to above, but it is also possible to have uploaded files only.<br/>
+            Since it is more expedient to serve large datasets from an information holder's link, the ceiling on the size of uploadable files is <strong>${config.get('ckan.max_resource_size', '10')} MB</strong>. You can upload only one file at a time.
+            In order to upload additional files, you must return to this form via the operation of dataset change.<br/>
         </p>
         <table class="table table-bordered table-condensed table-striped" id="file-upload-table">
             <thead>
                 <tr>
-                    <th class="resource-name" style="width:30%"><div class="js-tooltip" title="" data-original-title="Tekst, mida kuvatakse andmehulga lingi kõrval">Faili pealkiri: <i class="icon-info-sign"></i></div></th>
-                    <th class="resource-url" style="width:50%"><div class="js-tooltip" title="" data-original-title="Tekst, mida kuvatakse andmehulga lingi kõrval">Lühikirjeldus: <i class="icon-info-sign"></i></div></th>
-                    <th class="resource-name" style="width:20%"><div class="js-tooltip" title="" data-original-title="Faili formaat">Faili formaat: <i class="icon-info-sign"></i></div></th>
+                    <th class="resource-name" style="width:30%"><div class="js-tooltip" title="" data-original-title="${_('The text that is displayed next to the link of the dataset record')}">File title: <i class="icon-info-sign"></i></div></th>
+                    <th class="resource-url" style="width:50%"><div class="js-tooltip" title="" data-original-title="${_('The text that is displayed next to the link of the dataset record')}">Description: <i class="icon-info-sign"></i></div></th>
+                    <th class="resource-name" style="width:20%"><div class="js-tooltip" title="" data-original-title="${_('Faili formaat')}">File format: <i class="icon-info-sign"></i></div></th>
                 </tr>
             </thead>
             <tbody>
@@ -348,32 +305,32 @@
                     <td class="resource-format "><input type="text" name="file_format" value="" class="form-control format-typeahead" data-provider="typeahead" data-items="8"/></td>
                 </tr>
                 <tr class="individual_resources__1 resource">
-                    <td colspan="3"><label for="file-upload-input">Laadi fail:</label>&nbsp;<input id="file-upload-input" type="file" name="file_uploaded" value="" style="display:inline"/></td>
+                    <td colspan="3"><label for="file-upload-input">Upload file:</label>&nbsp;<input id="file-upload-input" type="file" name="file_uploaded" value="" style="display:inline"/></td>
                 </tr>
             </tbody>
         </table>
     </div>
     <hr/>
 
-    <p><strong>Formaat:</strong> Kirjeldab faili formaati. Soovitatavad väärtused:<br/>
-    CSV | RDF | XML | XBRL | SDMX | HTML+RDFa | Muu vastavalt sobivusele
+    <p><strong>Format:</strong> This should give the file format in which the data is supplied. Format choices:<br/>
+    CSV | RDF | XML | XBRL | SDMX | HTML+RDFa | Other as appropriate
     </p>
 
 </fieldset>
 
 
 <fieldset class="tab-pane boxed whitebox fade" id="section-description-field">
-  <h3>Kirjeldus</h3>
-  <p class="instructions basic">Lisage andmehulga kirjeldus. Mida see andmehulk sisaldab/näitab? Millal on ta loodud?</p>
-  <p class="instructions further instruction-needed">(Kirjeldust kuvatakse sageli andmehulga pealkirja juures. Ta võiks alata lühikese lausega, mis kirjeldab andmhulga sisu võimalikult täpselt. Muuhulgas võiks siin kirjeldada ka kõik andmehulga kvaliteedi ja kasutamisega seotud piirangud. Ka ebatäielikud andmehulgad võivad huvi pakkuda.)</p>
+  <h3>Description</h3>
+  <p class="instructions basic">Please add a description of the data set.  What does the data contain/show?  Why was it produced?</p>
+  <p class="instructions further instruction-needed">(It is often displayed with the package title. In particular, it should start with a short sentence that describes the data set succinctly, because the first few words alone may be used in some views of the data sets. Here is the place to state if there are any limitations or deficiencies to the data in order to enable users to evaluate the information; even incomplete data may be adequate for some users).</p>
   <textarea class="form-control field_req" cols="260" id="notes" name="notes" rows="10">${data.get('notes', '')}</textarea>
   <p class="field_error" py:if="errors.get('notes', '')">${errors.get('notes', '')}</p>
 </fieldset>
 
 <fieldset class="tab-pane boxed whitebox fade form-inline" id="section-licence-field">
-  <h3>Litsents</h3>
+  <h3>Licence</h3>
     <div class="form-group">
-    <label for="license_id">Litsents:</label>
+    <label for="license_id">Licence:</label>
     <select id="license_id" class="form-control" name="license_id">
 
       <!--! An explanation of what's going on here...
@@ -393,20 +350,19 @@
         <option value="${license_id}" py:attrs="{'selected': 'selected' if data.get('license_id', 'uk-ogl') == license_id else None}">${license_desc}</option>
       </py:for>
 
-      <option py:if="h.get_license_extra(c.pkg)" value="__extra__" selected="selected">Andmekorjest saadud litsents...</option>
-      <option py:if="not h.get_license_extra(c.pkg)" value="" py:attrs="{'selected': 'selected' if (data.get('license_id', 'uk-ogl') not in h.get_ckan_licenses()) else None}">Määra muu...</option>
-
+      <option py:if="h.get_license_extra(c.pkg)" value="__extra__" selected="selected">Harvested license...</option>
+      <option py:if="not h.get_license_extra(c.pkg)" value="" py:attrs="{'selected': 'selected' if (data.get('license_id', 'uk-ogl') not in h.get_ckan_licenses()) else None}">Specify other...</option>
     </select>
   </div>
-  <p class="instructions basic">Litsents, mille alusel antud andmehulk on publitseeritud.</p>
+  <p class="instructions basic">The licence under which the dataset is released.</p>
   <p class="instructions further">
-    Avaandmete hulgal peab olema litsents, mis võimaldab tema vaba, piiranguteta kasutamist, töötlemist ja levitamist,<br/>
-    sealjuures võimaldama levitamist kasutaja valikul nii tasuta kui tasu eest.<br/>
-    Sobiva litsentsi puudumisel ülal pakutavas valikus palume valida "Muu" ning täita vastav tekstiväli.
+    Open datasets must be published under a licence which permits their free and unlimited use, processing and distribution.<br/>
+    Under the licence, it must be possible to distribute the dataset at the discretion of the user either without charge or for a fee.<br/>
+    If the appropriate licence is not included in the menu above, please select 'other' and fill out the corresponding field.
   </p>
 
     <div class="form-group choose-other-licence">
-      <label for="license_extra">Litsents (muu):</label>
+      <label for="license_extra">Licence (other):</label>
       <textarea class="form-control" py:if="not h.get_license_extra(c.pkg)" rows="1" cols="60" id="access_constraints" name="access_constraints">${data.get('access_constraints', '') if data.get('access_constraints', '') else (data.get('license_id', 'uk-ogl') if (data.get('license_id', 'uk-ogl') not in h.get_ckan_licenses()) else '')}</textarea>
       <textarea class="form-control" py:if="h.get_license_extra(c.pkg)" rows="1" cols="60" id="access_constraints" name="license_extra" disabled="disabled">${h.get_license_extra(c.pkg)}</textarea>
       <input class="form-control" py:if="h.get_license_extra(c.pkg)" rows="10" cols="60" id="actual_access_constraints" name="access_constraints" type="hidden" value="${c.pkg.extras.get('access_constraints','')}"/>
@@ -415,12 +371,12 @@
 </fieldset>
 
 <fieldset class="tab-pane boxed whitebox fade" id="section-publisher-field">
-  <h3>Teabevaldaja</h3>
+  <h3>Publisher</h3>
     <div class="form-group">
-      <label for="owner_org">Andmehulga avaldaja: </label>
+      <label for="owner_org">Published by: </label>
       <!--! data['owner_org'] is a group.id. Either it is the existing value in the database, or the value from this form that was submitted invalid, or from the owner_org={id} URL parameter. -->
       <select class="form-control" id="owner_org" name="owner_org" py:with="owner_org=data.get('owner_org')">
-        <option value=" " py:attrs="{'selected': 'selected' if not owner_org else None}" >Valige teabevaldaja...</option> <!--! NB Value is " " to ensure that validation fails if this is selected, due to it checking 'name' is not_empty. In addition, in logic/auth/create.py this particular value is authorized, so when you submit the form with this value, rather that say 'not authorized', it carries on to validation where it fails and shows the user a better error. -->
+        <option value=" " py:attrs="{'selected': 'selected' if not owner_org else None}" >Please select a publisher...</option> <!--! NB Value is " " to ensure that validation fails if this is selected, due to it checking 'name' is not_empty. In addition, in logic/auth/create.py this particular value is authorized, so when you submit the form with this value, rather that say 'not authorized', it carries on to validation where it fails and shows the user a better error. -->
         <py:for each="publisher_name, publisher in sorted(c.publishers.items())">
           <option value="${publisher.id}" py:attrs="{'selected': 'selected' if owner_org == publisher.id else None}" >
             ${publisher['title']}
@@ -430,46 +386,46 @@
     </div>
     <p class="field_error" py:if="errors.get('owner_org', '')">Valige teabevaldaja.</p>
     <hr/>
-  <h3>Kontaktandmed</h3>
-    <p>Vaikimisi kuvatakse andmehulga vaatelehel teabevaldaja infos määratud kontaktandmeid. Alltoodud sektsioonis on teil võimalik neid antud andhulga tarvis "Muuda" nupu abil muuta.</p>
+  <h3>Contact details</h3>
+    <p>Here are the contact details that will be displayed for this dataset.  The default Contact information is taken from the selected publisher, but you may edit it for this dataset.</p>
     <py:with vars="group=h.edit_publisher_group(data)">
-      <fieldset id="publisher-information-field" class="well" >
-        <h3>Andmehulga valdaja kontaktandmed</h3>
-        <p><b>Nimi: </b> <span id="contact-name-label">${data.get('contact-name', '')}</span></p>
-        <p><b>E-mail: </b><span id="contact-email-label">${data.get('contact-email', '')}</span></p>
-        <p><b>Telefon: </b><span id="contact-phone-label">${data.get('contact-phone', '')}</span></p>
+      <fieldset id="publisher-information-field" class="well">
+        <h3>Publisher Contact Details</h3>
+        <p><b>Name:</b> <span id="contact-name-label">${data.get('contact-name', '')}</span></p>
+        <p><b>Email:</b><span id="contact-email-label">${data.get('contact-email', '')}</span></p>
+        <p><b>Phone:</b><span id="contact-phone-label">${data.get('contact-phone', '')}</span></p>
 
         <input id="contact-name" name="contact-name" type="hidden" value="${data.get('contact-name', '')}"/>
         <input id="contact-email" name="contact-email" type="hidden" value="${data.get('contact-email', '')}"/>
         <input id="contact-phone" name="contact-phone" type="hidden" value="${data.get('contact-phone', '')}"/>
 
-        <a class="btn btn-primary" data-toggle="modal" href="#edit-contact">Muuda</a>
+        <a class="btn btn-primary" data-toggle="modal" href="#edit-contact">Edit</a>
         <div style="display: none;" class="modal dgu-editor" id="edit-contact">
           <div class="modal-dialog">
           <div class="modal-content">
           <div class="modal-header">
             <a class="close" data-dismiss="modal">x</a>
             <!--button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button-->
-            <h4 class="modal-title">Muuda kontaktandmeid</h4>
+            <h4 class="modal-title">Edit Contact Information</h4>
           </div>
           <div class="modal-body">
-            <p>Muuda alltoodud välju.</p>
+            <p>Edit any of the contact details below.</p>
             <div class="form-group">
-              <label class="control-label" for="contact-name-editor">Nimi:</label>
-              <input class="form-control" type="text" name="contact-name-dialog"  data-label="#contact-name-label"  data-input="#contact-name" value="${data.get('contact-name', '')}" />
+              <label class="control-label" for="contact-name-editor">Name:</label>
+              <input class="form-control" type="text" name="contact-name-dialog" data-label="#contact-name-label" data-input="#contact-name" value="${data.get('contact-name', '')}"/>
             </div>
             <div class="form-group">
               <label class="control-label" for="contact-email-editor">E-mail:</label>
-              <input class="form-control" type="text" name="contact-email-dialog" data-label="#contact-email-label" data-input="#contact-email" value="${data.get('contact-email', '')}" />
+              <input class="form-control" type="text" name="contact-email-dialog" data-label="#contact-email-label" data-input="#contact-email" value="${data.get('contact-email', '')}"/>
             </div>
             <div class="form-group">
-              <label class="control-label" for="contact-phone-editor">Telefon:</label>
-              <input class="form-control" type="text" name="contact-phone-dialog" data-label="#contact-phone-label" data-input="#contact-phone" value="${data.get('contact-phone', '')}" />
+              <label class="control-label" for="contact-phone-editor">Phone:</label>
+              <input class="form-control" type="text" name="contact-phone-dialog" data-label="#contact-phone-label" data-input="#contact-phone" value="${data.get('contact-phone', '')}"/>
             </div>
           </div>
           <div class="modal-footer">
-            <a href="#" data-dismiss="modal" class="dgu-editor-save btn btn-primary">Salvesta muudatused</a>
-            <a href="#" data-dismiss="modal" class="btn btn-black-text">Sulge</a>
+            <a href="#" data-dismiss="modal" class="dgu-editor-save btn btn-primary">Save Changes</a>
+            <a href="#" data-dismiss="modal" class="btn btn-black-text">Close</a>
           </div>
           </div>
           </div>
@@ -481,13 +437,13 @@
 
 <fieldset class="tab-pane boxed whitebox fade" id="section-themes-field">
     <div style="width: 45%; float: left; margin-right: 4%;">
-        <h3 style="font-weight: bold;">Põhiteema</h3>
-    <p>1. Palun valige põhiteema, mida antud andmehulk katab.</p>
+    <h3 style="font-weight: bold;">Primary Theme</h3>
+    <p>1. Please choose a primary theme which this data record falls under from the options below.</p>
         ${primary_theme_input(data, errors)}
     </div>
     <div style="width: 45%; float: left; padding-left: 4%; border-left: 1px solid #aaa;">
-      <h3>Muud teemad</h3>
-      <p>2. Valige muud teemad, mida antud andmehulk katab:</p>
+      <h3>Secondary Theme</h3>
+      <p>2. If there are other themes in this data, select them here:</p>
       <div class="well">
         ${secondary_theme_input(data, errors)}
       </div>
@@ -495,11 +451,8 @@
     <div class="clearfix">&nbsp;</div>
 
     <hr/>
-    <h3>Võtmesõnad</h3>
-    <p>
-        Loetlege võtmesõnad, mis lisaks ülaltoodud teemadele iseloomustavad teie andmhulka (näited: e-valitsus, teabelevi, teabepoliitika jne). Eraldage võtmesõnad või sõnapaarid komadega.
-        Soovitame kasutada <a href="http://eurovoc.europa.eu/drupal/?q=et/navigation&amp;cl=et" target="_blank">EuroVoc sõnastikku</a>.
-    </p>
+    <h3>Keywords</h3>
+    <p>Please list keywords which describe the subject of this data in commonly used abstract terms e.g. "e-government, press work, information policy". Put commas between each phrase or keyword. We recommend <a href="http://eurovoc.europa.eu/drupal/?q=et/navigation&amp;cl=en" target="_blank">EuroVoc dictionary</a> for help.</p>
     <div class="form-group">
       <input class="form-control long autocomplete-tag" data-tagcomplete-queryparam="query" data-tagcomplete-url="/api/action/tag_autocomplete" id="tag_string" name="tag_string" size="60" type="text"
            value="${data.get('tag_string') or ', '.join(h.free_tags(data))}" />
@@ -507,15 +460,15 @@
 </fieldset>
 
 <fieldset class="tab-pane boxed whitebox fade" id="section-additional_resources-field">
-  <h3>Täiendavad ressursid</h3>
-  <p>Te saate lisada linke täiendavatele ressurssidele (nt. dokumendid, veebilehed või failid), mis antud andmehulka kirjeldavad või on sellega seotud. Ühe ressursi kohta kasutage ühte linki.</p>
+  <h3>Additional resources</h3>
+  <p>You can add links to additional resources here.  Use a link for each resource.  This could be PDFs of files explaining the data or links to a website with more information. Use one link per resource.</p>
   <table class="table table-bordered table-striped table-condensed flexitable" id="additional_resources-table">
     <thead>
       <tr>
         <th></th>
-        <th class="resource-name">Kirjeldus:</th>
-        <th class="resource-url"><div class="js-tooltip" title="Täiendava ressursi veebiaadress.">Link: <i class="icon-info-sign"></i></div></th>
-        <th class="resource-url"><div class="js-tooltip" title="Täiendava ressursi formaat">Formaat: <i class="icon-info-sign"></i></div></th>
+        <th class="resource-name">Description:</th>
+        <th class="resource-url"><div class="js-tooltip" title="This is the Internet link directly to the data.">Link: <i class="icon-info-sign"></i></div></th>
+        <th class="resource-url"><div class="js-tooltip" title="The file format of the linked resource">Format: <i class="icon-info-sign"></i></div></th>
       </tr>
     </thead>
     <tbody>
@@ -562,7 +515,7 @@
                      class="form-control"/>
               <span class="input-group-btn">
                 <button id="additional_resources__${num}__validate-resource-button"
-                        class="validate-resource-button btn btn-default">Kontrolli</button>
+                        class="validate-resource-button btn btn-default">Check</button>
               </span>
             </span>
           </td>
@@ -577,17 +530,15 @@
       </py:for>
     </tbody>
     </table>
-    <a href="javascript:;" id="additional_resources-add" class="btn btn-primary pull-right add-button"><i class="icon-plus"></i> &nbsp;Lisa rida</a>
-    <p style="display: block;" class="field_error" py:if="errors.get('additional_resources', '')">Read osaliselt täitmata.</p>
-    <button  class="validate-resources-button btn btn-default" id="validate-timeseries-button">Kontrolli kõiki URLe</button>
-    <span class="checking-links-label" style="display: none;">Kontrollin, palun oodake...</span>
-    <hr/>
-
+     <a href="javascript:;" id="additional_resources-add" class="btn btn-primary pull-right add-button"><i class="icon-plus"></i> &nbsp;Add row</a>
+    <p style="display: block;" class="field_error" py:if="errors.get('additional_resources', '')">Row(s) partially filled.</p>
+    <button class="validate-resources-button btn btn-default" id="validate-timeseries-button">Check all URLs</button>
+    <span class="checking-links-label" style="display: none;">Checking, please wait...</span>
 </fieldset>
 
 <fieldset class="tab-pane boxed whitebox fade" id="section-temporal-field">
-  <h3>Aeg ja kuupäev</h3>
-  <p>Ajaline periood, mida antud andmehulk katab.</p>
+  <h3>Time &amp; date</h3>
+  <p>Temporal coverage of the dataset.</p>
   <div class="form-inline">
     <div class="form-group">
       <input style="width:300px;" class="form-control needs-datepicker" id="temporal_coverage-from" name="temporal_coverage-from" type="text" value="${data.get('temporal_coverage-from', '')}" /> -
@@ -596,19 +547,19 @@
   </div>
   <p style="display: block;" class="field_error" py:if="errors.get('temporal_coverage-from', '')">${errors.get('temporal_coverage-from', '')}</p>
   <p style="display: block;" class="field_error" py:if="errors.get('temporal_coverage-to', '')">${errors.get('temporal_coverage-to', '')}</p>
-  <p class="hints">nt. 21.03.2007 - 03.10.2009 või 07:45 31.03.2006</p>
-  <p class="instructions further">Kui võimalik, siis näidake nii kuupäev kui kellaaeg. Kui andmed katavad vaid ühte päeva, siis võib teise lahtri tühjaks jätta.</p>
+  <p class="hints">e.g. 21/03/2007 - 03/10/2009 or 07:45 31/03/2006</p>
+  <p class="instructions further">If available, please indicate the time as well as the date. Where data covers only a single day, the second box can be left blank.</p>
 </fieldset>
 
 <fieldset class="tab-pane boxed whitebox fade" id="section-state-field" py:if="h.is_sysadmin()">
-    <h4>Staatus</h4>
+    <h4>State</h4>
     <div class="well">
-      <p>NB: Ohtlik operatsioon! (Ainult süsteemiadministraatoritele)</p>
+      <p>NB: Dangerous operation! (Available to sysadmins only)</p>
       <span>
-      See andmehulk on&nbsp;&nbsp;
+      This dataset is&nbsp;&nbsp;
       <select id="state" class="dataset-delete" name="state" style="display:inline;">
-        <option py:attrs="{'selected': 'selected' if data.get('state') == 'active' else None}" value="active">aktiivne</option>
-        <option py:attrs="{'selected': 'selected' if data.get('state') == 'deleted' else None}" value="deleted">kustutatud</option>
+        <option py:attrs="{'selected': 'selected' if data.get('state') == 'active' else None}" value="active">active</option>
+        <option py:attrs="{'selected': 'selected' if data.get('state') == 'deleted' else None}" value="deleted">deleted</option>
       </select>
       </span>
     </div>
@@ -621,16 +572,15 @@
   <div id="nav-controls" class="submit">
     <div class="nav-backnext">
       <py:if test="not h.is_package_edit_form(data)">
-        <input disabled="disabled" class="btn btn-primary" type="button" id="back-button" value="&laquo; Tagasi" />
-        <input                     class="btn btn-primary" type="button" id="next-button" value="Edasi &raquo;" />
+        <input disabled="disabled" class="btn btn-primary" type="button" id="back-button" value="${_('&laquo; Back')}"/>
+        <input class="btn btn-primary" type="button" id="next-button" value="${_('Next &raquo;')}"/>
       </py:if>
     </div>
   </div>
   <div id="disclaimer">
-    <input id="save-button" class="btn btn-primary" name="save" type="submit" value="Salvesta ja lõpeta" />
+    <input id="save-button" class="btn btn-primary" name="save" type="submit" value="${_('Save and Finish')}"/>
     <p class="hints">
-      <strong>Tähtis:</strong> Salvestades lubate avaldada oma andmehulga vastavalt antud portaali <a href="/kasutustingimused">kasutustingimustele</a>.
-    </p>
+      <strong>Important:</strong>By submitting content, you agree to release your contributions under the <a href="/kasutustingimused">terms &amp; conditions</a> of the site.</p>
   </div>
 </div><!-- /form-actions -->
 
@@ -644,14 +594,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <!--button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button-->
-        <h4 class="modal-title">Loobu kuupäevadest?</h4>
+        <h4 class="modal-title">Discard date information?</h4>
       </div>
       <div class="modal-body">
-        <p>Perioodilisest ühekordseks tagasi muutmisel kaovad sisestatud perioodilisuse alguskuupäevad. Kas jätkame?</p>
+        <p>Changing from a 'timeseries record' to a 'single file record' will discard the <code>date</code> information for each resource. Continue?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn cancel btn-default" data-dismiss="modal">Ei</button>
-        <button type="button" class="btn ok btn-primary" data-dismiss="modal">Jah</button>
+        <button type="button" class="btn cancel btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn ok btn-primary" data-dismiss="modal">OK</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

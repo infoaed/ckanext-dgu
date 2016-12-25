@@ -6,21 +6,21 @@
   <py:def function="page_title">${c.group.display_name}</py:def>
 
   <py:match path="breadcrumbs">
-    <li><a href="/publisher">Teabevaldajad</a></li>
+    <li><a href="/publisher">Publishers</a></li>
     <li><a href="/publisher/${c.group.name}">${c.group.display_name}</a></li>
   </py:match>
 
   <py:match path="content">
     <div class="dropdown-buttons">
       <span class="dropdown">
-        <a href="#" class="js-tooltip dropdown-button" data-placement="top" data-delay="300" data-toggle="dropdown" title="" data-original-title="Kontaktandmed">
+        <a href="#" class="js-tooltip dropdown-button" data-placement="top" data-delay="300" data-toggle="dropdown" title="" data-original-title="${_('Contact&nbsp;Details')}">
           <i class="icon-envelope icon-2x"></i>
           <div class="dropdown-chevron"></div>
         </a>
         <div class="panel panel-default dropdown-menu" role="menu" aria-labelledby="dLabel">
-          <div class="panel-heading">Kontaktid</div>
+          <div class="panel-heading">Contacts</div>
           <div class="panel-body">
-            <b>Küsimused:</b>
+            <b>Enquiries:</b>
             <ul style="margin-bottom: 5px;">
               ${c.group_extras.get('contact-name')}
               ${contact_details(c.group_extras.get('contact-name'),
@@ -33,12 +33,12 @@
         </div>
       </span>
       <span class="dropdown js-trigger-publisher-scroll">
-        <a href="#" class="js-tooltip dropdown-button" data-placement="top" data-delay="300" data-toggle="dropdown" title="" data-original-title="Teabevaldajate&nbsp;hierarhia">
+        <a href="#" class="js-tooltip dropdown-button" data-placement="top" data-delay="300" data-toggle="dropdown" title="" data-original-title="${_('Publisher&nbsp;Hierarchy')}">       
           <i class="icon-sitemap icon-2x"></i>
           <div class="dropdown-chevron"></div>
         </a>
         <div class="dropdown-menu panel panel-default" role="menu" aria-labelledby="dLabel">
-          <div class="panel-heading">Teabevaldajate hierarhia</div>
+          <div class="panel-heading">Publisher Hierarchy</div>
           <div class="panel-body publisher-dropdown">
             <py:def function="render_child(pub)">
                 <div class="publisher">
@@ -64,40 +64,40 @@
           </div>
         </div>
       </span>
-      <span class="dropdown" py:if="c.userobj">
-        <a href="#" class="js-tooltip dropdown-button" data-placement="top" data-delay="300" data-toggle="dropdown" title="" data-original-title="Administraatorid">
+     <span class="dropdown" py:if="c.userobj">
+        <a href="#" class="js-tooltip dropdown-button" data-placement="top" data-delay="300" data-toggle="dropdown" title="" data-original-title="${_('Administrators')}">
           <i class="icon-group icon-2x"></i>
           <div class="dropdown-chevron"></div>
         </a>
-        <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-          <b>Administraatorid:</b>
+         <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+          <b>Administrators:</b>
           <ul py:with="count = c.administrators.count()">
             <py:if test="c.is_an_official">
               <li py:for="admin in c.administrators">${h.linked_user(admin, maxlength=40)}</li>
             </py:if>
             <py:if test="not c.is_an_official">
-              <li py:if="count">${count} administraator${h.pluralise_text(count)}</li>
-              <li py:if="not count">Määramata</li>
+              <li py:if="count">${count} administrator${h.pluralise_text(count)}</li>
+              <li py:if="not count">No-one assigned</li>
             </py:if>
           </ul>
-          <b>Toimetajad:</b>
+          <b>Editors:</b>
           <ul py:with="count = c.editors.count()">
             <py:if test="c.is_an_official">
               <li py:for="editor in c.editors">${h.linked_user(editor, maxlength=35)}</li>
             </py:if>
             <py:if test="not c.is_an_official">
-              <li py:if="count">${count} toimetaja${h.pluralise_text(count)}</li>
-              <li py:if="not count">Määramata</li>
+              <li py:if="count">${count} editor${h.pluralise_text(count)}</li>
+              <li py:if="not count">No-one assigned</li>
             </py:if>
             <li py:if="not c.userobj in c.administrators and not c.userobj in c.editors">
               <b><a href="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='apply', id=c.group.name)}">
-                  <u>Avalda soovi saada toimetajaks</u> &nbsp;&raquo;
+                  <u>Request to become an editor</u> &nbsp;&raquo;
               </a></b>
             </li>
           </ul>
         </div>
       </span>
-      <a class="js-tooltip dropdown-button rss-link" data-placement="top" title="" data-delay="300" data-original-title="RSS&nbsp;Feed" href="${h.url(controller='feed', action='organization', id=c.group['name'])}">
+      <a class="js-tooltip dropdown-button rss-link" data-placement="top" title="" data-delay="300" data-original-title="${_('RSS&nbsp;Feed')}" href="${h.url(controller='feed', action='organization', id=c.group['name'])}">
         <i class="icon-rss icon-2x"></i>
       </a>
     </div>
@@ -106,7 +106,7 @@
     </h1>
     <py:if test="c.group['state'] != 'active'">
       <div class="panel panel-danger">
-        <div class="panel-heading"><strong>Staatus:</strong> ${c.group['state']}</div>
+        <div class="panel-heading"><strong>State:</strong> ${c.group['state']}</div>
       </div>
     </py:if>
     <div class="row" py:with="
@@ -116,7 +116,7 @@
       >
       <div class="${if_(adminmode,'col-md-8','col-md-12')}">
         <p py:if="h.group_category(c.group_extras)" class="pre-notes">
-          <b>Kategooria: </b> ${h.group_category(c.group_extras)}
+          <b>Category:</b> ${h.group_category(c.group_extras)}
         </p>
         <div class="notes" py:with="description = (c.description or '')">
           ${h.render_markdown(description)}
@@ -125,17 +125,17 @@
       <div class="col-md-4" py:if="adminmode">
         <div class="admin-toolkit">
           <div class="panel panel-info">
-            <div class="panel-heading" style="font-weight: bold;">Administraatori tööriistad</div>
+            <div class="panel-heading" style="font-weight: bold;">Administrator Tools</div>
             <div class="panel-body">
               <ul class="administrator-tools">
                 <li py:if="organizationupdate">
-                  <a href="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='edit', id=c.group.name)}"><span class="wrap-icon"><i class="icon-edit"></i> </span>Muuda teabevaldaja metaandmeid &raquo;</a>
+                  <a href="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='edit', id=c.group.name)}"><span class="wrap-icon"><i class="icon-edit"></i> </span>Edit publisher properties &raquo;</a>
                 </li>
                 <li py:if="packagecreate">
-                  <a href="${h.url_for('dataset_new')}?owner_org=${c.group.name}"><span class="wrap-icon"><i class="icon-plus-sign-alt"></i> </span>Lisa uus andmehulk &raquo;</a>
+                  <a href="${h.url_for('dataset_new')}?owner_org=${c.group.name}"><span class="wrap-icon"><i class="icon-plus-sign-alt"></i> </span>Add a new dataset &raquo;</a>
                 </li>
                 <li py:if="organizationupdate">
-                  <a href="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='users', id=c.group.name)}"><span class="wrap-icon"><i class="icon-unlock-alt"></i> </span>Halda kasutajaõigusi &raquo;</a>
+                  <a href="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='users', id=c.group.name)}"><span class="wrap-icon"><i class="icon-unlock-alt"></i> </span>Edit user permissions &raquo;</a>
                 </li>
               </ul>
             </div>
@@ -146,19 +146,17 @@
 
     <py:def function="publisher_extra_options">
       <label class="checkbox" id="publisher-extra-options">
-        <input type="checkbox" name="publisher-results-include-subpub" class="inline" />
-        Kaasa arvatud alam-teabevaldajate andmehulgad
-      </label>
+        <input type="checkbox" name="publisher-results-include-subpub" class="inline"/>Include datasets from sub-publishers</label>
     </py:def>
 
-    ${search_form(
-      placeholder='Otsi teabevaldajaid',
+   ${search_form(
+      placeholder="_('Search publisher)",
       set_fields={'publisher':c.group.name},
       extra_options=publisher_extra_options,
     )}
     <div class="clearfix" style="height: 30px;">&nbsp;</div>
 
-    <h2>Populaarsed andmehulgad</h2>
+    <h2>Popular Datasets</h2>
     <div py:if="c.page.items">
       ${package_list_from_dict(c.page.items,mini=True)}
     </div>
@@ -169,7 +167,7 @@
   </py:match>
 
   <py:def function="optional_feed">
-    <link rel="alternate" type="application/atom+xml" title="${g.site_title} - Andmehulgad organisatsioonis '${c.group['title']}'"
+    <link rel="alternate" type="application/atom+xml" title="${g.site_title} - Datasets in organization '${c.group['title']}'"
       href="${h.url(controller='feed', action='organization', id=c.group['name'])}" />
   </py:def>
 

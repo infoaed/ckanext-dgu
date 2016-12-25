@@ -26,7 +26,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>${page_title()} | Avaandmete portaal</title>
+  <title>${page_title()} | Estonian Open Data Portal</title>
   <meta name="description" content="" />
   <meta name="author" content="" />
 
@@ -126,18 +126,18 @@ ${h.top_level_init()}
 
   <div id="blackbar" class="${if_(h.check_access('package_create'),'with-publisher','without-publisher')}">
     <div class="container">
-      <a class="brand" href="/" rel="home"></a>
+      <a class="brand" href="${h.url_for('/')}" rel="home"></a>
       <div class="chevron position2"></div>
       <nav id="dgu-nav">
-        <div class="text-links">
-           <a href="/" class="nav-home">AVALEHT</a>
-           <a href="/data" class="trigger-subnav nav-data">ANDMED</a>
-           <a href="/apps" class="trigger-subnav nav-apps">RAKENDUSED</a>
-           <a href="/interact" class="trigger-subnav nav-interact">LISAINFO</a>
+        <div class="text-links allcapsmenu">
+           <a href="${h.url_for('/')}" class="nav-home">Home</a>
+           <a href="${h.url_for('/data')}" class="trigger-subnav nav-data">Data</a>
+           <a href="${h.url_for('/apps')}" class="trigger-subnav nav-apps">Apps</a>
+           <a href="${h.url_for('/interact')}" class="trigger-subnav nav-interact">More info</a>
          </div>
         <div class="nav-search" style="width: 200px;">
           <form action="/data/search" class="input-group input-group-sm">
-            <input type="text" name="q" class="form-control" placeholder="Otsi andmehulki..." />
+            <input type="text" name="q" class="form-control" placeholder="${_('Search for data...')}" />
             <span class="input-group-btn">
               <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
             </span>
@@ -154,11 +154,11 @@ ${h.top_level_init()}
           <span py:if="h.check_access('package_create')" class="dropdown toolsmenu">
             <a class="nav-publisher btn btn-info dropdown-button" data-toggle="dropdown" href="#"><i class="icon-wrench"></i></a>
             <ul class="dropdown-menu dgu-user-dropdown" role="menu" aria-labelledby="dLabel">
-              <li role="presentation" class="dropdown-header">Tööriistad</li>
-              <li><a href="${h.url_for('dataset_new')}">Lisa andmehulk</a></li>
-              <li py:if="h.is_sysadmin()"><a href="${h.url_for('publisher_new')}">Lisa teabevaldaja</a></li>
+              <li role="presentation" class="dropdown-header">Tools</li>
+              <li><a href="${h.url_for('dataset_new')}">Add a Dataset</a></li>
+              <li py:if="h.is_sysadmin()"><a href="${h.url_for('publisher_new')}">Add a Publisher</a></li>
 
-              <li role="presentation" class="dropdown-header">Minu teabevaldajad</li>
+              <li role="presentation" class="dropdown-header">My publishers</li>
               <py:for each="group in h.groups_for_current_user()">
                   <li><a class="${'active' if c.environ.get('CKAN_CURRENT_URL').startswith('/data/%s' % group.name) else ''}" href="/publisher/${group.name}">${group.title}</a></li>
               </py:for>
@@ -171,26 +171,26 @@ ${h.top_level_init()}
   <div id="greenbar">
     <div class="container">
       <ul class="subnav subnav-data active" py:with="url=c.environ.get('CKAN_CURRENT_URL')">
-        <li><a class="${if_(url.startswith('/data/search') or url.startswith('/dataset/'),'active')}" href="${h.url_for(controller='package', action='search')}">Andmehulgad</a></li>
-        <li><a class="${if_(url.startswith('/publisher'),'active')}" href="/publisher">Teabevaldajad</a></li>
+        <li><a class="${if_(url.startswith('/data/search') or url.startswith('/dataset/'),'active')}" href="${h.url_for(controller='package', action='search')}">Datasets</a></li>
+        <li><a class="${if_(url.startswith('/publisher'),'active')}" href="${h.url_for('/publisher')}">Publishers</a></li>
         <py:if test="h.ga_report_installed()">
-          <li><a class="${if_(url.startswith('/data/site-usage'),'active')}" href="/data/site-usage">Portaali kasutus</a></li>
+          <li><a class="${if_(url.startswith('/data/site-usage'),'active')}" href="${h.url_for('/data/site-usage')}">Site usage</a></li>
         </py:if>
         <br/>
 
         <py:if test="h.is_sysadmin()">
-          <span class="divider-section">&nbsp; Süsadmin:</span>
-          <li><a class="${if_(url.startswith('/data/system_dashboard'),'active')}" href="${h.url_for(controller='ckanext.dgu.controllers.data:DataController', action='system_dashboard')}">Süsteemi töölaud</a></li>
-          <li><a class="${if_(url.startswith('/harvest'),'active')}" href="${h.url_for(controller='ckanext.harvest.controllers.view:ViewController', action='index')}">Andmekorje allikad</a></li>
-          <li><a class="${if_(url.startswith('/data/feedback/moderation'),'active')}" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController', action='moderation')}">Tagasiside modereerimine</a></li>
+          <span class="divider-section">&nbsp;Sys Admin:</span>
+          <li><a class="${if_(url.startswith('/data/system_dashboard'),'active')}" href="${h.url_for(controller='ckanext.dgu.controllers.data:DataController', action='system_dashboard')}">System Dashboard</a></li>
+          <li><a class="${if_(url.startswith('/harvest'),'active')}" href="${h.url_for(controller='ckanext.harvest.controllers.view:ViewController', action='index')}">Harvest Sources</a></li>
+          <li><a class="${if_(url.startswith('/data/feedback/moderation'),'active')}" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController', action='moderation')}">Feedback moderation</a></li>
         </py:if>
       </ul>
 
       <ul class="subnav subnav-interact">
-        <li><a href="/forum">Foorumid</a></li>
-        <li><a href="/juhendid">Juhendid</a></li>
-        <li><a href="/kkk">KKK</a></li>
-        <li><a href="/roheline-raamat">Avaandmete roheline raamat</a></li>
+        <li><a href="${h.url_for('/forum')}">Forums</a></li>
+        <li><a href="${h.url_for('/juhendid')}">Guidelines</a></li>
+        <li><a href="${h.url_for('/kkk')}">FAQ</a></li>
+        <li><a href="${h.url_for('/roheline-raamat')}">Green Paper on Open Data</a></li>
       </ul>
     </div>
   </div>
@@ -200,7 +200,7 @@ ${h.top_level_init()}
       <div class="row">
         <div class="col-md-12">
           <ul id="breadcrumbs">
-            <li><a href="/"><i class="icon-home"></i></a></li>
+            <li><a href="${h.url_for('/')}"><i class="icon-home"></i></a></li>
             <breadcrumbs>
             </breadcrumbs>
           </ul>
@@ -236,15 +236,12 @@ ${h.top_level_init()}
     <footer role="contentinfo" class="container">
       <div>
 	      <ul class="links">
-	        <li class="menu-531 first"><a href="/about">Mis on avaandmete portaal?</a></li>
-	        <li class="menu-538 "><a href="/kasutustingimused">Kasutustingimused</a></li>
-	        <li class="menu-538"><a href="/kontaktid" title="">Kontaktid</a></li>
-	        <li class="menu-538 last"><a href="/abi" title="">Abi</a></li>
+	        <li class="menu-531 first"><a href="${h.url_for('/about')}">About</a></li>
+	        <li class="menu-538 "><a href="${h.url_for('/kasutustingimused')}">Terms of use</a></li>
+	        <li class="menu-538"><a href="${h.url_for('/kontaktid')}" title="">Contact</a></li>
+	        <li class="menu-538 last"><a href="${h.url_for('/abi')}" title="">Help</a></li>
 	      </ul>
-	      <div style="float:right;text-align:right;font-size:0.8em">
-	        Avaandmete portaal valmib EL struktuurifondide programmist "Infoühiskonna teadlikkuse tõstmine"<br/>
-	                                                                      Euroopa Regionaalarengu Fondi rahastusel.
-	      </div>
+	      <div style="float:right;text-align:right;font-size:0.8em">The Open Data Portal is created as part of the EU structural funds' programme 'Raising Awareness of<br/>Information Society' which is financed through the EU Regional Development Fund.</div>
       </div>
       <div class="credits" style="float:right;clear:both">
         <div class="credit">

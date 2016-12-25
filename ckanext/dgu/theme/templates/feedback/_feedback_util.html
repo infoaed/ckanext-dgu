@@ -15,45 +15,41 @@
   <div py:def="feedback_item(item, package)" class="feedback-item" id="${item.id}">
       <div class="pull-right">
         <py:if test="h.is_sysadmin()">
-          <a class="btn btn-danger btn-mini"  href="javascript:0" onclick="return feedback_delete('${item.id}',false);">
-            <i class="icon-trash"></i> &nbsp;Kustuta
-          </a>
+          <a class="btn btn-danger btn-mini" href="javascript:0" onclick="return feedback_delete('${item.id}',false);">
+            <i class="icon-trash"></i> &nbsp;Delete</a>
         </py:if>
       </div>
       <p>
-        <strong>Lisanud:</strong> ${h.dgu_linked_user(item.user_id,maxlength=32,organisation=item.organisation_name)} kuupäeval ${h.render_datetime(item.created, date_format="%d.%m.%Y", with_hours=False)}
-        <br/>
-        <strong>Lisatud kui:</strong>
-        <py:if test="item.responding_as=='individual'">Eraisik</py:if>
-        <py:if test="item.responding_as=='organisation'">
-          Organisatisoon
-          <py:if test="item.organisation_name">
+        <strong>Submitted by:</strong> ${h.dgu_linked_user(item.user_id,maxlength=32,organisation=item.organisation_name)} on ${h.render_datetime(item.created, date_format="_('%d/%m/%Y)", with_hours=False)}<br/>
+        <strong>Responding as:</strong>
+        <py:if test="item.responding_as=='individual'">A Private Individual</py:if>
+        <py:if test="item.responding_as=='organisation'">An Organisation<py:if test="item.organisation_name">
             <span style="color: #666">("${item.organisation_name}")</span>
           </py:if>
           <py:if test="not item.organisation_name">
-            <em style="color: #666">(Märkimata)</em>
+            <em style="color: #666">(Unnamed)</em>
           </py:if>
         </py:if>
       </p>
 
       <py:if test="item.economic">
-        <i class="feedback-view-icon icon-2x icon-gbp"></i> ${feedback_comment(item.economic_comment,'Majanduskasv')}
+        <i class="feedback-view-icon icon-2x icon-gbp"></i> ${feedback_comment(item.economic_comment,_('Economic Growth'))}
       </py:if>
 
       <py:if test="item.social">
-        <i class="feedback-view-icon icon-2x icon-group"></i> ${feedback_comment(item.social_comment,'Sotsiaalne kasv')}
+        <i class="feedback-view-icon icon-2x icon-group"></i> ${feedback_comment(item.social_comment,_('Social Growth'))}
       </py:if>
 
       <py:if test="item.effective">
-        <i class="feedback-view-icon icon-2x icon-road"></i> ${feedback_comment(item.effective_comment,'Efektiivsed avalikud teenused')}
+        <i class="feedback-view-icon icon-2x icon-road"></i> ${feedback_comment(item.effective_comment,_('Effective Public Services'))}
       </py:if>
 
       <py:if test="item.linked">
-        <i class="feedback-view-icon icon-2x icon-code-fork"></i> ${feedback_comment(item.linked_comment,'Potentsiaalsed lingid teistele andmehulkadele')}
+        <i class="feedback-view-icon icon-2x icon-code-fork"></i> ${feedback_comment(item.linked_comment,_('Potential links to other datasets'))}
       </py:if>
 
       <py:if test="item.other">
-        <i class="feedback-view-icon icon-2x icon-quote-left"></i> ${feedback_comment(item.other_comment,'Muud kasulikud mõjud')}
+        <i class="feedback-view-icon icon-2x icon-quote-left"></i> ${feedback_comment(item.other_comment,_('Other Benefits'))}
       </py:if>
   </div>
 
@@ -64,46 +60,46 @@
       <div class="pull-right">
         ${feedback_moderation_button(item)}
       </div>
-      <strong>Tagasiside andmehulgale </strong><a style="text-decoration: underline;" href="${h.url_for(controller='package', action='read', id=package.name)}">${package.title or package.name}</a>
+      <strong>Response to </strong><a style="text-decoration: underline;" href="${h.url_for(controller='package', action='read', id=package.name)}">${package.title or package.name}</a>
     </div>
     <div class="panel-body">
       <p class="status">
       </p>
       <ul>
         <li>
-          <py:if test="item.visible">See tagasiside on hetkel nähtav - see märgiti ebasobivaks</py:if>
-          <py:if test="not item.visible">See tagasiside ei ole hetkel nähtav.</py:if>
+          <py:if test="item.visible">This feedback is currently visible - it was flagged as offensive</py:if>
+          <py:if test="not item.visible">This feedback is not currently visible.</py:if>
         </li>
         <li>
-          <strong>Lisanud</strong>: ${h.linked_user(item.user_id, maxlength=40)} kuupäeval ${h.render_datetime(item.created, date_format="%d.%m.%Y", with_hours=False)}
+          <strong>Submitted by</strong>: ${h.linked_user(item.user_id, maxlength=40)} on ${h.render_datetime(item.created, date_format="%d.%m.%Y", with_hours=False)}
         </li>
         <li py:if="item.organisation_name">
-          <strong>Organisatsioon</strong>: ${item.organisation_name}
+          <strong>Organisation</strong>: ${item.organisation_name}
         </li>
         <li>
-          <strong>Tagasiside tüüp</strong>:
-          <py:if test="item.responding_as=='individual'">Eraisik</py:if>
-          <py:if test="item.responding_as=='organisation'">Organisatsioon</py:if>
+          <strong>Response type</strong>:
+          <py:if test="item.responding_as=='individual'">Private individual</py:if>
+          <py:if test="item.responding_as=='organisation'">Organisation</py:if>
         </li>
       </ul>
-      <h2 style="border-bottom: solid 1px #999; margin: 8px 0;">Täisvastused:</h2>
-      <h5 py:if="item.economic"> Majanduskasv</h5>
+      <h2 style="border-bottom: solid 1px #999; margin: 8px 0;">Full Responses:</h2>
+      <h5 py:if="item.economic">Economic Growth</h5>
       <div py:if="item.economic and item.economic_comment">
         ${item.economic_comment}
       </div>
-      <h5 py:if="item.social">Sotsiaalne kasv</h5>
+      <h5 py:if="item.social">Social Growth</h5>
       <div py:if="item.social and item.social_comment">
         ${item.social_comment}
       </div>
-      <h5 py:if="item.effective">Efektiivsed avalikud teenused</h5>
+      <h5 py:if="item.effective">Effective Public Services</h5>
       <div py:if="item.effective and item.effective_comment">
         ${item.effective_comment}
       </div>
-      <h5 py:if="item.other">Muud kasulikud mõjud</h5>
+      <h5 py:if="item.other">Other Benefits</h5>
       <div py:if="item.other and item.other_comment">
         ${item.other_comment}
       </div>
-      <h4 py:if="item.linked">Potentsiaalsed lingid teistele andmehulkadele</h4>
+      <h4 py:if="item.linked">Potential links to other datasets</h4>
       <div py:if="item.linked and item.linked_comment">
         ${item.linked_comment}
       </div>
@@ -115,13 +111,9 @@
 <py:def function="feedback_moderation_button(item, show_publish=True)">
   <py:if test="h.is_sysadmin()">
     <div class="btn-group btn-group-xs">
-      <a class="btn btn-primary" href="javascript:0" onclick="return feedback_publish('${item.id}');">Avalda</a>
-      <a class="btn btn-warning"  href="javascript:0" onclick="return feedback_delete('${item.id}',false);">
-        Kustuta
-      </a>
-      <a class="btn btn-danger"  href="javascript:0" onclick="return feedback_delete('${item.id}',true);">
-        Kustuta ja keela
-      </a>
+      <a class="btn btn-primary" href="javascript:0" onclick="return feedback_publish('${item.id}');">Publish</a>
+      <a class="btn btn-warning" href="javascript:0" onclick="return feedback_delete('${item.id}',false);">Delete</a>
+      <a class="btn btn-danger" href="javascript:0" onclick="return feedback_delete('${item.id}',true);">Delete and ban</a>
     </div>
   </py:if>
 </py:def>
