@@ -107,17 +107,17 @@ class FeedbackController(BaseController):
             log.warning("No comments to send for spam check")
             success,flag = True, MOLLOM_HAM
 
-        msg = u'Täname tagasiside eest!'
+        msg = _('Thank you for your feedback.')
         if not success:
             # If we fail to check spam, force into moderation
             data["moderation_required"] = True
-            msg = u'Täname tagasiside eest!'
+            msg = _('Thank you for your feedback.')
         else:
             data["spam_score"] = flag
             if flag == MOLLOM_SPAM:
                 data["moderation_required"] = True
                 data["visible"] = False
-                msg = u'Teie postitusel leiti rämpsposti tunnuseid ja see jäeti avaldamata.'
+                msg = _("Your post has been identified as spam and has not been posted.")
 
         flash_notice(msg)
         return Feedback(**data)
@@ -139,7 +139,7 @@ class FeedbackController(BaseController):
                 fb.visible = False
                 flash_notice("Queued. As you are an administrator, this item has been hidden")
             else:
-                flash_notice(u'Täname tagasiside eest!')
+                flash_notice(_("Thank you for your feedback, the item has been queued for moderation"))
             model.Session.add(fb)
             model.Session.commit()
 

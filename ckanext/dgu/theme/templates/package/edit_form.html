@@ -54,7 +54,7 @@
         <li><a data-toggle="tab" class="${classes}" data-hash="tab-themes" id="section-themes" py:attrs="boilerplate" href="#section-themes-field">Tags</a></li>
         <li><a data-toggle="tab" class="${classes}" data-hash="tab-additional_resources" id="section-additional_resources" py:attrs="boilerplate" href="#section-additional_resources-field">Additional resources</a></li>
         <li><a data-toggle="tab" class="${classes}" data-hash="tab-temporal" id="section-temporal" py:attrs="boilerplate" href="#section-temporal-field">Temporal coverage</a></li>
-        <li py:if="h.is_sysadmin()"><a data-toggle="tab" class="${classes}" data-hash="tab-state" id="section-state" py:attrs="boilerplate" href="#section-state-field">Staatus</a></li>
+        <li py:if="h.is_sysadmin()"><a data-toggle="tab" class="${classes}" data-hash="tab-state" id="section-state" py:attrs="boilerplate" href="#section-state-field">State</a></li>
       </ul>
     </div>
     <div class="col-lg-9 col-sm-8" id="dataset-edit-workarea">
@@ -295,7 +295,7 @@
                 <tr>
                     <th class="resource-name" style="width:30%"><div class="js-tooltip" title="" data-original-title="${_('The text that is displayed next to the link of the dataset record')}">File title: <i class="icon-info-sign"></i></div></th>
                     <th class="resource-url" style="width:50%"><div class="js-tooltip" title="" data-original-title="${_('The text that is displayed next to the link of the dataset record')}">Description: <i class="icon-info-sign"></i></div></th>
-                    <th class="resource-name" style="width:20%"><div class="js-tooltip" title="" data-original-title="${_('Faili formaat')}">File format: <i class="icon-info-sign"></i></div></th>
+                    <th class="resource-name" style="width:20%"><div class="js-tooltip" title="" data-original-title="${_('File format')}">File format: <i class="icon-info-sign"></i></div></th>
                 </tr>
             </thead>
             <tbody>

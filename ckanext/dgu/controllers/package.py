@@ -49,24 +49,24 @@ class PackageController(ckan.controllers.package.PackageController):
                     get_action('package_delete')(context, {'id':id})
                     is_uklp = get_from_flat_dict(pkg_dict['extras'], 'UKLP') == 'True'
                     if is_uklp:
-                        action = 'withdrawn'
-                        resource_type = get_from_flat_dict(pkg_dict['extras'], 'resource-type') + ' record'
+                        action = _('withdrawn')
+                        resource_type = get_from_flat_dict(pkg_dict['extras'], 'resource-type') + _(' record')
                     else:
-                        action = 'kustutatud'
-                        resource_type = 'Andmehulk'
-                    h.flash_success('%s edukalt %s.' \
+                        action = _('deleted')
+                        resource_type = _('Dataset')
+                    h.flash_success(_('%s edukalt %s.' \
                                     % (resource_type, action))
                     self._form_save_redirect(package_name, 'edit')
                 except NotAuthorized:
-                    abort(401, _('Andmehulga kustutamine pole lubatud: %s') % id)
+                    abort(401, _('Unauthorized to delete package: %s') % id)
                 except ObjectNotFound, e:
-                    abort(404, _('Andmehulka ei leitud'))
+                    abort(404, _('Package not found'))
                 except DataError:
-                    abort(400, _(u'Integrity Error'))
+                    abort(400, _('Integrity Error'))
                 except SearchIndexError, e:
-                    abort(500, _(u'Unable to update search index.') + repr(e.args))
+                    abort(500, _('Unable to update search index.') + repr(e.args))
                 except ValidationError, e:
-                    abort(400, _('Viga andmhulga kustutamisel.') + repr(e.error_dict))
+                    abort(400, _('Unable to delete package.') + repr(e.error_dict))
             else:
                 abort(400, 'Parameter error')
 
@@ -75,7 +75,7 @@ class PackageController(ckan.controllers.package.PackageController):
         try:
             check_access('package_delete', context)
         except NotAuthorized, e:
-            abort(401, _('Andmehulga kustutamine pole lubatud.'))
+            abort(401, _('Unauthorized to delete package.'))
         package_type = self._get_package_type(id)
         self._setup_template_variables(context, {'id': id}, package_type=package_type)
         return render('package/delete.html')

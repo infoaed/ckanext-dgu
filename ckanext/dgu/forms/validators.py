@@ -23,7 +23,7 @@ def allow_empty_if_inventory(key, data, errors, context):
             raise StopOnError
     else:
         if not value or value is missing:
-            errors[key].append(_('Puudu'))
+            errors[key].append(_('Missing value'))
             raise StopOnError
 
 
