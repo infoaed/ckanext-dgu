@@ -54,7 +54,7 @@ class PackageController(ckan.controllers.package.PackageController):
                     else:
                         action = _('deleted')
                         resource_type = _('Dataset')
-                    h.flash_success(_('%s edukalt %s.' \
+                    h.flash_success(_('%s succesfully %s.') \
                                     % (resource_type, action))
                     self._form_save_redirect(package_name, 'edit')
                 except NotAuthorized:
