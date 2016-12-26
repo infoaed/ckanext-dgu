@@ -69,6 +69,21 @@
     ${optional_head()}
   </py:if>
 
+  <py:choose test="h.lang()"> 
+    <py:when test="str('en')">
+      <style>
+        #blackbar .chevron.position1 { right:510px !important; }     
+        #blackbar .chevron.position2 { right:440px !important; }     
+        #blackbar .chevron.position3 { right:370px !important; }     
+        #blackbar .chevron.position4 { right:280px !important; }     
+        #blackbar .chevron.position5 { right:100px !important; }     
+        #blackbar .chevron.position6 { right:-23px !important; } 
+      </style>
+    </py:when>
+    <py:otherwise>
+    </py:otherwise>
+  </py:choose>
+
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
