@@ -65,7 +65,7 @@
 	</div>
 
     <py:if test="not c.query_error">
-      <h1>${c.page.item_count if c.page not in (None, '') else c.package_count or 0} tulemust</h1>
+      <h1>${c.page.item_count if c.page not in (None, '') else c.package_count or 0} results</h1>
     </py:if>
     <py:if test="c.query_error">
       <h1>Search Error</h1>
