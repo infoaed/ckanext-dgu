@@ -202,7 +202,6 @@ ${h.top_level_init()}
         <py:if test="h.ga_report_installed()">
           <li><a class="${if_(url.startswith('/data/site-usage'),'active')}" href="/data/site-usage">Portaali kasutus</a></li>
         </py:if>
-        <br/>
 
         <py:if test="h.is_sysadmin()">
           <span class="divider-section">&nbsp; Süsadmin:</span>
