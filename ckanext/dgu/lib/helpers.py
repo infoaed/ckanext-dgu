@@ -225,7 +225,7 @@ def get_secondary_themes(package):
     secondary_themes_raw = get_from_flat_dict(package.get('extras', []), 'theme-secondary', '')
     secondary_themes_ripe = []
     for name in secondary_themes_raw:
-        secondary_themes_ripe.append(_(themes()[name]["title"])
+        secondary_themes_ripe.append(_(themes()[name]["title"]))
     return secondary_themes({'theme-secondary':secondary_themes_ripe})
 
 def is_service(package):
