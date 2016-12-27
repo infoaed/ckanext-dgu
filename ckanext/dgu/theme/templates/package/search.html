@@ -44,7 +44,7 @@
     <div id="dataset-search-upper-right">
 
         <py:if test="bool(c.user) and h.check_access('package_create')">
-            <div id="add-dataset"><a href="/dataset/new"><button class="btn btn-primary">Lisa andmehulk</button></a></div>
+            <div id="add-dataset"><a href="/dataset/new"><button class="btn btn-primary">Add dataset</button></a></div>
         </py:if>
 
     <form class="form-inline pull-right" id="search-sort-by">
@@ -54,9 +54,9 @@
       <label>Sort by:</label>
       <select name="dataset-results-sort" class="form-control" style="display:inline-block;">
         <!-- Can optimise this bit of the template, particularly results_sort_by -->
-        ${sort_option('Popularity', c.sort_by([('popularity','desc')]), 'popularity' in h.results_sort_by())}
-        ${sort_option('Title', c.sort_by([('title_string','asc')]), 'title_string' in h.results_sort_by())}
-        ${sort_option('Last Updated', c.sort_by([('metadata_modified','desc')]), 'metadata_modified' in h.results_sort_by())}
+        ${sort_option(_('Popularity'), c.sort_by([('popularity','desc')]), 'popularity' in h.results_sort_by())}
+        ${sort_option(_('Title'), c.sort_by([('title_string','asc')]), 'title_string' in h.results_sort_by())}
+        ${sort_option(_('Last Updated'), c.sort_by([('metadata_modified','desc')]), 'metadata_modified' in h.results_sort_by())}
       </select>
       <a class="feed-icon" href="${h.url(controller='feed', action='custom')}?${c.search_url_params}" title="Newsfeed in Atom format"> 
         <i class="icon-rss-sign"></i>
