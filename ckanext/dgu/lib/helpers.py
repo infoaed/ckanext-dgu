@@ -24,6 +24,8 @@ from webhelpers.html import escape
 from pylons import config
 from pylons import request
 
+from ckan.lib.base import _
+
 from ckan.lib.helpers import icon, icon_html, json, unselected_facet_items
 import ckan.lib.helpers
 
@@ -214,11 +216,17 @@ def get_uklp_package_type(package):
     return get_from_flat_dict(package.get('extras', []), 'resource-type', '')
 
 def get_primary_theme(package):
-    return get_from_flat_dict(package.get('extras', []), 'theme-primary', '')
+    name = get_from_flat_dict(package.get('extras', []), 'theme-primary', '')
+    if name != "":
+        return _(themes()[name]["title"])
+    return name
 
 def get_secondary_themes(package):
     secondary_themes_raw = get_from_flat_dict(package.get('extras', []), 'theme-secondary', '')
-    return secondary_themes({'theme-secondary':secondary_themes_raw})
+    secondary_themes_ripe = []
+    for name in secondary_themes_raw:
+        secondary_themes_ripe.append(_(themes()[name]["title"])
+    return secondary_themes({'theme-secondary':secondary_themes_ripe})
 
 def is_service(package):
     res_type = get_uklp_package_type(package)
@@ -1585,9 +1593,8 @@ def search_facet_text(key,value):
                 'discovery' : 'Discovery',
             }
         return mapping.get(value,value)
-    if key=='theme-primary' or key=='all_themes':
-        from ckanext.dgu.schema import THEMES
-        return THEMES.get(value,value)
+    if key in ('theme-primary', 'theme-secondary', 'all_themes'):
+        return _(themes()[value]["title"])
     return value
 
 def search_facet_tooltip(key,value):
