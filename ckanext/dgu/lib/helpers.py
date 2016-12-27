@@ -1159,16 +1159,16 @@ def _translate_ckan_string(o):
     """DGU uses different words for things compared to CKAN, so
     adjust the language of errors using mappings."""
     field_name_map = {
-        'groups': _('Publisher'),
-        'organization': _('Publisher'),
-        'individual_resources': _('Data Files'),
-        'timeseries_resources': _('Data Files'),
-        'title': _('Name'),
-        'name': _('Unique identifier'),
-        'url': _('URL'),
-        'notes': _('Description'),
-        'theme-primary': _('Primary Theme'),
-        'license_id': _('Licence')
+        'groups': 'Publisher',
+        'organization': 'Publisher',
+        'individual_resources': 'Data Files',
+        'timeseries_resources': 'Data Files',
+        'title': 'Name',
+        'name': 'Unique identifier',
+        'url': 'URL',
+        'notes': 'Description',
+        'theme-primary': 'Primary Theme',
+        'license_id': 'Licence'
     }
     field_error_key_map = {
         'group': 'publisher',
@@ -1176,7 +1176,7 @@ def _translate_ckan_string(o):
         'description': 'title',
     }
     field_error_value_map = {
-        _('That group name or ID does not exist.'): _('Missing value'),
+        'That group name or ID does not exist.': 'Missing value',
     }
 
     o = field_name_map.get(o,o)
