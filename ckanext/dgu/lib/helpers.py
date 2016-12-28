@@ -798,17 +798,12 @@ def get_package_fields(package, pkg_extras, dataset_type, pkg_tags):
     taxonomy_url = pkg_extras.get('taxonomy_url') or ''
     if taxonomy_url and taxonomy_url.startswith('http'):
         taxonomy_url = h.link_to(truncate(taxonomy_url, 70), taxonomy_url)
-    primary_theme = pkg_extras.get('theme-primary') or ''
-    primary_theme = THEMES.get(primary_theme, primary_theme)
-    secondary_themes = pkg_extras.get('theme-secondary')
-    if secondary_themes:
-        try:
-            secondary_themes = secondary_themes_display_csv(secondary_themes)
-        except ValueError:
-            # string for single value
-            secondary_themes = unicode(secondary_themes)
-            secondary_themes = THEMES.get(secondary_themes,
-                                          secondary_themes)
+        
+    primary_theme = get_trans_theme(pkg_extras.get('theme-primary'))
+    secondary_list = []
+    for theme in pkg_extras.get('theme-secondary').strip("}").strip("{").split(","):
+        secondary_list.append(get_trans_theme(theme))
+    secondary_themes = ", ".join(secondary_list)
 
     update_frequency = pkg_extras.get('update_frequency')
     if update_frequency:
@@ -1529,14 +1524,16 @@ def publisher_performance_data(publisher, include_sub_publishers):
 def publisher_has_spend_data(publisher):
     return publisher.extras.get('category','') == 'ministerial-department'
 
-def get_trans_theme(name):
+def get_trans_theme(name, field="title"):
     """Gets an translation of the theme in current session language"""
+    if name is None or name == "":
+        return ""
     from ckan.lib.helpers import lang as get_lang
     lang = get_lang()
     if lang=="en":
-        return themes()[name]["translations"][lang]["title"]
+        return themes()[name]["translations"][lang][field] # notice that in translation "stored_as" is "tag"
     else:
-        return themes()[name]["title"] #default language in themes.json
+        return themes()[name][field] #default language in themes.json
 
 def search_facets_unselected(facet_keys,sort_by='count'):
     unselected_raw = []
