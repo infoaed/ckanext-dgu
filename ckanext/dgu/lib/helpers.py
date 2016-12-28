@@ -801,8 +801,9 @@ def get_package_fields(package, pkg_extras, dataset_type, pkg_tags):
         
     primary_theme = get_trans_theme(pkg_extras.get('theme-primary'))
     secondary_list = []
-    for theme in pkg_extras.get('theme-secondary').strip("}").strip("{").split(","):
-        secondary_list.append(get_trans_theme(theme))
+    if pkg_extras.get('theme-secondary'):
+        for theme in pkg_extras.get('theme-secondary').strip("}").strip("{").split(","):
+            secondary_list.append(get_trans_theme(theme))
     secondary_themes = ", ".join(secondary_list)
 
     update_frequency = pkg_extras.get('update_frequency')
