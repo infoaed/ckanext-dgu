@@ -217,15 +217,19 @@ def get_uklp_package_type(package):
 
 def get_primary_theme(package):
     name = get_from_flat_dict(package.get('extras', []), 'theme-primary', '')
+    return name
+
+def get_primary_theme_display_name(package):
+    name = get_from_flat_dict(package.get('extras', []), 'theme-primary', '')
     if name != "":
-        return _(themes()[name]["title"])
+        return get_trans_theme(name)
     return name
 
 def get_secondary_themes(package):
     secondary_themes_raw = get_from_flat_dict(package.get('extras', []), 'theme-secondary', '')
     secondary_themes_ripe = []
     for name in secondary_themes_raw:
-        secondary_themes_ripe.append(_(themes()[name]["title"]))
+        secondary_themes_ripe.append(get_trans_theme(name))
     return secondary_themes({'theme-secondary':secondary_themes_ripe})
 
 def is_service(package):
@@ -702,6 +706,24 @@ def get_resource_fields(resource, pkg_extras):
     # calculate displayable field values
     return  DisplayableFields(field_names, field_value_map, pkg_extras)
 
+
+def get_trans_tag(term):
+    """Gets an Eurovoc translation of the term in current session language"""
+    from ckan.logic import get_action
+    from ckan import model
+    import sets
+    from ckan.lib.helpers import lang as get_lang
+
+    terms = sets.Set()
+    terms.add(term)
+ 
+    trans = get_action('term_translation_show')({'model': model}, {'terms': terms, 'lang_codes': (get_lang())})
+
+    if len(trans) > 0:
+        return trans[0]["term_translation"]
+        
+    return term
+
 def get_package_fields(package, pkg_extras, dataset_type, pkg_tags):
     from ckan.lib.base import h
     from ckan.lib.field_types import DateType
@@ -802,7 +824,7 @@ def get_package_fields(package, pkg_extras, dataset_type, pkg_tags):
             if tag_value:
                 if len(tags_csv) > 0:
                     tags_csv = tags_csv + ', '
-                tags_csv = tags_csv + tag_value
+                tags_csv = tags_csv + get_trans_tag(tag_value)
 
     if len(tags_csv) > 0:
         field_names.add(['tags'])
@@ -1507,6 +1529,15 @@ def publisher_performance_data(publisher, include_sub_publishers):
 def publisher_has_spend_data(publisher):
     return publisher.extras.get('category','') == 'ministerial-department'
 
+def get_trans_theme(name):
+    """Gets an translation of the theme in current session language"""
+    from ckan.lib.helpers import lang as get_lang
+    lang = get_lang()
+    if lang=="en":
+        return themes()[name]["translations"][lang]["title"]
+    else:
+        return themes()[name]["title"] #default language in themes.json
+
 def search_facets_unselected(facet_keys,sort_by='count'):
     unselected_raw = []
     for key in facet_keys:
@@ -1594,7 +1625,7 @@ def search_facet_text(key,value):
             }
         return mapping.get(value,value)
     if key in ('theme-primary', 'theme-secondary', 'all_themes'):
-        return _(themes()[value]["title"])
+        return get_trans_theme(value)
     return value
 
 def search_facet_tooltip(key,value):

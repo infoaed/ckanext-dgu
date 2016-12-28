@@ -2,84 +2,168 @@
      "stored_as": "Põllumajandus",
      "description": "Põllumajandus, kalandus ja metsandus.",
      "topics": ["põllumajandus", "kalandus", "metsandus"],
-     "css-id": "Pollumajandus"
+     "css-id": "Pollumajandus",
+         "translations": { "en": {
+               "title": "Agriculture, fisheries, forestry",
+               "tag": "Agriculture",
+               "description": "Agriculture, fisheries and forestry."
+          }
+     }
     },
     {"title": "Kultuur",
      "stored_as": "Kultuur",
      "description": "Kultuur.",
      "topics": ["kultuur"],
-     "css-id": "Kultuur"
+     "css-id": "Kultuur",
+         "translations": { "en": {
+               "title": "Culture",
+               "tag": "Culture",
+               "description": "Culture."
+          }
+     }
     },
     {"title": "Majandus ja tööstus",
      "stored_as": "Majandus",
      "description": "Majandus",
      "topics": ["majandus", "tööstus"],
-     "css-id": "Majandus"
+     "css-id": "Majandus",
+         "translations": { "en": {
+               "title": "Economy and industry",
+               "tag": "Economy",
+               "description": "Economy"
+          }
+     }
     },
     {"title": "Tööhõive",
      "stored_as": "Tööhõive",
      "description": "Tööhõive.",
      "topics": ["tööhõive", "töötus"],
-     "css-id": "Toohoive"
+     "css-id": "Toohoive",
+         "translations": { "en": {
+               "title": "Employment",
+               "tag": "Employment",
+               "description": "Employment."
+          }
+     }
     },
     {"title": "Haridus ja teadus",
      "stored_as": "Haridus",
      "description": "Haridus ja teadus.",
      "topics": ["haridus", "teadus"],
-     "css-id": "Haridus"
+     "css-id": "Haridus",
+         "translations": { "en": {
+               "title": "Education and research",
+               "tag": "Education",
+               "description": "Education and research."
+          }
+     }
     },
     {"title": "Keskkond",
      "stored_as": "Keskkond",
      "description": "Keskkond, keskkonnakaitse.",
      "topics": ["keskkond", "keskkonnakaitse"],
-     "css-id": "Haridus"
+     "css-id": "Haridus",
+         "translations": { "en": {
+               "title": "Environment",
+               "tag": "Environment",
+               "description": "Environment, environment protection."
+          }
+     }
     },
     {"title": "Rahandus ja eelarvestamine",
      "stored_as": "Rahandus",
      "description": "Rahandus ja eelarvestamine.",
      "topics": ["rahandus", "eelarvestamine"],
-     "css-id": "Rahandus"
+     "css-id": "Rahandus",
+         "translations": { "en": {
+               "title": "Finances and budgeting",
+               "tag": "Finances",
+               "description": "Finances and budgeting."
+          }
+     }
     },
     {"title": "Geograafia",
      "stored_as": "Geograafia",
      "description": "Geograafia.",
      "topics": ["Geograafia"],
-     "css-id": "Geograafia"
+     "css-id": "Geograafia",
+         "translations": { "en": {
+               "title": "Geography",
+               "tag": "Geography",
+               "description": "Geography."
+          }
+     }
     },
     {"title": "Tervis",
      "stored_as": "Tervis",
      "description": "Tervis, tervishoid.",
      "topics": ["tervis", "tervishoid"],
-     "css-id": "Tervis"
+     "css-id": "Tervis",
+         "translations": { "en": {
+               "title": "Health",
+               "tag": "Health",
+               "description": "Health, healthcare."
+          }
+     }
     },
     {"title": "Riigiteenused",
      "stored_as": "Riigiteenused",
      "description": "Riigiteenused.",
      "topics": ["riigiteenused"],
-     "css-id": "Riigiteenused"
+     "css-id": "Riigiteenused",
+         "translations": { "en": {
+               "title": "Government services",
+               "tag": "Services",
+               "description": "Government services."
+          }
+     }
     },
     {"title": "Avatud valitsemine",
      "stored_as": "Valitsemine",
      "description": "Avatud valitsemine.",
      "topics": ["avatud", "avatus", "valitsemine"],
-     "css-id": "Valitsemine"
+     "css-id": "Valitsemine",
+         "translations": { "en": {
+               "title": "Open governance",
+               "tag": "Governance",
+               "description": "Open governance."
+          }
+     }
     },
     {"title": "Rahvastiku andmed",
      "stored_as": "Rahvastik",
      "description": "Rahvastiku andmed.",
      "topics": ["rahvastik"],
-     "css-id": "Rahvastik"
+     "css-id": "Rahvastik",
+         "translations": { "en": {
+               "title": "Population and vital statistics",
+               "tag": "Population",
+               "description": "Population and vital statistics."
+          }
+     }
     },
     {"title": "Transport",
      "stored_as": "Transport",
      "description": "Transport.",
      "topics": ["transport"],
-     "css-id": "Transport"
+     "css-id": "Transport",
+         "translations": { "en": {
+               "title": "Transport",
+               "tag": "Transport",
+               "description": "Transport."
+          }
+     }
     },
     {"title": "Sotsiaalvaldkond",
      "stored_as": "Sotsiaal",
      "description": "Sotsiaalvaldkond.",
      "topics": ["sotsiaalvaldkond", "sotsiaal", "sotsiaalia"],
-     "css-id": "Sotsiaal"
+     "css-id": "Sotsiaal",
+         "translations": { "en": {
+               "title": "Social sphere",
+               "tag": "Social",
+               "description": "Social sphere."
+          }
+     }
     }
 ]

@@ -112,11 +112,12 @@
           unpublished=h.is_unpublished_item(packages[i]);
           title=packages[i].get('title') or packages[i].get('name');
           primary_theme=h.get_primary_theme(packages[i]);
+          primary_theme_title=h.get_primary_theme_display_name(packages[i]);
           primary_theme_cssid=h.get_theme_key(primary_theme, 'css-id', primary_theme)">
           <div class="${if_(mini,'col-lg-3 col-md-4 col-sm-6')}">
           <div class="dataset dataset-summary theme-${primary_theme_cssid or 'none'} ${if_(mini,'mini')} ${if_(unpublished,'unpublished')}">
            <a class="dataset-header" href="${h.url_for(controller='package', action='read', id=package.get('name'))}">
-             <div class="theme-name">${primary_theme or ''}</div>
+             <div class="theme-name">${primary_theme_title or ''}</div>
              <div class="underlined">${title} <span class="text-unpublished" py:if="unpublished">(avalikustamata)</span></div>
            </a>
            <div class="dataset-body">
