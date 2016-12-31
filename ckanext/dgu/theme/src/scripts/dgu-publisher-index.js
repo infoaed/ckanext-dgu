@@ -30,14 +30,14 @@ $(function() {
   /* Recursive. Runs through a row of the index */
   function updateSearch(searchString) {
     searchString = searchString.toLowerCase();
-    if (searchString.length==0 || searchString=='start typing a name...') {
+    if (searchString.length==0 || searchString==__('Start typing a name...').toLowerCase()) {
       var p = $('.publisher');
       hacky_count = p.length;
       p.removeClass('match');
       p.removeClass('childMatch');
       container.addClass('empty-search');
       resultCountBox.text(hacky_count);
-      resultCountFooterBox.text('Publishers');
+      resultCountFooterBox.text(__('Publishers'));
       return;
     }
     container.removeClass('empty-search');
@@ -46,7 +46,7 @@ $(function() {
       updateSearch_recur(searchString,index[i]);
     }
     resultCountBox.text(hacky_count);
-    resultCountFooterBox.text('Results');
+    resultCountFooterBox.text(__('Results'));
   }
   function updateSearch_recur(searchString,entry) {
     var childMatch = false;
