@@ -2,7 +2,6 @@
 import json
 
 from ckan.lib.base import c, model
-from ckan.lib.base import _
 from ckan.lib.field_types import DateType, DateConvertError
 from ckan.lib.navl.dictization_functions import Invalid
 from ckan.lib.navl.validators import (ignore_missing,
@@ -41,12 +40,12 @@ geographic_granularity = [('', ''),
                           ('other', 'other - please specify')]
 
 update_frequency = [('', ''),
-                    ('never', _('never')),
-                    ('discontinued', _('discontinued')),
-                    ('annual', _('annual')),
-                    ('quarterly', _('quarterly')),
-                    ('monthly', _('monthly')),
-                    ('other', _('other - please specify'))]
+                    ('never', 'mitte kunagi'),
+                    ('discontinued', 'katkestatud'),
+                    ('annual', 'kord aastas'),
+                    ('quarterly', 'kord kvartalis'),
+                    ('monthly', 'kord kuus'),
+                    ('other', 'muu sagedus')]
 
 temporal_granularity = [("", ""),
                         ("year", "year"),
