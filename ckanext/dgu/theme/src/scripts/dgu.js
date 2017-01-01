@@ -658,13 +658,13 @@ CKAN.Dgu.UrlEditor = (function() {
       this.lastSlug = slug;
       if (this.updateTimer) { clearTimeout(this.updateTimer); }
       if (slug.length<2) {
-        this.validMsg.html('<span style="font-weight: bold; color: #444;">URL is too short.</span>');
+        this.validMsg.html('<span style="font-weight: bold; color: #444;">'+ __('URL is too short.') + '</span>');
       }
       else if (slug==this.originalUrl) {
-        this.validMsg.html('<span style="font-weight: bold; color: #000;">This is the current URL.</span>');
+        this.validMsg.html('<span style="font-weight: bold; color: #000;">'+ __('This is the current URL.') + '</span>');
       }
       else {
-        this.validMsg.html('<span style="color: #777;">Checking...</span>');
+        this.validMsg.html('<span style="color: #777;">'+ __('Checking...') + '</span>');
         var self = this;
         this.updateTimer = setTimeout(function () {
           self.checkSlugIsValid(slug);
@@ -693,9 +693,9 @@ CKAN.Dgu.UrlEditor = (function() {
   /* Called when the slug-validator gets back to us */
   UrlEditor.prototype.apiCallback = function(data) {
       if (data.valid) {
-        this.validMsg.html('<span style="font-weight: bold; color: #0c0">This URL is available!</span>');
+        this.validMsg.html('<span style="font-weight: bold; color: #0c0">'+ __('This URL is available!') + '</span>');
       } else {
-        this.validMsg.html('<span style="font-weight: bold; color: #c00">This URL is not available.</span>');
+        this.validMsg.html('<span style="font-weight: bold; color: #c00">'+ __('This URL is not available.') + '</span>');
       }
   };
 

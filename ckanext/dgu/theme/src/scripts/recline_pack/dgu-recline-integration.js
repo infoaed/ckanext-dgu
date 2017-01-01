@@ -36,27 +36,27 @@ CKAN.Dgu.resourcePreviewer = (function($,my) {
   //
   // Returns nothing.
   my.loadPreviewDialog = function(resourceData) {
-    my.$dialog().html('<h4>Loading ... <img src="http://assets.okfn.org/images/icons/ajaxload-circle.gif" class="loading-spinner" /></h4>');
+    my.$dialog().html('<h4>'+ __('Loading ...') + ' <img src="http://assets.okfn.org/images/icons/ajaxload-circle.gif" class="loading-spinner" /></h4>');
 
     function initializeDataExplorer(dataset) {
       var views = [
         {
           id: 'grid',
-          label: 'Grid',
+          label: __('Grid'),
           view: new recline.View.Grid({
             model: dataset
           })
         },
         {
           id: 'graph',
-          label: 'Graph',
+          label: __('Graph'),
           view: new recline.View.Graph({
             model: dataset
           })
         },
         {
           id: 'map',
-          label: 'Map',
+          label: __('Map'),
           view: new recline.View.Map({
             model: dataset
           })
@@ -207,7 +207,7 @@ CKAN.Dgu.resourcePreviewer = (function($,my) {
       // Cannot reliably preview this item - with no mimetype/format information,
       // can't guarantee it's not a remote binary file such as an executable.
       my.showError({
-        title: 'Preview not available for data type: ' + resourceData.formatNormalized,
+        title: __('Preview not available for data type:') + ' ' + resourceData.formatNormalized,
         message: ''
       });
     }
@@ -227,8 +227,8 @@ CKAN.Dgu.resourcePreviewer = (function($,my) {
     var timer = setTimeout(function error() {
       callback({
         error: {
-          title: 'Request Error',
-          message: 'Dataproxy server did not respond after ' + (timeout / 1000) + ' seconds'
+          title: __('Request Error'),
+          message: __('Dataproxy server did not respond after') + ' ' + (timeout / 1000) + ' ' + __('seconds')
         }
       });
     }, timeout);
@@ -248,8 +248,8 @@ CKAN.Dgu.resourcePreviewer = (function($,my) {
           clearTimeout(timer);
           callback({
             error: {
-              title: 'Request Error',
-              message: 'There was an error processing the request'
+              title: __('Request Error'),
+              message: __('There was an error processing the request')
             }
           });
       }
