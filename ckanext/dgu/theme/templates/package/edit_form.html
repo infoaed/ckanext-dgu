@@ -263,7 +263,7 @@
               <span class="input-group ${'error' if h.cell_has_errors(errors,'individual_resources', num, col) else ''}" py:when="col=='url'">
                 <input id="individual_resources__${num}__${col}" name="individual_resources__${num}__${col}" type="text" value="${res.get(col, '')}" class="form-control"/>
                 <span class="input-group-btn">
-                  <button id="individual_resources__${num}__validate-resource-button" class="validate-resource-button btn btn-default" style="font-weight:0.9em">Kontrolli</button>
+                  <button id="individual_resources__${num}__validate-resource-button" class="validate-resource-button btn btn-default" style="font-weight:0.9em">Check</button>
                 </span>
               </span>
               <input py:when="col=='format'" id="individual_resources__${num}__${col}" name="individual_resources__${num}__${col}" type="text" value="${res.get(col, '')}" data-provider="typeahead" data-items="8" class="form-control format-typeahead ${'field_error' if h.cell_has_errors(errors,'additional_resources', num, col) else ''}"/>
