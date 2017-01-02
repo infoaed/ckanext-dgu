@@ -40,12 +40,24 @@ geographic_granularity = [('', ''),
                           ('other', 'other - please specify')]
 
 update_frequency = [('', ''),
-                    ('never', 'mitte kunagi'),
-                    ('discontinued', 'katkestatud'),
-                    ('annual', 'kord aastas'),
-                    ('quarterly', 'kord kvartalis'),
-                    ('monthly', 'kord kuus'),
-                    ('other', 'muu sagedus')]
+                    ('never', 'never'),
+                    ('discontinued', 'discontinued'),
+                    ('annual', 'annual'),
+                    ('quarterly', 'quarterly'),
+                    ('monthly', 'monthly'),
+                    ('other', 'other - please specify')]
+
+# dummy for gettext strings to be extracted by babel
+from gettext import gettext as _
+
+update_frequency_dummy_for_gettext = [
+                    _('never'),
+                    _('discontinued'),
+                    _('annual'),
+                    _('quarterly'),
+                    _('monthly'),
+                    _('other'),
+                    _('other - please specify')]
 
 temporal_granularity = [("", ""),
                         ("year", "year"),

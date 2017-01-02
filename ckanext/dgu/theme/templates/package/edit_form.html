@@ -121,7 +121,7 @@
         <select style="width: 200px;" class="form-control" id="update_frequency" name="update_frequency">
             <py:for each="freq_name, freq_desc in c.update_frequency">
               <option value="${freq_name}" py:attrs="{'selected': 'selected' if data.get('update_frequency', '') == freq_name else None}" >
-                ${freq_desc}
+                ${_(freq_desc)}
               </option>
             </py:for>
         </select>

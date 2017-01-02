@@ -784,7 +784,7 @@ def get_package_fields(package, pkg_extras, dataset_type, pkg_tags):
     if update_frequency:
         for freq_name, freq_desc in c.update_frequency:
             if update_frequency==freq_name and freq_desc:
-                update_frequency = freq_desc
+                update_frequency = _(freq_desc)
                 break
 
     tags_csv = ''
@@ -819,7 +819,8 @@ def get_package_fields(package, pkg_extras, dataset_type, pkg_tags):
         'taxonomy_url': {'label': _('Taxonomy URL'), 'value': taxonomy_url},
         'theme': {'label': _('Theme'), 'value': primary_theme},
         'theme-secondary': {'label': _('Secondary Theme(s)'), 'value': secondary_themes},
-        'update_frequency': {'label': _('Update frequency'), 'value': update_frequency},        'metadata-language': {'label': _('Metadata language'), 'value': pkg_extras.get('metadata-language', '').replace('eng', 'English')},
+        'update_frequency': {'label': _('Update frequency'), 'value': update_frequency},
+        'metadata-language': {'label': _('Metadata language'), 'value': pkg_extras.get('metadata-language', '').replace('eng', 'English')},
         'metadata-date': {'label': _('Metadata date'), 'value': DateType.db_to_form(pkg_extras.get('metadata-date', ''))},
         'dataset-reference-date': {'label': _('Dataset reference date'), 'value': dataset_reference_date},
         '': {'label': '', 'value': ''},
