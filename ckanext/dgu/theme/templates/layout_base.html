@@ -165,7 +165,7 @@ ${h.top_level_init()}
            <a href="${h.url_for('/interact')}" class="trigger-subnav nav-interact">More info</a>
          </div>
         <div class="nav-search" style="width: 200px;">
-          <form action="/data/search" class="input-group input-group-sm">
+          <form action="${h.url_for('/data/search'}" class="input-group input-group-sm">
             <input type="text" name="q" class="form-control" placeholder="${_('Search for data...')}" />
             <span class="input-group-btn">
               <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
