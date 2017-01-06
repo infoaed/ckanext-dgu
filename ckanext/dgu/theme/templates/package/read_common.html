@@ -128,6 +128,7 @@
         is_uklp=h.dataset_type(c.pkg_extras)=='uklp';
         admin_mode = can_update or can_delete;
         primary_theme=h.get_primary_theme(c.pkg_dict);
+        primary_theme_title=h.get_primary_theme_display_name(c.pkg_dict);
         primary_theme_cssid=h.get_theme_key(primary_theme, 'css-id', primary_theme)
     ">
       <div class="${if_(admin_mode,'col-md-8','col-md-12')}">
@@ -147,7 +148,7 @@
         <!-- blank style tag avoids a bug in jquery.dotdotdot -->
         <div class="notes" style="">
           <div class="dataset-theme theme-${primary_theme_cssid or 'none'}">
-            <div class="theme-name">${primary_theme or _('(Uncategorised)')}</div>
+            <div class="theme-name">${primary_theme_title or _('(Uncategorised)')}</div>
           </div>
           <a
             class="dataset-optional-logo"

@@ -1,12 +1,12 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-  <!--[if IE 8 ]>    <html class="no-js ie8" lang="en"
+  <!--[if IE 8 ]>    <html class="no-js ie8" lang="${h.lang()}"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:i18n="http://genshi.edgewall.org/i18n"
       xmlns:py="http://genshi.edgewall.org/"
       xmlns:xi="http://www.w3.org/2001/XInclude"
     > <![endif]-->
-  <!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js" lang="en"
+  <!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js" lang="${h.lang()}"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:i18n="http://genshi.edgewall.org/i18n"
       xmlns:py="http://genshi.edgewall.org/"
@@ -41,8 +41,11 @@
     </py:otherwise>
   </py:choose>
 
-  <link rel="stylesheet" href="/assets/css/datagovuk.min.css?${h.get_shared_assets_timestamp()}" />
+  <link rel="stylesheet" href="${h.url_for_static('/assets/css/datagovuk.min.css')}?${h.get_shared_assets_timestamp()}" />
   <link rel="stylesheet" href="${h.url_for_static('/css/dgu-ckan.min.css')}?${h.ckan_asset_timestamp()}" />
+
+  <!-- Simple JavaScript translator from http://i18njs.com/ -->
+  <script type="text/javascript" src="${h.url_for_static('/assets/js/odp-ee-i18n.min.js')}"></script>
 
   <!-- Python-generated JS values -->
   <script type="text/javascript">
@@ -68,6 +71,21 @@
   <py:if test="defined('optional_head')">
     ${optional_head()}
   </py:if>
+
+  <py:choose test="h.lang()"> 
+    <py:when test="str('en')">
+      <style>
+        #blackbar .chevron.position1 { right:510px !important; }     
+        #blackbar .chevron.position2 { right:440px !important; }     
+        #blackbar .chevron.position3 { right:370px !important; }     
+        #blackbar .chevron.position4 { right:280px !important; }     
+        #blackbar .chevron.position5 { right:100px !important; }     
+        #blackbar .chevron.position6 { right:-23px !important; } 
+      </style>
+    </py:when>
+    <py:otherwise>
+    </py:otherwise>
+  </py:choose>
 
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
@@ -98,30 +116,41 @@ ${h.top_level_init()}
       py:with="breakout = defined('break_out_page') and break_out_page"
   >
 
-  <div py:if="not bool(c.userobj)" class="ourmenu">
-     <div class="menucontainer">
-         <div class="menulogin"><a href="/user">Logi sisse</a></div>
-     </div>
-  </div>
-
-  <div py:if="bool(c.userobj)" id="toolbar" class="toolbar overlay-displace-top clearfix toolbar-processed">
+  <div id="toolbar" class="toolbar overlay-displace-top clearfix">
     <div class="toolbar-menu clearfix">
       <ul id="toolbar-home">
-        <li class="home first last">
-          <a href="/" title="Home"><span class="home-link">Avaleht</span></a>
-        </li>
+        <li class="home first last"><a href="${h.url_for('/')}" title="Home"><span class="home-link">Home</span></a></li>
       </ul>
-      <ul id="toolbar-user">
-        <li class="account first">
-          <a href="/user" title="User account">Kasutaja <strong>${c.userobj.display_name}</strong></a>
-        </li>
-        <li class="logout last">
-          <a href="${if_('dgu_drupal_auth' in config['ckan.plugins'],'/user/logout',h.url_for('/data/user/logout'))}">Logi välja</a>
-        </li>
-      </ul>
+      <py:choose test="bool(c.userobj)">
+        <py:when test="False">
+          <div class="menulanguage">
+            <ul class="language-switcher-locale-url">
+               <py:for each="locale in h.get_available_locales()">
+                <li class="${h.lang()} language-link${if_(h.lang()==locale,' active')}">
+                      <a class="language-link${if_(h.lang()==locale,' active')}" href="${if_(h.full_current_url().find('riik.ee/'+h.lang())+10 == len(h.full_current_url()) or h.full_current_url().find('riik.ee/' + h.lang() + '/') != -1, h.full_current_url().replace('riik.ee/'+h.lang(), 'riik.ee/'+str(locale), 1), h.full_current_url().replace('riik.ee', 'riik.ee/'+str(locale)))}" lang="${locale}">
+                        ${locale.display_name.capitalize() or locale.english_name}
+                     </a>
+                  </li>
+               </py:for>
+            </ul>
+          </div>
+          <ul id="toolbar-user">
+            <li class="login"><a href="${h.url_for('/user')}"><img src="/assets/img/icon-log-in-avatar.png" /> Log in</a></li>
+          </ul>
+        </py:when>
+        <py:otherwise>
+          <ul id="toolbar-user">
+            <li class="account first">
+              <a href="${h.url_for('/user')}" title="User account" disabled="disabled">User: <strong>${c.userobj.display_name}</strong></a>
+            </li>
+            <li class="logout last">
+              <a href="${if_('dgu_drupal_auth' in config['ckan.plugins'],'/user/logout',h.url_for('/data/user/logout'))}">Log out</a>
+            </li>
+          </ul>
+          </py:otherwise>
+      </py:choose>
     </div>
-    <div class="toolbar-drawer clearfix">
-    </div>
+    <div class="toolbar-drawer clearfix"></div>
   </div>
 
   <div id="blackbar" class="${if_(h.check_access('package_create'),'with-publisher','without-publisher')}">
@@ -160,7 +189,7 @@ ${h.top_level_init()}
 
               <li role="presentation" class="dropdown-header">My publishers</li>
               <py:for each="group in h.groups_for_current_user()">
-                  <li><a class="${'active' if c.environ.get('CKAN_CURRENT_URL').startswith('/data/%s' % group.name) else ''}" href="/publisher/${group.name}">${group.title}</a></li>
+                  <li><a class="${'active' if c.environ.get('CKAN_CURRENT_URL').startswith('/%s/data/%s' % (h.lang(), group.name)) or c.environ.get('CKAN_CURRENT_URL').startswith('/data/%s' % group.name) else ''}" href="${h.url_for('/publisher/' + group.name)}">${group.title}</a></li>
               </py:for>
             </ul>
           </span>
@@ -171,18 +200,17 @@ ${h.top_level_init()}
   <div id="greenbar">
     <div class="container">
       <ul class="subnav subnav-data active" py:with="url=c.environ.get('CKAN_CURRENT_URL')">
-        <li><a class="${if_(url.startswith('/data/search') or url.startswith('/dataset/'),'active')}" href="${h.url_for(controller='package', action='search')}">Datasets</a></li>
-        <li><a class="${if_(url.startswith('/publisher'),'active')}" href="${h.url_for('/publisher')}">Publishers</a></li>
+        <li><a class="${if_(url.startswith('/%s/data/search' % h.lang()) or url.startswith('/data/search') or url.startswith('%s/dataset' % h.lang()) or url.startswith('/dataset'),'active')}" href="${h.url_for(controller='package', action='search')}">Datasets</a></li>
+        <li><a class="${if_(url.startswith('/%s/publisher' % h.lang()) or url.startswith('/publisher'),'active')}" href="${h.url_for('/publisher')}">Publishers</a></li>
         <py:if test="h.ga_report_installed()">
-          <li><a class="${if_(url.startswith('/data/site-usage'),'active')}" href="${h.url_for('/data/site-usage')}">Site usage</a></li>
+          <li><a class="${if_(url.startswith('%s/data/site-usage' % h.lang()) or url.startswith('/data/site-usage'),'active')}" href="${h.url_for('/data/site-usage')}">Site usage</a></li>
         </py:if>
-        <br/>
 
         <py:if test="h.is_sysadmin()">
           <span class="divider-section">&nbsp;Sys Admin:</span>
-          <li><a class="${if_(url.startswith('/data/system_dashboard'),'active')}" href="${h.url_for(controller='ckanext.dgu.controllers.data:DataController', action='system_dashboard')}">System Dashboard</a></li>
-          <li><a class="${if_(url.startswith('/harvest'),'active')}" href="${h.url_for(controller='ckanext.harvest.controllers.view:ViewController', action='index')}">Harvest Sources</a></li>
-          <li><a class="${if_(url.startswith('/data/feedback/moderation'),'active')}" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController', action='moderation')}">Feedback moderation</a></li>
+          <li><a class="${if_(url.startswith('/%s/data/system_dashboard' % h.lang()) or url.startswith('/data/system_dashboard'),'active')}" href="${h.url_for(controller='ckanext.dgu.controllers.data:DataController', action='system_dashboard')}">System Dashboard</a></li>
+          <li><a class="${if_(url.startswith('/%s/harvest' % h.lang()) or url.startswith('/harvest'),'active')}" href="${h.url_for(controller='ckanext.harvest.controllers.view:ViewController', action='index')}">Harvest Sources</a></li>
+          <li><a class="${if_(url.startswith('/%s/data/feedback/moderation' % h.lang()) or url.startswith('/data/feedback/moderation'),'active')}" href="${h.url_for(controller='ckanext.dgu.controllers.feedback:FeedbackController', action='moderation')}">Feedback moderation</a></li>
         </py:if>
       </ul>
 

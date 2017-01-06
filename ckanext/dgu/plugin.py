@@ -551,12 +551,32 @@ class SearchPlugin(p.SingletonPlugin):
         SearchIndexing.add_field__group_abbreviation(pkg_dict)
         SearchIndexing.add_inventory(pkg_dict)
 
-        # Extract multiple theme values (concatted with ' ') into one multi-value schema field
+        from ckan.logic import get_action
+        from ckan import model
+        
+        # Extract also the English translations of tags in Eurovoc  
+        all_tags = set()
+        tags = pkg_dict.get("tags","")
+        for t in tags:
+            all_tags.add(t)
+        if tags:
+            trans_list = get_action('term_translation_show')({'model': model}, {'terms': tags, 'lang_codes': ("en")})
+            for t in trans_list:
+                all_tags.add(t["term_translation"])
+        pkg_dict['tags'] = list(all_tags)
+
+        from ckanext.dgu.lib.helpers import themes
+        themes_json = themes()
+        
+        # Extract multiple theme values (concatted with ' ' ???) into one multi-value schema field
         all_themes = set()
         for value in (pkg_dict.get('theme-primary', ''), pkg_dict.get('theme-secondary', '')):
-            for theme in value.split(' '):
-                if theme:
-                    all_themes.add(theme)
+            for theme in value.strip("{").strip("}").split(','):
+                if theme: #also add english translation
+                    title = theme
+                    title_eng = themes_json[theme]["translations"]["en"]["tag"]
+                    all_themes.add(title)
+                    all_themes.add(title_eng)
         pkg_dict['all_themes'] = list(all_themes)
         return pkg_dict
 

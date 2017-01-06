@@ -29,6 +29,7 @@ import ckan.lib.helpers
 
 # not importing ckan.controllers here, since we need to monkey patch it in plugin.py
 from ckanext.dgu.lib import formats
+from ckanext.dgu.plugins_toolkit import _
 
 log = logging.getLogger(__name__)
 
@@ -214,11 +215,21 @@ def get_uklp_package_type(package):
     return get_from_flat_dict(package.get('extras', []), 'resource-type', '')
 
 def get_primary_theme(package):
-    return get_from_flat_dict(package.get('extras', []), 'theme-primary', '')
+    name = get_from_flat_dict(package.get('extras', []), 'theme-primary', '')
+    return name
+
+def get_primary_theme_display_name(package):
+    name = get_from_flat_dict(package.get('extras', []), 'theme-primary', '')
+    if name != "":
+        return get_trans_theme(name)
+    return name
 
 def get_secondary_themes(package):
     secondary_themes_raw = get_from_flat_dict(package.get('extras', []), 'theme-secondary', '')
-    return secondary_themes({'theme-secondary':secondary_themes_raw})
+    secondary_themes_ripe = []
+    for name in secondary_themes_raw:
+        secondary_themes_ripe.append(get_trans_theme(name))
+    return secondary_themes({'theme-secondary':secondary_themes_ripe})
 
 def is_service(package):
     res_type = get_uklp_package_type(package)
@@ -694,6 +705,24 @@ def get_resource_fields(resource, pkg_extras):
     # calculate displayable field values
     return  DisplayableFields(field_names, field_value_map, pkg_extras)
 
+
+def get_trans_tag(term):
+    """Gets an Eurovoc translation of the term in current session language"""
+    from ckan.logic import get_action
+    from ckan import model
+    import sets
+    from ckan.lib.helpers import lang as get_lang
+
+    terms = sets.Set()
+    terms.add(term)
+ 
+    trans = get_action('term_translation_show')({'model': model}, {'terms': terms, 'lang_codes': (get_lang())})
+
+    if len(trans) > 0:
+        return trans[0]["term_translation"]
+        
+    return term
+
 def get_package_fields(package, pkg_extras, dataset_type, pkg_tags):
     from ckan.lib.base import h
     from ckan.lib.field_types import DateType
@@ -768,17 +797,13 @@ def get_package_fields(package, pkg_extras, dataset_type, pkg_tags):
     taxonomy_url = pkg_extras.get('taxonomy_url') or ''
     if taxonomy_url and taxonomy_url.startswith('http'):
         taxonomy_url = h.link_to(truncate(taxonomy_url, 70), taxonomy_url)
-    primary_theme = pkg_extras.get('theme-primary') or ''
-    primary_theme = THEMES.get(primary_theme, primary_theme)
-    secondary_themes = pkg_extras.get('theme-secondary')
-    if secondary_themes:
-        try:
-            secondary_themes = secondary_themes_display_csv(secondary_themes)
-        except ValueError:
-            # string for single value
-            secondary_themes = unicode(secondary_themes)
-            secondary_themes = THEMES.get(secondary_themes,
-                                          secondary_themes)
+        
+    primary_theme = get_trans_theme(pkg_extras.get('theme-primary'))
+    secondary_list = []
+    if pkg_extras.get('theme-secondary'):
+        for theme in pkg_extras.get('theme-secondary').strip("}").strip("{").split(","):
+            secondary_list.append(get_trans_theme(theme))
+    secondary_themes = ", ".join(secondary_list)
 
     update_frequency = pkg_extras.get('update_frequency')
     if update_frequency:
@@ -794,7 +819,7 @@ def get_package_fields(package, pkg_extras, dataset_type, pkg_tags):
             if tag_value:
                 if len(tags_csv) > 0:
                     tags_csv = tags_csv + ', '
-                tags_csv = tags_csv + tag_value
+                tags_csv = tags_csv + get_trans_tag(tag_value)
 
     if len(tags_csv) > 0:
         field_names.add(['tags'])
@@ -1477,6 +1502,17 @@ def publisher_performance_data(publisher, include_sub_publishers):
 def publisher_has_spend_data(publisher):
     return publisher.extras.get('category','') == 'ministerial-department'
 
+def get_trans_theme(name, field="title"):
+    """Gets an translation of the theme in current session language"""
+    if name is None or name == "":
+        return ""
+    from ckan.lib.helpers import lang as get_lang
+    lang = get_lang()
+    if lang=="en":
+        return themes()[name]["translations"][lang][field] # notice that in translation "stored_as" is "tag"
+    else:
+        return themes()[name][field] #default language in themes.json
+
 def search_facets_unselected(facet_keys,sort_by='count'):
     unselected_raw = []
     for key in facet_keys:
@@ -1563,9 +1599,8 @@ def search_facet_text(key,value):
                 'discovery' : 'Discovery',
             }
         return mapping.get(value,value)
-    if key=='theme-primary' or key=='all_themes':
-        from ckanext.dgu.schema import THEMES
-        return THEMES.get(value,value)
+    if key in ('theme-primary', 'theme-secondary', 'all_themes'):
+        return get_trans_theme(value)
     return value
 
 def search_facet_tooltip(key,value):

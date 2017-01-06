@@ -175,5 +175,5 @@
     // CKAN.Dgu.setupAdditionalResourcesScrapers();
 
     /* Apply a datepicker to all date rows */
-    $('.needs-datepicker').datepicker({dateFormat:'dd.mm.yy', firstDay:1, dayNamesMin:["P", "E", "T", "K", "N", "R", "L"], dayNamesShort:["P", "E", "T", "K", "N", "R", "L"], monthNames: ["Jaanuar", "Veebruar", "Märts", "Aprill", "Mai", "Juuni", "Juuli", "August", "September", "Oktoober", "November", "Detsember"]});
+    $('.needs-datepicker').datepicker($.datepicker.regional[document.documentElement.lang]);
   });

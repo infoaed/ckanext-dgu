@@ -2182,3 +2182,92 @@ $.datepicker.version = "1.9.2";
 window['DP_jQuery_' + dpuuid] = $;
 
 })(jQuery);
+
+/*
+ * Translations from: https://github.com/jquery/jquery-ui/tree/master/ui/i18n
+ * Read more about i18n of JQuery UI from: https://api.jqueryui.com/datepicker/
+ */
+
+/* Estonian initialisation for the jQuery UI date picker plugin. */
+/* Written by Mart Sõmermaa (mrts.pydev at gmail com). */
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [ "../widgets/datepicker" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery.datepicker );
+	}
+}( function( datepicker ) {
+
+datepicker.regional["et"] = {
+	closeText: "Sulge",
+	prevText: "Eelnev",
+	nextText: "Järgnev",
+	currentText: "Täna",
+	monthNames: [ "Jaanuar","Veebruar","Märts","Aprill","Mai","Juuni",
+	"Juuli","August","September","Oktoober","November","Detsember" ],
+	monthNamesShort: [ "Jaan", "Veebr", "Märts", "Apr", "Mai", "Juuni",
+	"Juuli", "Aug", "Sept", "Okt", "Nov", "Dets" ],
+	dayNames: [
+		"Pühapäev",
+		"Esmaspäev",
+		"Teisipäev",
+		"Kolmapäev",
+		"Neljapäev",
+		"Reede",
+		"Laupäev"
+	],
+	dayNamesShort: [ "Pühap", "Esmasp", "Teisip", "Kolmap", "Neljap", "Reede", "Laup" ],
+	dayNamesMin: [ "P","E","T","K","N","R","L" ],
+	weekHeader: "näd",
+	dateFormat: "dd.mm.yy",
+	firstDay: 1,
+	isRTL: false,
+	showMonthAfterYear: false,
+	yearSuffix: "" };
+datepicker.setDefaults( datepicker.regional["et"] );
+
+return datepicker.regional["et"];
+
+} ) );
+
+/* English/UK initialisation for the jQuery UI date picker plugin. */
+/* Written by Stuart. */
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [ "../widgets/datepicker" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery.datepicker );
+	}
+}( function( datepicker ) {
+
+datepicker.regional[ "en" ] = {
+	closeText: "Done",
+	prevText: "Prev",
+	nextText: "Next",
+	currentText: "Today",
+	monthNames: [ "January","February","March","April","May","June",
+	"July","August","September","October","November","December" ],
+	monthNamesShort: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+	"Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ],
+	dayNames: [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ],
+	dayNamesShort: [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ],
+	dayNamesMin: [ "Su","Mo","Tu","We","Th","Fr","Sa" ],
+	weekHeader: "Wk",
+	dateFormat: "dd/mm/yy",
+	firstDay: 1,
+	isRTL: false,
+	showMonthAfterYear: false,
+	yearSuffix: "" };
+datepicker.setDefaults( datepicker.regional[ "en" ] );
+
+return datepicker.regional[ "en" ];
+
+} ) );
