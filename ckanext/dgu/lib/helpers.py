@@ -24,13 +24,12 @@ from webhelpers.html import escape
 from pylons import config
 from pylons import request
 
-from ckan.lib.base import _
-
 from ckan.lib.helpers import icon, icon_html, json, unselected_facet_items
 import ckan.lib.helpers
 
 # not importing ckan.controllers here, since we need to monkey patch it in plugin.py
 from ckanext.dgu.lib import formats
+from ckanext.dgu.plugins_toolkit import _
 
 log = logging.getLogger(__name__)
 
