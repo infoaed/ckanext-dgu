@@ -50,7 +50,7 @@
 			Data, you will be displayed in a few seconds the identificator of that user. Select it and press 'Save'.
         </p>
         <p>
-            <strong>NB:</strong> A user might not appear on this list until that user has logged in and visited a page under <a href="/data">Data</a> part of the portal.
+            <strong>NB:</strong> A user might not appear on this list until that user has logged in and visited a page under <a href="${h.url_for('/data')}">Data</a> part of the portal.
         </p>
         <label class="control-label" for="users__${len(data.get('users', []))}__name">User</label>
         <div class="controls">

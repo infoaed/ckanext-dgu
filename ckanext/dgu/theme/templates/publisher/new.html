@@ -6,8 +6,8 @@
   <py:def function="page_title">New - Publisher</py:def>
 
   <py:match path="breadcrumbs">
-    <li><a href="/publisher">Publishers</a></li>
-    <li><a href="/publisher/new">New Publisher</a></li>
+    <li><a href="${h.url_for('/publisher')}">Publishers</a></li>
+    <li><a href="${h.url_for('/publisher/new')}">New Publisher</a></li>
   </py:match>
 
   <div py:match="content">

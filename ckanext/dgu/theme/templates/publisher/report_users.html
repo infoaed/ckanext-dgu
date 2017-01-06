@@ -7,8 +7,8 @@
   <py:def function="page_heading">Users (${ c.count })</py:def>
 
   <py:match path="breadcrumbs">
-    <li><a href="/data/system_dashboard">System Dashboard</a></li>
-    <li><a href="/publisher/report_users">Users report</a></li>
+    <li><a href="${h.url_for('/data/system_dashboard')}">System Dashboard</a></li>
+    <li><a href="${h.url_for('/publisher/report_users')}">Users report</a></li>
   </py:match>
 
 
@@ -27,7 +27,7 @@
         </tr>
         <py:for each="u in c.page.items">
           <tr>
-            <td><a href="/data/user/${u.name}">${u.display_name}</a></td>
+            <td><a href="${h.url_for('/data/user/')+u.name}">${u.display_name}</a></td>
             <td>${u.email}</td>
             <td>${u.number_administered_packages()}</td>
             <td>${u.number_of_edits()}</td>
@@ -35,7 +35,7 @@
               <py:if test="h.is_sysadmin(u)">Sysadmin</py:if>
               <py:for each="capacity in ('admin', 'editor')">
                 <py:for each="group in u.get_groups(capacity=capacity)">
-                  ${capacity.capitalize()}: <a href="/publisher/${group.name}">${group.display_name}</a>
+                  ${capacity.capitalize()}: <a href="${h.url_for('/publisher/')+group.name}">${group.display_name}</a>
                 </py:for>
               </py:for>
             </td>

@@ -6,7 +6,7 @@
   <py:def function="page_title">Publishers</py:def>
 
   <py:match path="breadcrumbs">
-    <li><a href="/publisher">Publishers</a></li>
+    <li><a href="${h.url_for('/publisher')}">Publishers</a></li>
   </py:match>
 
   <py:match path="content" py:with="hierarchy=h.publisher_hierarchy()">
@@ -76,7 +76,7 @@
             <button class="btn btn-xs btn-default js-collapse"><i class="icon icon-minus"/></button>
           </py:if>
           <div class="publisher-row">
-            <a href="/publisher/${pub['name']}">
+            <a href="${h.url_for('/publisher/')+pub['name']}">
               ${pub['title']}
             </a>
           </div>

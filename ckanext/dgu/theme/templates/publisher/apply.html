@@ -6,13 +6,13 @@
   <py:def function="page_heading">Apply for membership</py:def>
 
  <py:match path="breadcrumbs">
-    <li><a href="/publisher">Publishers</a></li>
+    <li><a href="${h.url_for('/publisher')}">Publishers</a></li>
     <py:if test="not c.group">
-      <li><a href="/publisher/apply}">Apply for membership</a></li>
+      <li><a href="${h.url_for('/publisher/apply')}">Apply for membership</a></li>
     </py:if>
     <py:if test="c.group">
-      <li><a href="/publisher/${c.group.name}">${c.group.display_name}</a></li>
-      <li><a href="/publisher/apply/${c.group.name}">Apply for membership</a></li>
+      <li><a href="${h.url_for('/publisher/')+c.group.name}">${c.group.display_name}</a></li>
+      <li><a href="${h.url_for('/publisher/apply/')+c.group.name}">Apply for membership</a></li>
     </py:if>
   </py:match>
 

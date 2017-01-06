@@ -5,8 +5,8 @@
   <py:def function="page_title">Users in ${c.group.display_name}</py:def>
 
   <py:match path="breadcrumbs">
-    <li><a href="/publisher">Publishers</a></li>
-    <li><a href="/publisher/${c.group.name}">${c.group.title}</a></li>
+    <li><a href="${h.url_for('/publisher')}">Publishers</a></li>
+    <li><a href="${h.url_for('/publisher/')+c.group.name}">${c.group.title}</a></li>
     <li><a href="${request.url}">Edit User Permissions</a></li>
   </py:match>
 

@@ -7,8 +7,8 @@
   <py:def function="page_heading">Publishers and Admins/Editors (${c.count})</py:def>
 
   <py:match path="breadcrumbs">
-    <li><a href="/data/system_dashboard">System Dashboard</a></li>
-    <li><a href="/publisher/report_publishers_and_users">Publishers and users</a></li>
+    <li><a href="${h.url_for('/data/system_dashboard')}">System Dashboard</a></li>
+    <li><a href="${h.url_for('/publisher/report_publishers_and_users')}">Publishers and users</a></li>
   </py:match>
 
 
@@ -27,7 +27,7 @@
         </tr>
         <py:for each="g in c.page.items">
           <tr>
-            <td><a href="/publisher/${g.name}">${g.title}</a></td>
+            <td><a href="${h.url_for('/publisher/')+g.name}">${g.title}</a></td>
             <td>${len(g.packages())}</td>
             <td>${g.approval_status}</td>
             <td py:for="capacity in ('admin', 'editor')">
