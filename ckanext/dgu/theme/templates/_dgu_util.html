@@ -35,7 +35,7 @@
       <li><a href="/"><i class="icon-home"></i></a></li>
       <py:for each="k,v in kvlist">
         <li class="spacer">&nbsp;/&nbsp;</li>
-        <li><a href="${v}">${k}</a></li>
+        <li><a href="${h.url_for(v)}">${k}</a></li>
       </py:for>
     </ul>
   </div>
