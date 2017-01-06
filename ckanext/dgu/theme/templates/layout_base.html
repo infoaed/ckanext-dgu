@@ -189,7 +189,7 @@ ${h.top_level_init()}
 
               <li role="presentation" class="dropdown-header">My publishers</li>
               <py:for each="group in h.groups_for_current_user()">
-                  <li><a class="${'active' if c.environ.get('CKAN_CURRENT_URL').startswith('/%s/data/%s' % (h.lang(), group.name)) or c.environ.get('CKAN_CURRENT_URL').startswith('/data/%s' % group.name) else ''}" href="${h.url_for('/publisher/' + group.name)}">${group.title}</a></li>
+                  <li><a class="${'active' if c.environ.get('CKAN_CURRENT_URL').startswith('/%s/data/%s' % (h.lang(), group.name)) or c.environ.get('CKAN_CURRENT_URL').startswith('/data/%s' % group.name) else ''}" href="${h.url_for('/publisher/')+group.name}">${group.title}</a></li>
               </py:for>
             </ul>
           </span>
