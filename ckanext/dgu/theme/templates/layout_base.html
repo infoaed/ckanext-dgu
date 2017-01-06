@@ -127,7 +127,7 @@ ${h.top_level_init()}
             <ul class="language-switcher-locale-url">
                <py:for each="locale in h.get_available_locales()">
                 <li class="${h.lang()} language-link${if_(h.lang()==locale,' active')}">
-                      <a class="language-link${if_(h.lang()==locale,' active')}" href="${h.full_current_url().replace('/'+h.lang(), '/'+str(locale), 1)}" lang="${locale}">
+                      <a class="language-link${if_(h.lang()==locale,' active')}" href="${if_(h.full_current_url().find('riik.ee/'+h.lang())+10 == len(h.full_current_url()) or h.full_current_url().find('riik.ee/' + h.lang() + '/') != -1, h.full_current_url().replace('riik.ee/'+h.lang(), 'riik.ee/'+str(locale), 1), h.full_current_url().replace('riik.ee', 'riik.ee/'+str(locale)))}" lang="${locale}">
                         ${locale.display_name.capitalize() or locale.english_name}
                      </a>
                   </li>
