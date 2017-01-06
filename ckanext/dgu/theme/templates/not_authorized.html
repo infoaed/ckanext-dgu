@@ -8,7 +8,7 @@
   <py:def function="page_title">Not Authorized</py:def>
 
   <py:match path="breadcrumbs">
-    <li><a href="/data/search">Datasets</a></li>
+    <li><a href="${h.url_for('/data/search')}">Datasets</a></li>
     <li><i>Not Authorized</i></li>
   </py:match>
 
@@ -18,10 +18,10 @@
       <div class="panel-body">
         <p>
           If you want to publish datasets, you must be logged in and your username must be associated with a particular publisher.
-          Further information on the registration of publishers and associating users with holders of information is available under <a href="/juhendid">Guidelines</a>.
+          Further information on the registration of publishers and associating users with holders of information is available under <a href="${h.url_for('/juhendid')}">Guidelines</a>.
         </p>
         <div py:if="not c.user">
-          <p>You may <a href="${'/user' if 'dgu_drupal_auth' in config['ckan.plugins'] else h.url_for(controller='user',action='me')}?destination=${request.path[1:]}">log-in</a> and try again.</p>
+          <p>You may <a href="${h.url_for('/user') if 'dgu_drupal_auth' in config['ckan.plugins'] else h.url_for(controller='user',action='me')}?destination=${request.path[1:]}">log-in</a> and try again.</p>
         </div>
         <div py:if="c.user">
           <p>You are logged in as: ${h.dgu_linked_user(c.user, maxlength=100)}</p>
