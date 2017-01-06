@@ -200,7 +200,7 @@ ${h.top_level_init()}
   <div id="greenbar">
     <div class="container">
       <ul class="subnav subnav-data active" py:with="url=c.environ.get('CKAN_CURRENT_URL')">
-        <li><a class="${if_(url.startswith('/%s/data/search' % h.lang()) url.startswith('/data/search') or url.startswith('%s/dataset' % h.lang()) url.startswith('/dataset'),'active')}" href="${h.url_for(controller='package', action='search')}">Andmehulgad</a></li>
+        <li><a class="${if_(url.startswith('/%s/data/search' % h.lang()) or url.startswith('/data/search') or url.startswith('%s/dataset' % h.lang()) or url.startswith('/dataset'),'active')}" href="${h.url_for(controller='package', action='search')}">Andmehulgad</a></li>
         <li><a class="${if_(url.startswith('/%s/publisher' % h.lang()) or url.startswith('/publisher'),'active')}" href="${h.url_for('/publisher')}">Teabevaldajad</a></li>
         <py:if test="h.ga_report_installed()">
           <li><a class="${if_(url.startswith('%s/data/site-usage' % h.lang()) or url.startswith('/data/site-usage'),'active')}" href="${h.url_for('/data/site-usage')}">Portaali kasutus</a></li>
