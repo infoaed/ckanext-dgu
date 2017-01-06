@@ -16,7 +16,7 @@
   <xi:include href="../inventory/inventory_util.html" />
 
   <py:match path="breadcrumbs">
-    <li><a href="/data/search">Datasets</a></li>
+    <li><a href="${h.url_for('/data/search')}">Datasets</a></li>
     <li><a href="${h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}">${c.pkg_dict.get('title', c.pkg_dict['name'])}</a></li>
   </py:match>
 
@@ -118,7 +118,7 @@
             <td class="value">
               <ul py:if="h.coupled_pkg_tuples(c.pkg)">
                 <li py:for="name, title in h.coupled_pkg_tuples(c.pkg)">
-                  <a href="/dataset/${name}">${title}</a>
+                  <a href="${h.url_for('/dataset')+name}">${title}</a>
                 </li>
               </ul>
               <span py:if="not h.coupled_pkg_tuples(c.pkg)">(none)</span>

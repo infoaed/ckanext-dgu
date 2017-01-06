@@ -8,7 +8,7 @@
   </py:def>
 
   <py:match path="breadcrumbs" py:with="is_uklp=c.pkg.extras.get('UKLP')=='True'">
-    <li><a href="/data/search">Datasets</a></li>
+    <li><a href="${h.url_for('/data/search')}">Datasets</a></li>
     <li><a href="${h.url_for(controller='package',action='read',id=c.pkg.name)}">${c.pkg.title or c.pkg.name}</a></li>
     <li><a href="${h.url_for(controller='package',action='delete',id=c.pkg.name)}">${if_(is_uklp,_('Withdraw'),_('Delete'))}</a></li>
   </py:match>

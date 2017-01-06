@@ -6,7 +6,7 @@
   <py:def function="page_title">${c.pkg.title or c.pkg.name} - Edit</py:def>
 
   <py:match path="breadcrumbs">
-    <li><a href="/data/search">Datasets</a></li>
+    <li><a href="${h.url_for('/data/search')}">Datasets</a></li>
     <li><a href="${h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}">${c.pkg_dict.get('title', c.pkg_dict['name'])}</a></li>
     <li><a href="${h.url_for(controller='package',action='edit',id=c.pkg_dict['name'])}">Edit</a></li>
   </py:match>

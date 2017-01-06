@@ -51,8 +51,8 @@
 
 
             <ul>
-              <li><a href="/node/add/app?dataset=${c.pkg_dict.get('name')}">Share your app &raquo;</a><br/></li>
-              <li><a href="/node/add/data-request?dataset=${c.pkg_dict.get('name')}">Request new data &raquo;</a></li>
+              <li><a href="${h.url_for('/node/add/')}app?dataset=${c.pkg_dict.get('name')}">Share your app &raquo;</a><br/></li>
+              <li><a href="${h.url_for('/node/add/')}data-request?dataset=${c.pkg_dict.get('name')}">Request new data &raquo;</a></li>
             </ul>The information on this page (the dataset metadata) is also available in JSON format.<ul>
               <li>
                 <b>API: </b><a href="${h.url_for(controller='api', register='package', action='show', id=c.pkg.name, ver='2')}">
@@ -159,7 +159,7 @@
           </a>
           <a
             class="dataset-optional-logo"
-            href="/location"
+            href="${h.url_for('/location')}"
             py:if="h.dataset_type(c.pkg_extras) == 'uklp'"
           >
             <img src="/images/uk_location.gif" />
