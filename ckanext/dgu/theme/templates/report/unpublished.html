@@ -24,8 +24,8 @@
               <tbody>
                 <py:for each="dataset in c.data['table']">
                     <tr>
-                        <td><a href="/dataset/${dataset['name']}">${dataset['title']}</a></td>
-                        <td><a href="/publisher/${dataset['organization name']}">${dataset['organization title']}</a></td>
+                        <td><a href="${h.url_for('/dataset/')+dataset['name']}">${dataset['title']}</a></td>
+                        <td><a href="${h.url_for('/publisher/')+dataset['organization name']}">${dataset['organization title']}</a></td>
                         <td>${dataset['notes']}</td>
                         <td>${dataset['publish date']}</td>
                         <td>${dataset['will not be released']}</td>

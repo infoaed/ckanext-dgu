@@ -21,7 +21,7 @@
       <div class="panel-heading"><strong>CKAN login</strong></div>
       <div class="panel-body">
 
-        <form action="/data/user/login_generic" method="post" class="form-horizontal ckan-login-form">
+        <form action="${h.url_for('/data/user/login_generic')}" method="post" class="form-horizontal ckan-login-form">
           <div class="control-group">
             <label for="login">Username:</label>
             <input type="text" name="login" value="" />

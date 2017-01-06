@@ -19,7 +19,7 @@
         </ul>
 
         <py:for each="publisher_name, publisher_title in c.data['organizations']">
-          <h2><a name="${publisher_name}" href="/publisher/${publisher_name}">${publisher_title}</a></h2>
+          <h2><a name="${publisher_name}" href="${h.url_for('/publisher/')+publisher_name}">${publisher_title}</a></h2>
           <table class="table table-bordered">
               <thead>
                 <tr>
@@ -32,14 +32,14 @@
               <tbody>
                 <py:for each="dataset in __import__('itertools').ifilter(lambda d: d['organization_name'] == publisher_name, c.data['table'])">
                     <tr py:attrs="{'class':'warning' if dataset['num_broken_resources'] > 0 else None}">
-                        <td><a href="/dataset/${dataset['name']}">${dataset['title']}</a></td>
+                        <td><a href="${h.url_for('/dataset/')+dataset['name']}">${dataset['title']}</a></td>
                         <td>${dataset['dataset_notes']}</td>
                         <td>${dataset['num_broken_resources']}</td>
                         <td>
                             <ul py:if="dataset['broken_resources']">
                               <py:for each="rdesc,rid in dataset['broken_resources']">
                                 <li>
-                                    <a href="/dataset/${dataset['name']}/resource/${rid}">${rdesc or "Unnamed"}</a>
+                                    <a href="${h.url_for('/dataset/')+dataset['name']}/resource/${rid}">${rdesc or "Unnamed"}</a>
                                 </li>
                               </py:for>
                             </ul>

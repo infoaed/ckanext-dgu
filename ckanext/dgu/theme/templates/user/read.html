@@ -60,7 +60,7 @@
         <ul>
             <py:for each="group in h.user_get_groups(c.user_dict['id'])">
             <li>
-              <a href="/publisher/${group.name}">${group.title}</a>
+              <a href="${h.url_for('/publisher/')+group.name}">${group.title}</a>
             </li>
           </py:for>
         </ul>

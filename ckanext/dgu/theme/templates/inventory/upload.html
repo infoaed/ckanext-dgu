@@ -9,9 +9,9 @@
 
 
 <py:match path="breadcrumbs">
-    <li><a href="/publisher">Publishers</a></li>
-    <li><a href="/publisher/${c.group['name']}">${c.group['title']}</a></li>
-    <li><a href="/unpublished/${c.group['name']}/edit">Manage inventory</a></li>
+    <li><a href="${h.url_for('/publisher')}">Publishers</a></li>
+    <li><a href="${h.url_for('/publisher/')+c.group['name']}">${c.group['title']}</a></li>
+    <li><a href="${h.url_for('/unpublished/')+c.group['name']}/edit">Manage inventory</a></li>
     <li><a href="${request.url}">Upload results</a></li>
 </py:match>
 

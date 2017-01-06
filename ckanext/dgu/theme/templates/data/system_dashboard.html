@@ -6,7 +6,7 @@
   <py:def function="page_title">System Dashboard</py:def>
 
   <py:match path="breadcrumbs">
-    <li><a href="/data/system_dashboard">System Dashboard</a></li>
+    <li><a href="${h.url_for('/data/system_dashboard')}">System Dashboard</a></li>
   </py:match>
 
 
@@ -21,8 +21,8 @@
       <div class="panel-heading">Datasets</div>
       <div class="panel-body">
         <ul>
-          <li><a href="/dataset/new">Create a dataset</a></li>
-          <li>Edit a dataset by <a href="/data/search">navigating to it</a> and clicking 'Edit'</li>
+          <li><a href="${h.url_for('/dataset/new')}">Create a dataset</a></li>
+          <li>Edit a dataset by <a href="${h.url_for('/data/search')}">navigating to it</a> and clicking 'Edit'</li>
           <li>${h.link_to("Report - Broken Links", h.url_for('report', report_name='broken-links'))}</li>
           <li>${h.link_to("Report - 5 Stars of Openness scores", h.url_for('report', report_name='openness'))}</li>
           <li>${h.link_to("Report - Publisher Resources", h.url_for('report', report_name='publisher-resources'))}</li>
@@ -74,7 +74,7 @@
       <div class="panel-body">
         <ul>
           <li><a href="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='new')}">Create a new publisher</a></li>
-          <li>Edit a publisher by <a href="/publisher">navigating to it</a> and clicking 'Edit'</li>
+          <li>Edit a publisher by <a href="${h.url_for('/publisher')}">navigating to it</a> and clicking 'Edit'</li>
           <li><a href="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='report_publishers_and_users')}">Report - Publishers and their editors/admins</a></li>
           <li><a href="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='report_groups_without_admins')}">Report - Publishers without editors/admins</a></li>
         </ul>
@@ -86,7 +86,7 @@
       <div class="panel-body">
         <ul>
           <li><a href="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='report_users')}">Users</a></li>
-          <li>Appoint a Publisher Admin or Publisher Editor by <a href="/publisher">navigating to the publisher</a> and clicking 'Edit User Permissions'</li>
+          <li>Appoint a Publisher Admin or Publisher Editor by <a href="${h.url_for('/publisher')}">navigating to the publisher</a> and clicking 'Edit User Permissions'</li>
           <li><a href="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='report_groups_without_admins')}">Report - Users who are admins/editors for publishers</a></li>
           <li><a href="${h.url_for(controller='ckanext.dgu.controllers.publisher:PublisherController', action='report_users_not_assigned_to_groups')}">Report - Users not assigned to a publisher</a></li>
           <li><a href="${h.url_for('ckanadmin_index')}">Sysadmins</a></li>

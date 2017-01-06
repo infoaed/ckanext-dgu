@@ -19,9 +19,9 @@
   </py:def>
 
   <py:match path="breadcrumbs">
-    <li><a href="/publisher">Publishers</a></li>
-    <li><a href="/publisher/${c.group['name']}">${c.group['title']}</a></li>
-    <li><a href="/unpublished/${c.group['name']}/edit">Manage inventory</a></li>
+    <li><a href="${h.url_for('/publisher')}">Publishers</a></li>
+    <li><a href="${h.url_for('/publisher/')+c.group['name']}">${c.group['title']}</a></li>
+    <li><a href="${h.url_for('/unpublished/')+c.group['name']}/edit">Manage inventory</a></li>
   </py:match>
 
   <py:match path="content">
@@ -62,12 +62,12 @@
       Create new entries to inform us about datasets not yet published.
         <ul>
             <li>Firstly, review your existing lists of datasets and inventory items available from step 1</li>
-            <li><a href="/library/guide-publication-and-assessment-national-information-infrastructure">See specific guidance</a> on completing the template.</li>
+            <li><a href="${h.url_for('/library/guide-publication-and-assessment-national-information-infrastructure')}">See specific guidance</a> on completing the template.</li>
             <li>As a publisher administrator you can share this spreadsheet with other colleagues to complete and send to you for upload.</li>
             <li>Save the completed template on your PC or local network once complete ready for upload and always keep a local copy as backup.</li>
             <li>Please include datasets that at present may not be available on Open Licence</li>
         </ul>
-        <a href="/inventory/template/xls_template.php?publisher=${c.group.encoded_title}" class="btn btn-primary pull-right">Download inventory template</a>
+        <a href="${h.url_for('/inventory/template/xls_template.php?publisher=')+c.group.encoded_title}" class="btn btn-primary pull-right">Download inventory template</a>
       </div>
     </div>
 

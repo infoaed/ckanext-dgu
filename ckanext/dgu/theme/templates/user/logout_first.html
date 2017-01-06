@@ -12,7 +12,7 @@
     <div class="panel panel-danger">
       <div class="panel-heading">Error</div>
       <div class="panel-body">
-        You must <a href="${'/logout' if ('dgu_drupal_auth' in config['ckan.plugins']) else h.url_for('/data/user/logout')}">log out</a> before you can login.
+        You must <a href="${h.url_for('/logout') if ('dgu_drupal_auth' in config['ckan.plugins']) else h.url_for('/data/user/logout')}">log out</a> before you can login.
       </div>
     </div>
   </py:match>
